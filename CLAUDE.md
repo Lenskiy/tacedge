@@ -80,6 +80,11 @@ unreadable.
 - Squared corners throughout (`border-radius:0`), ghost buttons, no shadows,
   no blur, no gradients.
 
+**Voice.** Plain, factual, specific. Prefer concrete nouns, numbers and dates
+to claims about significance. Avoid aphorisms, three-part rhetorical lists and
+neat antitheses — they read as generated text to exactly this audience. If a
+sentence could sit on any workshop's site, it is not earning its place.
+
 **Two hard rules for this aesthetic:**
 
 1. **Never fake a readout.** No decorative signal levels, coordinates or
@@ -96,9 +101,17 @@ site stays honest while facts are still settling — flip statuses as things
 confirm rather than waiting to publish. Never mark something CONFIRMED that
 `CONTENT.md` has as TO CONFIRM.
 
+**Background mesh.** A fixed full-page canvas (`#mesh`, `z-index:-1`) of
+drifting nodes whose links form and break by range, with nodes occasionally
+dropping off the net and rejoining. It is decorative furniture, carries no
+information, and is `aria-hidden`. It must stay subordinate to the waterfall —
+dim, slow, and never bright enough to compete with body text. It honours
+`prefers-reduced-motion` by rendering a single static frame.
+
 **Signature element:** the animated spectrum waterfall canvas in the hero. It
 is the one bold thing on the page. Keep everything else quiet — no competing
-animation elsewhere. It respects `prefers-reduced-motion`; preserve that. Its
+animation beyond the background mesh. It respects `prefers-reduced-motion`;
+preserve that. Its
 scale bar currently declares the data synthetic. That declaration comes off
 only when real captured data replaces it (queue item 1).
 
@@ -137,7 +150,11 @@ names or inventing figures.
    from real data: a spectrum explorer that labels emitters on hover, a
    SAR↔optical wipe over Canberra (Sentinel-1 GRD + Sentinel-2, Copernicus
    attribution), and a detector frame with a live confidence threshold
-   (needs the raw boxes as JSON, not a video).
+   (needs the raw boxes as JSON, not a video). Tutorial 2's copy is grounded
+   in the course SAR exercise in `Books/FST/source-materials/lectures/
+   discussion_forums/Discussion_1.docx` — Sentinel-1 GRD dual-pol through
+   calibration, multi-look speckle reduction and terrain correction, then read
+   against optical imagery.
 7. **Registration and travel info.** Venue address detail, getting there,
    nearby accommodation, and visa guidance for international attendees.
 8. **Partner logos.** Fig. 03 slot in §05, once permissions are confirmed.

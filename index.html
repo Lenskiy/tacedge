@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TacEdge 2026 — International Workshop on Tactical Edge Technologies</title>
-<meta name="description" content="A one-day workshop on RF and optical surveillance, tactical telecommunications and applied AI. 13 November 2026, UNSW Canberra City.">
+<meta name="description" content="One-day workshop on sensing, communications and autonomy in contested environments. 13 November 2026, UNSW Canberra City.">
 <meta property="og:title" content="TacEdge 2026">
-<meta property="og:description" content="International Workshop on Tactical Edge Technologies. In person, 13 November 2026, UNSW Canberra City.">
+<meta property="og:description" content="International Workshop on Tactical Edge Technologies. Sensing, communications and autonomy in contested environments. In person, 13 November 2026, UNSW Canberra City.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tacedge.org/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,6 +48,13 @@ a:hover{text-decoration:underline}
 .m{
   font-family:var(--mono);font-size:11px;letter-spacing:.16em;
   text-transform:uppercase;color:var(--ink-3);
+}
+
+/* ---------- background mesh: drifting nodes, links forming and dropping ----
+   Subordinate to the waterfall by design — dim, slow, and behind everything. */
+#mesh{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:-1;pointer-events:none;display:block;
 }
 
 /* ---------- rails: the page sits inside a bezel ---------- */
@@ -235,6 +242,8 @@ a.btn{display:inline-block;text-decoration:none}
 </head>
 <body>
 
+<canvas id="mesh" aria-hidden="true"></canvas>
+
 <nav class="nav">
   <div class="nav-in">
     <a class="mark" href="#top">Tac<span>Edge</span>&nbsp;2026</a>
@@ -260,7 +269,7 @@ a.btn{display:inline-block;text-decoration:none}
   </div>
   <div class="panel-body" style="padding-bottom:22px">
     <h1>Technologies that have to work at the edge.</h1>
-    <p class="lede" style="margin-bottom:0;color:var(--ink-2)">RF and optical surveillance, tactical telecommunications, and applied AI in the field.</p>
+    <p class="lede" style="margin-bottom:0;color:var(--ink-2)">Sensing, communications and autonomy in contested environments.</p>
 
     <div class="fields" style="margin-top:26px">
       <div class="f"><span class="k">Date</span><span class="v">Friday 13 November 2026</span><span class="s ok">Confirmed</span></div>
@@ -282,15 +291,15 @@ a.btn{display:inline-block;text-decoration:none}
 <section class="panel" id="about">
   <div class="panel-bar"><span class="id">01</span><h2>About</h2><span class="fill"></span></div>
   <div class="panel-body">
-    <h3>The tactical edge is where the assumptions break</h3>
+    <p class="lede">TacEdge brings together researchers and practitioners working on sensing, communications and autonomy for contested environments: RF and optical surveillance, tactical telecommunications, and applied AI in the field.</p>
     <div class="two">
       <div>
-        <p>Spectrum is contested, bandwidth is scarce, links drop, and the hardware that has to carry the load is whatever fits on the platform. TacEdge is about the methods and tools that still work under those conditions.</p>
-        <p>The morning is keynotes and talks. The afternoon is hands on — parallel tutorials in software-defined radio, satellite imagery, and object detection, run as working sessions rather than lectures. The day closes with an autonomous robot capture-the-flag competition.</p>
+        <p>Equipment in the field has to work with contested spectrum, intermittent links and whatever processing fits on the platform. The workshop is about methods that hold up under those constraints.</p>
+        <p>The morning is two keynotes and two talk sessions. The afternoon is three hands-on tutorials across two parallel slots, and the day closes with a 105-minute autonomous robot capture-the-flag competition.</p>
       </div>
       <div>
-        <p>The workshop is aimed at researchers, Defence and defence-industry practitioners, and graduate students. Demonstrations run continuously through the day, including passive RF sensing systems and an educational robot arena.</p>
-        <p>TacEdge 2026 is a pilot event. If it lands well, it becomes annual.</p>
+        <p>It is aimed at researchers, Defence and defence-industry practitioners, and graduate students. Demonstrations run continuously through the day, including passive RF sensing and an educational robot arena.</p>
+        <p>TacEdge 2026 is the first of what is intended to become an annual workshop.</p>
       </div>
     </div>
     <div class="note">
@@ -373,7 +382,7 @@ a.btn{display:inline-block;text-decoration:none}
         <div class="card-in">
           <!-- FIG slot — SAR / optical wipe -->
           <h3>SAR and optical satellite imagery</h3>
-          <p>Reading synthetic aperture radar alongside optical imagery: what each sensor gives you, where speckle and geometry mislead, and how to get from raw product to something usable.</p>
+          <p>Taking Sentinel-1 radar data through calibration, speckle reduction and terrain correction, then reading the result against optical imagery of the same ground — what each sensor shows, and what can actually be concluded from it.</p>
         </div>
       </div>
       <div class="card">
@@ -391,16 +400,16 @@ a.btn{display:inline-block;text-decoration:none}
 <section class="panel" id="ctf">
   <div class="panel-bar"><span class="id">04</span><h2>Capture the flag</h2><span class="fill"></span><span class="rt">105 min · 2 v 2 · teams of 2–4</span></div>
   <div class="panel-body">
-    <p class="lede">An asymmetric two-against-two autonomous robot game, run as the closing session of the day. Teams write the strategy; the robots run it with no one at the controls.</p>
+    <p class="lede">An asymmetric two-against-two autonomous robot game, run as the closing session of the day. Teams of two to four write the strategy; the robots execute it without human control.</p>
 
     <div class="two" style="margin-top:26px">
       <div>
-        <p>One side attacks and the other defends, and the two sides do not have the same capabilities. Everything on the arena is autonomous: teams develop and test their attack and defence strategies during the session, then hand them over and watch them run.</p>
+        <p>One side attacks and the other defends, and the two sides do not have the same capabilities. Teams develop and test their attack and defence strategies during the session; nothing on the arena is driven by hand.</p>
         <p>The build phase runs against a simulator rather than the arena, so every team can keep testing continuously. LLM assistance is available throughout it.</p>
       </div>
       <div>
         <p>Qualifying runs go against a reference defender across parallel simulators. The top four teams go through to a knockout bracket on the physical arena, and the day closes with the awards.</p>
-        <p>Bring a laptop. The rules, the API documentation and the context pack for LLM assistance will be published here ahead of the event — there will be nothing to read for the first time on the day.</p>
+        <p>Bring a laptop. The rules, the API documentation and the context pack for LLM assistance will be published here ahead of the event.</p>
       </div>
     </div>
 
@@ -464,6 +473,70 @@ a.btn{display:inline-block;text-decoration:none}
 </div>
 
 <script>
+/* Background mesh — nodes drift, links form and break by range, and a node
+   drops off the net now and then and rejoins. Decorative furniture: it carries
+   no information and is hidden from assistive technology. */
+(function(){
+  var c=document.getElementById('mesh');if(!c)return;
+  var ctx=c.getContext('2d'),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2);
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var N=[],LINK=0;
+
+  function seed(){
+    var count=Math.max(14,Math.min(40,Math.round(W*H/38000)));
+    LINK=Math.max(140,Math.min(250,Math.min(W,H)*0.30));
+    N=[];
+    for(var i=0;i<count;i++){
+      N.push({x:Math.random()*W,y:Math.random()*H,
+              vx:(Math.random()-0.5)*0.13,vy:(Math.random()-0.5)*0.13,
+              up:1,t:Math.random()*300});
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<N.length;i++){
+      var a=N[i];if(!a.up)continue;
+      for(var j=i+1;j<N.length;j++){
+        var b=N[j];if(!b.up)continue;
+        var dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<LINK){
+          var q=1-d/LINK;                                  // link quality by range
+          ctx.strokeStyle='rgba(16,109,190,'+(q*0.44).toFixed(3)+')';
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+        }
+      }
+    }
+    for(var k=0;k<N.length;k++){
+      var n=N[k];
+      ctx.fillStyle=n.up?'rgba(27,169,165,0.52)':'rgba(107,127,151,0.20)';
+      ctx.fillRect(n.x-2,n.y-2,4,4);                       // square nodes, not dots
+    }
+  }
+
+  function size(){
+    W=c.clientWidth;H=c.clientHeight;
+    c.width=W*dpr;c.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.lineWidth=1;seed();draw();
+  }
+  size();
+  var ro=new ResizeObserver(size);ro.observe(c);
+
+  if(!reduce){
+    (function step(){
+      for(var i=0;i<N.length;i++){
+        var n=N[i];
+        n.x+=n.vx;n.y+=n.vy;n.t++;
+        if(n.x<0||n.x>W)n.vx*=-1;
+        if(n.y<0||n.y>H)n.vy*=-1;
+        if(n.t>240&&Math.random()<0.0006){n.up=n.up?0:1;n.t=0;}
+      }
+      draw();
+      setTimeout(function(){requestAnimationFrame(step);},33);
+    })();
+  }
+})();
+
 (function(){
   var c=document.getElementById('fall');if(!c)return;
   var ctx=c.getContext('2d'),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2);
