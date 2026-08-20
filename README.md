@@ -28,14 +28,15 @@ then add:
 
 Propagation is usually minutes but can take a few hours.
 
-## The interest form
+## Registering interest
 
-The form currently posts to a placeholder Formspree endpoint. Replace
-`REPLACE_WITH_YOUR_ENDPOINT` in `index.html` with a real one, or swap the whole
-`<form>` for a link to a Google Form or a UNSW-approved tool.
+The site currently asks people to email `a.lenskiy@unsw.edu.au` via a `mailto:`
+link that pre-fills the fields. This is deliberate: it captures interest without
+putting attendee details into a third-party service before UNSW has said which
+tool they want used.
 
-Before choosing: check with UNSW which form or registration tool they would
-prefer you use for attendee details.
+To restore a real form later, the original markup and CSS are in the initial
+commit — check with UNSW first which form or registration tool they prefer.
 
 ## Migrating to WordPress later
 

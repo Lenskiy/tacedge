@@ -118,9 +118,10 @@ names or inventing figures.
    its scale bar. Replace with 60–120 s of real 2.40–2.48 GHz PSD (~512 bins),
    captured at the venue or in the lab, quantised to 8-bit and inlined. Then
    the caption becomes a provenance line: band, location, date, receiver.
-2. **Interest form endpoint.** Placeholder Formspree URL in the form action —
-   the form is non-functional as shipped. See `CONTENT.md` §8; there is a
-   data-handling question to settle with UNSW first.
+2. **Interest form.** Currently a `mailto:` link with pre-filled fields, not a
+   form — chosen so no attendee details reach a third-party service before
+   UNSW says which tool they want used. See `CONTENT.md` §8. The original
+   form markup and CSS are recoverable from the initial commit.
 3. **Session leads.** Add tutorial and session presenters — students and
    colleagues running the sessions. Names under each tutorial card is the
    lightest touch; a separate "Presenters" section is warranted if there are

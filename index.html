@@ -208,33 +208,16 @@ figcaption{
   color:var(--ink-3);padding:8px 0 0;
 }
 
-/* ---------- form ---------- */
-.form{max-width:660px}
-.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:640px){.fgrid{grid-template-columns:1fr}}
-.field{margin-bottom:16px}
-label{
-  display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;
-}
-input[type=text],input[type=email],textarea{
-  width:100%;background:var(--bg-3);border:1px solid var(--rule-2);color:var(--ink);
-  font-family:var(--mono);font-size:14px;padding:10px 12px;border-radius:0;
-}
-textarea{min-height:88px;resize:vertical;font-family:var(--body);font-size:16px}
-input:focus,textarea:focus{border-color:var(--p3);outline:none}
-.checks{display:grid;gap:9px}
-.chk{
-  display:flex;gap:10px;align-items:flex-start;font-size:15.5px;color:var(--ink-2);
-  cursor:pointer;font-family:var(--body);text-transform:none;letter-spacing:0;
-}
-.chk input{margin:3px 0 0;accent-color:var(--p3);width:15px;height:15px;flex:none}
+/* ---------- action ---------- */
+/* The interest form's markup and CSS were removed when it was replaced by a
+   mailto link; both are recoverable from the initial commit. */
 .btn{
   font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
   background:transparent;color:var(--p3);border:1px solid var(--p3);padding:13px 28px;
   border-radius:0;cursor:pointer;margin-top:4px;
 }
-.btn:hover{background:var(--p3);color:var(--bg)}
+a.btn{display:inline-block;text-decoration:none}
+.btn:hover{background:var(--p3);color:var(--bg);text-decoration:none}
 .privacy{margin-top:14px;font-size:13.5px;color:var(--ink-3);max-width:56ch}
 
 /* ---------- status bar footer ---------- */
@@ -280,7 +263,7 @@ input:focus,textarea:focus{border-color:var(--p3);outline:none}
     <p class="lede" style="margin-bottom:0;color:var(--ink-2)">RF and optical surveillance, tactical telecommunications, and applied AI in the field.</p>
 
     <div class="fields" style="margin-top:26px">
-      <div class="f"><span class="k">Date</span><span class="v">Friday 13 November 2026</span><span class="s prov">Provisional</span></div>
+      <div class="f"><span class="k">Date</span><span class="v">Friday 13 November 2026</span><span class="s ok">Confirmed</span></div>
       <div class="f"><span class="k">Venue</span><span class="v">UNSW Canberra City, Reid ACT</span><span class="s ok">Confirmed</span></div>
       <div class="f"><span class="k">Format</span><span class="v">One day · in person only</span><span class="s ok">Confirmed</span></div>
     </div>
@@ -431,7 +414,7 @@ input:focus,textarea:focus{border-color:var(--p3);outline:none}
     </div>
 
     <div class="note">
-      <b>Want to enter?</b> Tick <em>Entering the robot competition</em> on the <a href="#register">interest form</a> and we will send you the rules and the API documentation as soon as they are ready.
+      <b>Want to enter?</b> <a href="#register">Register your interest</a> and say you are entering the robot competition — we will send you the rules and the API documentation as soon as they are ready.
     </div>
     <!-- FIG 02 slot — arena schematic / playable demonstration run -->
   </div>
@@ -457,43 +440,18 @@ input:focus,textarea:focus{border-color:var(--p3);outline:none}
   <div class="panel-body">
     <p class="lede">Tell us you are coming, or put your hand up to speak, demonstrate or enter the robot competition. Full registration opens closer to the date.</p>
 
-    <form class="form" action="https://formspree.io/f/REPLACE_WITH_YOUR_ENDPOINT" method="POST">
-      <div class="fgrid">
-        <div class="field">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" required>
-        </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required>
-        </div>
-      </div>
-      <div class="fgrid">
-        <div class="field">
-          <label for="org">Affiliation</label>
-          <input id="org" name="affiliation" type="text">
-        </div>
-        <div class="field">
-          <label for="country">Country</label>
-          <input id="country" name="country" type="text">
-        </div>
-      </div>
-      <div class="field">
-        <label>I am interested in</label>
-        <div class="checks">
-          <label class="chk"><input type="checkbox" name="interest" value="Attending"> Attending</label>
-          <label class="chk"><input type="checkbox" name="interest" value="Giving a talk"> Giving a talk</label>
-          <label class="chk"><input type="checkbox" name="interest" value="Running a demonstration"> Running a demonstration</label>
-          <label class="chk"><input type="checkbox" name="interest" value="Entering the robot competition"> Entering the robot competition</label>
-        </div>
-      </div>
-      <div class="field">
-        <label for="topic">Topic or anything else (optional)</label>
-        <textarea id="topic" name="topic"></textarea>
-      </div>
-      <button class="btn" type="submit">Send</button>
-      <p class="privacy">We will use your details only to contact you about TacEdge 2026.</p>
-    </form>
+    <p style="color:var(--ink-2);max-width:62ch;margin:0 0 4px">Email us with the details below and we will keep you posted. An online form will replace this once the registration tool is settled.</p>
+
+    <div class="fields" style="margin-top:22px;max-width:780px">
+      <div class="f"><span class="k">Name</span><span class="v">As you would like it published</span></div>
+      <div class="f"><span class="k">Affiliation</span><span class="v">Institution or organisation</span></div>
+      <div class="f"><span class="k">Country</span><span class="v"></span></div>
+      <div class="f"><span class="k">Interested in</span><span class="v">Attending · giving a talk · running a demonstration · entering the robot competition</span></div>
+      <div class="f"><span class="k">Topic</span><span class="v">Optional</span></div>
+    </div>
+
+    <p style="margin:28px 0 0"><a class="btn" href="mailto:a.lenskiy@unsw.edu.au?subject=TacEdge%202026%20interest&amp;body=Name%3A%0AAffiliation%3A%0ACountry%3A%0A%0AInterested%20in%20(delete%20as%20appropriate)%3A%0A-%20Attending%0A-%20Giving%20a%20talk%0A-%20Running%20a%20demonstration%0A-%20Entering%20the%20robot%20competition%0A%0ATopic%20or%20anything%20else%3A%0A">Email your interest</a></p>
+    <p class="privacy">We will use your details only to contact you about TacEdge 2026.</p>
   </div>
 </section>
 
