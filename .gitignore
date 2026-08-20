@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+*.log
+
+# Working notes — deliberately not published. This repository is public via
+# GitHub Pages, so anything committed here is world-readable.
+CONTENT.md

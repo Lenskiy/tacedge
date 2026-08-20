@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TacEdge 2026 — International Workshop on Tactical Edge Technologies</title>
+<meta name="description" content="A one-day workshop on RF and optical surveillance, tactical telecommunications and applied AI. 13 November 2026, UNSW Canberra City.">
+<meta property="og:title" content="TacEdge 2026">
+<meta property="og:description" content="International Workshop on Tactical Edge Technologies. In person, 13 November 2026, UNSW Canberra City.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tacedge.org/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B1119;
+  --bg-2:#0E1620;
+  --bg-3:#141F2C;
+  --rule:#22303F;
+  --rule-2:#2E4054;
+  --ink:#E8EEF6;
+  --ink-2:#9DAFC4;
+  --ink-3:#6B7F97;
+  /* parula ramp — MATLAB's spectrum colormap. Data only, never chrome. */
+  --p1:#352A87;
+  --p2:#106DBE;
+  --p3:#1BA9A5;
+  --p4:#7FD03B;
+  --p5:#F9FB0E;
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --wrap:1240px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;
+}
+a{color:var(--p3);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--p4);outline-offset:2px}
+
+/* ---------- chrome idiom: mono, uppercase, tracked ---------- */
+.m{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+
+/* ---------- rails: the page sits inside a bezel ---------- */
+.rails{
+  max-width:var(--wrap);margin:0 auto;
+  border-left:1px solid var(--rule);border-right:1px solid var(--rule);
+}
+
+/* ---------- soft-key nav ---------- */
+.nav{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--rule)}
+.nav-in{
+  max-width:var(--wrap);margin:0 auto;display:flex;align-items:stretch;height:50px;
+  border-left:1px solid var(--rule);border-right:1px solid var(--rule);
+}
+.mark{
+  display:flex;align-items:center;padding:0 16px;font-family:var(--display);
+  font-weight:800;font-stretch:112%;font-size:15px;letter-spacing:.01em;color:var(--ink);
+}
+.mark span{color:var(--p3)}
+.nav-links{margin-left:auto;display:flex}
+.nav-links a{
+  display:flex;align-items:center;padding:0 13px;border-left:1px solid var(--rule);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);
+}
+.nav-links a:hover{background:var(--bg-3);color:var(--ink);text-decoration:none}
+.nav-links a.cta{color:var(--p3);background:rgba(27,169,165,.07)}
+@media(max-width:900px){.nav-links a:not(.cta){display:none}}
+
+/* ---------- panels ---------- */
+.panel{border-bottom:1px solid var(--rule)}
+.panel-bar{
+  display:flex;align-items:center;gap:12px;height:34px;padding:0 16px;overflow:hidden;
+  border-bottom:1px solid var(--rule);background:var(--bg-2);
+}
+.panel-bar h2,.panel-bar span{
+  font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);margin:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto;min-width:0;
+}
+.panel-bar .id{color:var(--p3)}
+.panel-bar .fill{flex:1 1 auto;min-width:8px;height:1px;background:var(--rule);align-self:center}
+.panel-bar .rt{margin-left:auto}
+@media(max-width:760px){.panel-bar .rt,.panel-bar .sub{display:none}}
+.panel-body{padding:clamp(20px,3.2vw,38px) 16px}
+
+h1{
+  font-family:var(--display);font-weight:800;font-stretch:112%;
+  font-size:clamp(30px,4.6vw,54px);line-height:1.06;letter-spacing:-.01em;margin:0 0 12px;
+}
+h3{
+  font-family:var(--display);font-weight:700;font-stretch:112%;
+  font-size:clamp(23px,3vw,34px);line-height:1.1;letter-spacing:-.005em;margin:0 0 18px;
+}
+.lede{font-size:clamp(17px,1.9vw,19px);line-height:1.55;color:var(--ink);max-width:62ch;margin:0 0 22px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,52px)}
+.two p{margin:0 0 16px;color:var(--ink-2)}
+.two p:last-child{margin-bottom:0}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+
+.note{
+  margin-top:30px;padding:16px 18px;border:1px solid var(--rule);border-left:2px solid var(--p2);
+  background:var(--bg-2);color:var(--ink-2);font-size:15.5px;
+}
+.note b{color:var(--ink);font-weight:600}
+
+/* ---------- field list: label · value · status ---------- */
+.fields{border-top:1px solid var(--rule)}
+.f{
+  display:grid;grid-template-columns:170px 1fr auto;gap:16px;align-items:baseline;
+  padding:11px 0;border-bottom:1px solid var(--rule);
+}
+.f .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.f .v{font-family:var(--mono);font-size:14px;color:var(--ink)}
+.f .v small{display:block;font-family:var(--body);font-size:14px;color:var(--ink-3);letter-spacing:0;margin-top:2px}
+.f .s{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.f .s.ok{color:var(--p3)}
+.f .s.prov{color:var(--p4)}
+@media(max-width:640px){
+  .f{grid-template-columns:1fr auto;gap:4px 12px}
+  .f .k{grid-column:1/-1}
+}
+
+/* ---------- waterfall (signature) ---------- */
+.fall{position:relative;background:#050A11;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.fall canvas{display:block;width:100%;height:150px}
+.fall-scale{
+  display:flex;justify-content:space-between;gap:12px;padding:5px 16px;background:var(--bg-2);
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+}
+@media(max-width:640px){
+  .fall canvas{height:104px}
+  .fall-scale .mid{display:none}
+}
+
+/* ---------- timeline strip ---------- */
+.tl-bar{position:relative;height:34px;background:var(--bg-3);border:1px solid var(--rule)}
+.seg{position:absolute;top:0;bottom:0;border-right:1px solid var(--bg)}
+.tl-ticks{position:relative;height:26px;margin-top:2px}
+.tl-ticks span{
+  position:absolute;top:0;font-family:var(--mono);font-size:10px;color:var(--ink-3);
+  padding-top:7px;border-left:1px solid var(--rule-2);padding-left:4px;
+}
+.legend{
+  display:flex;flex-wrap:wrap;gap:16px;margin:14px 0 26px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+}
+.legend i{display:inline-block;width:22px;height:8px;margin-right:7px;vertical-align:1px}
+
+/* ---------- ruled rows: programme, competition phases ---------- */
+.rows{border-top:1px solid var(--rule)}
+.r{
+  display:grid;grid-template-columns:82px 1fr auto;gap:18px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--rule);
+}
+.r time{font-family:var(--mono);font-size:14px;color:var(--p3)}
+.r .what{font-family:var(--mono);font-size:14px;color:var(--ink)}
+.r .what small{display:block;font-family:var(--body);font-size:14.5px;color:var(--ink-3);margin-top:2px}
+.r .dur{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.r.br .what{color:var(--ink-3)}
+@media(max-width:640px){
+  .r{grid-template-columns:66px 1fr;gap:12px}
+  .r .dur{grid-column:2;margin-top:2px}
+}
+.prov{margin-top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+/* ---------- tutorial panels ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule)}
+.card{border-right:1px solid var(--rule)}
+.card:last-child{border-right:0}
+.card-bar{
+  display:flex;justify-content:space-between;height:30px;align-items:center;padding:0 14px;
+  border-bottom:1px solid var(--rule);background:var(--bg-2);
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+}
+.card-bar b{color:var(--p4);font-weight:500}
+.card-bar span{color:var(--ink-3)}
+.card-in{padding:18px 14px 22px}
+.card h3{font-family:var(--display);font-weight:600;font-stretch:105%;font-size:17px;line-height:1.25;margin:0 0 8px}
+.card p{margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.55}
+@media(max-width:880px){
+  .cards{grid-template-columns:1fr}
+  .card{border-right:0;border-bottom:1px solid var(--rule)}
+  .card:last-child{border-bottom:0}
+}
+
+/* ---------- figure plate (used once assets land) ---------- */
+.fig{
+  position:relative;background:var(--bg-3);border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+}
+.fig::before,.fig::after{content:"";position:absolute;width:11px;height:11px}
+.fig::before{left:-1px;top:-1px;border-left:1px solid var(--p3);border-top:1px solid var(--p3)}
+.fig::after{right:-1px;bottom:-1px;border-right:1px solid var(--p3);border-bottom:1px solid var(--p3)}
+.fig img{display:block;width:100%;height:auto}
+figure{margin:0}
+figcaption{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);padding:8px 0 0;
+}
+
+/* ---------- form ---------- */
+.form{max-width:660px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.fgrid{grid-template-columns:1fr}}
+.field{margin-bottom:16px}
+label{
+  display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;
+}
+input[type=text],input[type=email],textarea{
+  width:100%;background:var(--bg-3);border:1px solid var(--rule-2);color:var(--ink);
+  font-family:var(--mono);font-size:14px;padding:10px 12px;border-radius:0;
+}
+textarea{min-height:88px;resize:vertical;font-family:var(--body);font-size:16px}
+input:focus,textarea:focus{border-color:var(--p3);outline:none}
+.checks{display:grid;gap:9px}
+.chk{
+  display:flex;gap:10px;align-items:flex-start;font-size:15.5px;color:var(--ink-2);
+  cursor:pointer;font-family:var(--body);text-transform:none;letter-spacing:0;
+}
+.chk input{margin:3px 0 0;accent-color:var(--p3);width:15px;height:15px;flex:none}
+.btn{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  background:transparent;color:var(--p3);border:1px solid var(--p3);padding:13px 28px;
+  border-radius:0;cursor:pointer;margin-top:4px;
+}
+.btn:hover{background:var(--p3);color:var(--bg)}
+.privacy{margin-top:14px;font-size:13.5px;color:var(--ink-3);max-width:56ch}
+
+/* ---------- status bar footer ---------- */
+.status{
+  display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;
+  padding:12px 16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);border-top:1px solid var(--rule);
+}
+.status a{color:var(--ink-2)}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="mark" href="#top">Tac<span>Edge</span>&nbsp;2026</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#programme">Programme</a>
+      <a href="#tutorials">Tutorials</a>
+      <a href="#ctf">Capture the flag</a>
+      <a href="#organisers">Organisers</a>
+      <a class="cta" href="#register">Register interest</a>
+    </div>
+  </div>
+</nav>
+
+<div class="rails">
+
+<header class="panel" id="top">
+  <div class="panel-bar">
+    <span class="id">SYS</span>
+    <span class="sub">TacEdge 2026 · International Workshop on Tactical Edge Technologies</span>
+    <span class="fill"></span>
+    <span class="rt">UNSW Canberra</span>
+  </div>
+  <div class="panel-body" style="padding-bottom:22px">
+    <h1>Technologies that have to work at the edge.</h1>
+    <p class="lede" style="margin-bottom:0;color:var(--ink-2)">RF and optical surveillance, tactical telecommunications, and applied AI in the field.</p>
+
+    <div class="fields" style="margin-top:26px">
+      <div class="f"><span class="k">Date</span><span class="v">Friday 13 November 2026</span><span class="s prov">Provisional</span></div>
+      <div class="f"><span class="k">Venue</span><span class="v">UNSW Canberra City, Reid ACT</span><span class="s ok">Confirmed</span></div>
+      <div class="f"><span class="k">Format</span><span class="v">One day · in person only</span><span class="s ok">Confirmed</span></div>
+    </div>
+  </div>
+
+  <div class="fall">
+    <canvas id="fall" aria-hidden="true"></canvas>
+  </div>
+  <div class="fall-scale">
+    <span>2.400 GHz</span>
+    <span class="mid">Spectrum waterfall — synthetic, pending real capture</span>
+    <span>2.480 GHz</span>
+  </div>
+</header>
+
+<section class="panel" id="about">
+  <div class="panel-bar"><span class="id">01</span><h2>About</h2><span class="fill"></span></div>
+  <div class="panel-body">
+    <h3>The tactical edge is where the assumptions break</h3>
+    <div class="two">
+      <div>
+        <p>Spectrum is contested, bandwidth is scarce, links drop, and the hardware that has to carry the load is whatever fits on the platform. TacEdge is about the methods and tools that still work under those conditions.</p>
+        <p>The morning is keynotes and talks. The afternoon is hands on — parallel tutorials in software-defined radio, satellite imagery, and object detection, run as working sessions rather than lectures. The day closes with an autonomous robot capture-the-flag competition.</p>
+      </div>
+      <div>
+        <p>The workshop is aimed at researchers, Defence and defence-industry practitioners, and graduate students. Demonstrations run continuously through the day, including passive RF sensing systems and an educational robot arena.</p>
+        <p>TacEdge 2026 is a pilot event. If it lands well, it becomes annual.</p>
+      </div>
+    </div>
+    <div class="note">
+      <b>Travelling for the space conference?</b> TacEdge runs the day after the Australian Space Domain Awareness and Space Traffic Management Conference (10–12 November), at the same venue. Stay one more day.
+    </div>
+    <!-- FIG 01 slot — wide photograph, foyer demonstrations / robot arena in build.
+         Uncomment once the photograph exists:
+    <figure style="margin-top:30px">
+      <div class="fig"><img src="img/fig-01-arena.jpg" alt="…"></div>
+      <figcaption>Fig. 01 · …</figcaption>
+    </figure>
+    -->
+  </div>
+</section>
+
+<section class="panel" id="programme">
+  <div class="panel-bar"><span class="id">02</span><h2>Programme</h2><span class="fill"></span><span class="rt">09:00–17:00 AEDT · provisional</span></div>
+  <div class="panel-body">
+
+    <div class="tl-bar">
+      <span class="seg" style="left:0%;width:2.083%;background:var(--ink-3)"></span>
+      <span class="seg" style="left:2.083%;width:6.25%;background:var(--p2)"></span>
+      <span class="seg" style="left:8.333%;width:9.375%;background:var(--p1)"></span>
+      <span class="seg" style="left:17.708%;width:4.167%;background:var(--bg-2)"></span>
+      <span class="seg" style="left:21.875%;width:9.375%;background:var(--p2)"></span>
+      <span class="seg" style="left:31.25%;width:9.375%;background:var(--p1)"></span>
+      <span class="seg" style="left:40.625%;width:10.417%;background:var(--bg-2)"></span>
+      <span class="seg" style="left:51.042%;width:12.5%;background:var(--p3)"></span>
+      <span class="seg" style="left:63.542%;width:12.5%;background:var(--p3)"></span>
+      <span class="seg" style="left:76.042%;width:2.083%;background:var(--bg-2)"></span>
+      <span class="seg" style="left:78.125%;width:21.875%;background:var(--p4)"></span>
+    </div>
+    <div class="tl-ticks" aria-hidden="true">
+      <span style="left:0%">09</span><span style="left:12.5%">10</span><span style="left:25%">11</span>
+      <span style="left:37.5%">12</span><span style="left:50%">13</span><span style="left:62.5%">14</span>
+      <span style="left:75%">15</span><span style="left:87.5%">16</span><span style="left:99.6%">17</span>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--p2)"></i>Keynote</span>
+      <span><i style="background:var(--p1)"></i>Talks</span>
+      <span><i style="background:var(--p3)"></i>Tutorials</span>
+      <span><i style="background:var(--p4)"></i>Competition</span>
+      <span><i style="background:var(--bg-2);border:1px solid var(--rule)"></i>Break · demonstrations</span>
+    </div>
+
+    <div class="rows">
+      <div class="r"><time>09:00</time><div class="what">Opening</div><span class="dur"></span></div>
+      <div class="r"><time>09:10</time><div class="what">Keynote 1<small>Speaker to be announced</small></div><span class="dur">30 min</span></div>
+      <div class="r"><time>09:40</time><div class="what">Talk session 1<small>Three talks</small></div><span class="dur">45 min</span></div>
+      <div class="r br"><time>10:25</time><div class="what">Coffee · demonstrations open</div><span class="dur">20 min</span></div>
+      <div class="r"><time>10:45</time><div class="what">Keynote 2<small>Speaker to be announced</small></div><span class="dur">45 min</span></div>
+      <div class="r"><time>11:30</time><div class="what">Talk session 2<small>Three talks</small></div><span class="dur">45 min</span></div>
+      <div class="r br"><time>12:15</time><div class="what">Lunch · demonstrations open</div><span class="dur">50 min</span></div>
+      <div class="r"><time>13:05</time><div class="what">Tutorials — first slot<small>Two rooms in parallel</small></div><span class="dur">60 min</span></div>
+      <div class="r"><time>14:05</time><div class="what">Tutorials — second slot<small>Two rooms in parallel</small></div><span class="dur">60 min</span></div>
+      <div class="r br"><time>15:05</time><div class="what">Coffee</div><span class="dur">10 min</span></div>
+      <div class="r"><time>15:15</time><div class="what"><a href="#ctf">Autonomous robot capture-the-flag</a><small>Teams of 2–4 · build, qualify, knockout on the arena</small></div><span class="dur">105 min</span></div>
+      <div class="r"><time>17:00</time><div class="what">Close</div><span class="dur"></span></div>
+    </div>
+
+    <p class="prov">Provisional — sessions and timings subject to change</p>
+  </div>
+</section>
+
+<section class="panel" id="tutorials">
+  <div class="panel-bar"><span class="id">03</span><h2>Tutorials</h2><span class="fill"></span><span class="rt">3 sessions · 2 parallel slots</span></div>
+  <div class="panel-body">
+    <p class="lede">Three hands-on tutorials run in two parallel slots. Bring a laptop.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-bar"><b>RF</b><span>T-01</span></div>
+        <div class="card-in">
+          <!-- FIG slot — spectrum explorer -->
+          <h3>Analysing the EM spectrum with SDR</h3>
+          <p>Working with software-defined radio to capture, visualise and characterise signals — from finding a carrier in the noise floor to identifying what is transmitting and when.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-bar"><b>Imagery</b><span>T-02</span></div>
+        <div class="card-in">
+          <!-- FIG slot — SAR / optical wipe -->
+          <h3>SAR and optical satellite imagery</h3>
+          <p>Reading synthetic aperture radar alongside optical imagery: what each sensor gives you, where speckle and geometry mislead, and how to get from raw product to something usable.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-bar"><b>Detection</b><span>T-03</span></div>
+        <div class="card-in">
+          <!-- FIG slot — detector output with confidence threshold -->
+          <h3>Target detection with YOLO and beyond</h3>
+          <p>Training and running modern detectors on real imagery, with attention to the constraints that matter at the edge — small targets, limited data, and inference on modest hardware.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="ctf">
+  <div class="panel-bar"><span class="id">04</span><h2>Capture the flag</h2><span class="fill"></span><span class="rt">105 min · 2 v 2 · teams of 2–4</span></div>
+  <div class="panel-body">
+    <p class="lede">An asymmetric two-against-two autonomous robot game, run as the closing session of the day. Teams write the strategy; the robots run it with no one at the controls.</p>
+
+    <div class="two" style="margin-top:26px">
+      <div>
+        <p>One side attacks and the other defends, and the two sides do not have the same capabilities. Everything on the arena is autonomous: teams develop and test their attack and defence strategies during the session, then hand them over and watch them run.</p>
+        <p>The build phase runs against a simulator rather than the arena, so every team can keep testing continuously. LLM assistance is available throughout it.</p>
+      </div>
+      <div>
+        <p>Qualifying runs go against a reference defender across parallel simulators. The top four teams go through to a knockout bracket on the physical arena, and the day closes with the awards.</p>
+        <p>Bring a laptop. The rules, the API documentation and the context pack for LLM assistance will be published here ahead of the event — there will be nothing to read for the first time on the day.</p>
+      </div>
+    </div>
+
+    <p class="prov" style="margin-top:34px">How the 105 minutes run</p>
+    <div class="rows" style="margin-top:10px">
+      <div class="r"><time datetime="PT10M">10 min</time><div class="what">Briefing and API walkthrough</div><span class="dur"></span></div>
+      <div class="r"><time datetime="PT55M">55 min</time><div class="what">Build phase<small>Attack and defence strategies, developed with LLM assistance</small></div><span class="dur">Simulator</span></div>
+      <div class="r"><time datetime="PT20M">20 min</time><div class="what">Qualifying runs<small>Against a reference defender, in parallel</small></div><span class="dur">Simulator</span></div>
+      <div class="r"><time datetime="PT15M">15 min</time><div class="what">Knockout bracket<small>Top four teams</small></div><span class="dur">Arena</span></div>
+      <div class="r br"><span></span><div class="what">Awards</div><span class="dur"></span></div>
+    </div>
+
+    <div class="note">
+      <b>Want to enter?</b> Tick <em>Entering the robot competition</em> on the <a href="#register">interest form</a> and we will send you the rules and the API documentation as soon as they are ready.
+    </div>
+    <!-- FIG 02 slot — arena schematic / playable demonstration run -->
+  </div>
+</section>
+
+<section class="panel" id="organisers">
+  <div class="panel-bar"><span class="id">05</span><h2>Organisers</h2><span class="fill"></span><span class="rt">5 co-organisers · 4 countries</span></div>
+  <div class="panel-body">
+    <div class="fields">
+      <div class="f"><span class="k">Organiser</span><span class="v">School of Engineering and Technology, UNSW Canberra</span><span class="s">Australia</span></div>
+      <div class="f"><span class="k">Co-organiser</span><span class="v">UNSW Defence Research Institute<small>Chris Mills</small></span><span class="s">Australia</span></div>
+      <div class="f"><span class="k">Co-organiser</span><span class="v">UNSW Canberra Space<small>Melrose Brown</small></span><span class="s">Australia</span></div>
+      <div class="f"><span class="k">Co-organiser</span><span class="v">Korean Institute of Communications and Information Sciences<small>Dong-Seong Kim</small></span><span class="s">Korea</span></div>
+      <div class="f"><span class="k">Co-organiser</span><span class="v">National Taiwan University of Science and Technology<small>Jui-Tang (RT) Wang · Jenq-Shiou Leu</small></span><span class="s">Taiwan</span></div>
+      <div class="f"><span class="k">Co-organiser</span><span class="v">Lyceum of the Philippines University<small>Gabriel Avelino Sampedro</small></span><span class="s">Philippines</span></div>
+    </div>
+    <!-- FIG 03 slot — partner marks, uniform optical height, monochrome. Pending permissions. -->
+  </div>
+</section>
+
+<section class="panel" id="register">
+  <div class="panel-bar"><span class="id">06</span><h2>Register interest</h2><span class="fill"></span><span class="rt">Not a binding registration</span></div>
+  <div class="panel-body">
+    <p class="lede">Tell us you are coming, or put your hand up to speak, demonstrate or enter the robot competition. Full registration opens closer to the date.</p>
+
+    <form class="form" action="https://formspree.io/f/REPLACE_WITH_YOUR_ENDPOINT" method="POST">
+      <div class="fgrid">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+      </div>
+      <div class="fgrid">
+        <div class="field">
+          <label for="org">Affiliation</label>
+          <input id="org" name="affiliation" type="text">
+        </div>
+        <div class="field">
+          <label for="country">Country</label>
+          <input id="country" name="country" type="text">
+        </div>
+      </div>
+      <div class="field">
+        <label>I am interested in</label>
+        <div class="checks">
+          <label class="chk"><input type="checkbox" name="interest" value="Attending"> Attending</label>
+          <label class="chk"><input type="checkbox" name="interest" value="Giving a talk"> Giving a talk</label>
+          <label class="chk"><input type="checkbox" name="interest" value="Running a demonstration"> Running a demonstration</label>
+          <label class="chk"><input type="checkbox" name="interest" value="Entering the robot competition"> Entering the robot competition</label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="topic">Topic or anything else (optional)</label>
+        <textarea id="topic" name="topic"></textarea>
+      </div>
+      <button class="btn" type="submit">Send</button>
+      <p class="privacy">We will use your details only to contact you about TacEdge 2026.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="status">
+  <span>TacEdge 2026 · UNSW Canberra City, Reid ACT</span>
+  <span>13 November 2026 · 09:00–17:00 AEDT</span>
+  <span>Artem Lenskiy · <a href="mailto:a.lenskiy@unsw.edu.au">a.lenskiy@unsw.edu.au</a></span>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var c=document.getElementById('fall');if(!c)return;
+  var ctx=c.getContext('2d'),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2);
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // parula-ish ramp
+  var stops=[[10,14,26],[53,42,135],[16,109,190],[27,169,165],[127,208,59],[249,251,14]];
+  function ramp(t){
+    t=Math.max(0,Math.min(1,t));
+    var x=t*(stops.length-1),i=Math.floor(x),f=x-i;
+    var a=stops[i],b=stops[Math.min(i+1,stops.length-1)];
+    return'rgb('+Math.round(a[0]+(b[0]-a[0])*f)+','+Math.round(a[1]+(b[1]-a[1])*f)+','+Math.round(a[2]+(b[2]-a[2])*f)+')';
+  }
+
+  // persistent emitters — narrowband carriers + wider bursty channels
+  var em=[{p:.13,w:.004,a:.72},{p:.27,w:.010,a:.60},{p:.41,w:.003,a:.80},
+          {p:.55,w:.022,a:.48},{p:.69,w:.006,a:.66},{p:.86,w:.014,a:.55}];
+  var t=0;
+
+  function line(y){
+    var n=Math.max(2,Math.floor(W/2));
+    for(var i=0;i<n;i++){
+      var f=i/n, v=0.14+Math.random()*0.10;           // noise floor
+      for(var k=0;k<em.length;k++){
+        var e=em[k], d=(f-e.p)/e.w;
+        var duty=0.55+0.45*Math.sin(t*0.013*(k+1.7)+k*2.1);
+        if(duty>0.35) v+=e.a*Math.exp(-d*d)*(0.75+0.25*Math.random());
+      }
+      if(Math.random()<0.00035) v+=0.5;               // sporadic burst
+      ctx.fillStyle=ramp(v);
+      ctx.fillRect(i*(W/n),y,(W/n)+1,2);
+    }
+  }
+
+  function size(){
+    W=c.clientWidth;H=c.clientHeight;
+    c.width=W*dpr;c.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.fillStyle='#050A11';ctx.fillRect(0,0,W,H);
+    for(var y=H;y>=0;y-=2){t++;line(y);}              // prefill
+  }
+  size();
+  var ro=new ResizeObserver(size);ro.observe(c);
+
+  if(!reduce){
+    (function step(){
+      t++;
+      ctx.drawImage(c,0,0,W*dpr,H*dpr,0,2,W,H);       // scroll down
+      line(0);
+      setTimeout(function(){requestAnimationFrame(step);},55);
+    })();
+  }
+})();
+</script>
+</body>
+</html>
