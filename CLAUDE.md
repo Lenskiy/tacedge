@@ -112,7 +112,7 @@ bring the badge back for that row only — never mark something CONFIRMED that
 drifting nodes whose links form and break by range, with nodes occasionally
 dropping off the net and rejoining. It is decorative furniture, carries no
 information, and is `aria-hidden`. It must stay subordinate to the waterfall —
-dim, slow, and never bright enough to compete with body text. It honours
+dim, and never bright enough to compete with body text. It honours
 `prefers-reduced-motion` by rendering a single static frame.
 
 **Signature element:** the animated spectrum waterfall canvas in the hero. It
@@ -122,9 +122,8 @@ cycles, Bluetooth hopping across 79 1 MHz channels, and the broad intermittent
 hump of a microwave oven. It is still simulated and the scale bar says so. It
 is the one bold thing on the page. Keep everything else quiet — no competing
 animation beyond the background mesh. It respects `prefers-reduced-motion`;
-preserve that. Its
-scale bar currently declares the data synthetic. That declaration comes off
-only when real captured data replaces it (queue item 1).
+preserve that. The scale bar's "simulated" declaration comes off only when
+real captured data replaces it (queue item 1).
 
 ## Quality floor
 
@@ -177,7 +176,12 @@ names or inventing figures.
 
 ## Deployment
 
-See `README.md`. Custom domain via `CNAME`; DNS is at Squarespace and needs
-the four GitHub A records plus a www CNAME. **There is no `CNAME` file in the
-repository yet** — it must contain exactly `tacedge.org` or GitHub Pages will
-serve only the `github.io` address.
+Live at https://tacedge.org from `Lenskiy/tacedge`, GitHub Pages on `main`
+at root, HTTPS enforced. `CNAME` contains `tacedge.org`; DNS is at Squarespace
+(Google Cloud nameservers) with the four GitHub A records on the apex and a
+`www` CNAME to `lenskiy.github.io.`.
+
+Note: changing the custom domain through the GitHub API makes GitHub commit
+to the repository (it writes or deletes the `CNAME` file), so pull afterwards
+or your local branch will be behind. `CONTENT.md` is gitignored and must stay
+that way — the repository is public.
