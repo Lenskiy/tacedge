@@ -68,9 +68,15 @@ unreadable.
   `<h2>`, styled small and mono; big display lines inside the body are `<h3>`.
   Bar items clamp to one line with ellipsis; `.rt` and `.sub` hide below
   760px.
-- `.fields` / `.f` — `LABEL — value — STATUS` ruled rows.
+- `.kicker` — small tracked teal line above the `<h1>`, carrying the short
+  name so the `<h1>` can be the full workshop title.
+- `.fields` / `.f` — `LABEL — value — readout` ruled rows.
+- `.logos` — partner mark row, greyscaled to a uniform 46px optical height.
+  Written and commented out in §05; see `img/README.md` for the file list.
 - `.rows` / `.r` — ruled time/what/duration rows, used by both the programme
-  and the competition phase list.
+  and the competition phase list. Programme rows carry a 3px colour chip
+  (`.g-key`, `.g-talk`, `.g-tut`, `.g-comp`, `.g-break`) keyed to the timeline
+  segment colours, so the legend means the same thing in both places.
 - `.tl-bar` + `.tl-ticks` + `.legend` — the day as a single 09:00–17:00 axis.
   Segment `left`/`width` are percentages of the 480-minute span; recompute
   them if timings change or the strip will lie.
@@ -95,10 +101,11 @@ sentence could sit on any workshop's site, it is not earning its place.
    mitigation is large, human figures — hands, gear, faces, the arena — set
    inside the plates. Until those land, the page will read austere.
 
-**Status semantics.** The `.f .s` column publishes confidence:
-`CONFIRMED` (`.ok`, teal) and `PROVISIONAL` (`.prov`, green). This is how the
-site stays honest while facts are still settling — flip statuses as things
-confirm rather than waiting to publish. Never mark something CONFIRMED that
+**Status column.** `.f` rows have a third cell (`.s`) for a right-aligned
+readout. It carried `CONFIRMED`/`PROVISIONAL` badges in the hero until every
+fact firmed up; those were removed as noise once everything read CONFIRMED. It
+now carries the country in the organisers list. If a fact goes soft again,
+bring the badge back for that row only — never mark something CONFIRMED that
 `CONTENT.md` has as TO CONFIRM.
 
 **Background mesh.** A fixed full-page canvas (`#mesh`, `z-index:-1`) of
@@ -109,6 +116,10 @@ dim, slow, and never bright enough to compete with body text. It honours
 `prefers-reduced-motion` by rendering a single static frame.
 
 **Signature element:** the animated spectrum waterfall canvas in the hero. It
+models the real structure of the 2.400–2.480 GHz ISM band — three Wi-Fi
+channels at 2412/2437/2462 MHz with flat-topped OFDM skirts and realistic duty
+cycles, Bluetooth hopping across 79 1 MHz channels, and the broad intermittent
+hump of a microwave oven. It is still simulated and the scale bar says so. It
 is the one bold thing on the page. Keep everything else quiet — no competing
 animation beyond the background mesh. It respects `prefers-reduced-motion`;
 preserve that. Its
@@ -157,8 +168,9 @@ names or inventing figures.
    against optical imagery.
 7. **Registration and travel info.** Venue address detail, getting there,
    nearby accommodation, and visa guidance for international attendees.
-8. **Partner logos.** Fig. 03 slot in §05, once permissions are confirmed.
-   Monochrome or on a light chip, uniform optical height.
+8. **Partner logos.** The `.logos` row is written and commented out in §05.
+   Drop the six files listed in `img/README.md` into `img/` and delete the
+   comment markers. Confirm each partner is happy to be shown first.
 9. **Capture-the-flag arena schematic**, or a playable 30-second demonstration
    run. Must not misrepresent the real rules.
 10. **Blockchain scope.** Unresolved mismatch — see `CONTENT.md` §7.

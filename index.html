@@ -102,7 +102,12 @@ a:hover{text-decoration:underline}
 
 h1{
   font-family:var(--display);font-weight:800;font-stretch:112%;
-  font-size:clamp(30px,4.6vw,54px);line-height:1.06;letter-spacing:-.01em;margin:0 0 12px;
+  font-size:clamp(26px,4vw,46px);line-height:1.08;letter-spacing:-.01em;
+  margin:0 0 12px;max-width:24ch;
+}
+.kicker{
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--p3);margin:0 0 12px;
 }
 h3{
   font-family:var(--display);font-weight:700;font-stretch:112%;
@@ -130,8 +135,6 @@ h3{
 .f .v{font-family:var(--mono);font-size:14px;color:var(--ink)}
 .f .v small{display:block;font-family:var(--body);font-size:14px;color:var(--ink-3);letter-spacing:0;margin-top:2px}
 .f .s{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-.f .s.ok{color:var(--p3)}
-.f .s.prov{color:var(--p4)}
 @media(max-width:640px){
   .f{grid-template-columns:1fr auto;gap:4px 12px}
   .f .k{grid-column:1/-1}
@@ -167,13 +170,19 @@ h3{
 .rows{border-top:1px solid var(--rule)}
 .r{
   display:grid;grid-template-columns:82px 1fr auto;gap:18px;align-items:baseline;
-  padding:12px 0;border-bottom:1px solid var(--rule);
+  padding:12px 0 12px 14px;border-bottom:1px solid var(--rule);position:relative;
 }
 .r time{font-family:var(--mono);font-size:14px;color:var(--p3)}
 .r .what{font-family:var(--mono);font-size:14px;color:var(--ink)}
 .r .what small{display:block;font-family:var(--body);font-size:14.5px;color:var(--ink-3);margin-top:2px}
 .r .dur{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 .r.br .what{color:var(--ink-3)}
+.r::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;background:transparent}
+.r.g-key::before{background:var(--p2)}
+.r.g-talk::before{background:var(--p1)}
+.r.g-tut::before{background:var(--p3)}
+.r.g-comp::before{background:var(--p4)}
+.r.g-break::before{background:var(--rule-2)}
 @media(max-width:640px){
   .r{grid-template-columns:66px 1fr;gap:12px}
   .r .dur{grid-column:2;margin-top:2px}
@@ -199,6 +208,16 @@ h3{
   .card{border-right:0;border-bottom:1px solid var(--rule)}
   .card:last-child{border-bottom:0}
 }
+
+/* ---------- partner marks ---------- */
+.logos{display:flex;flex-wrap:wrap;border:1px solid var(--rule);margin-top:28px}
+.logos div{
+  flex:1 1 170px;display:flex;align-items:center;justify-content:center;
+  padding:22px 18px;min-height:98px;border-right:1px solid var(--rule);
+}
+.logos div:last-child{border-right:0}
+.logos img{max-width:100%;max-height:46px;width:auto;height:auto;
+  filter:grayscale(1) brightness(1.85);opacity:.88}
 
 /* ---------- figure plate (used once assets land) ---------- */
 .fig{
@@ -268,13 +287,14 @@ a.btn{display:inline-block;text-decoration:none}
     <span class="rt">UNSW Canberra</span>
   </div>
   <div class="panel-body" style="padding-bottom:22px">
-    <h1>Technologies that have to work at the edge.</h1>
+    <p class="kicker">TacEdge 2026</p>
+    <h1>International Workshop on Tactical Edge Technologies</h1>
     <p class="lede" style="margin-bottom:0;color:var(--ink-2)">Sensing, communications and autonomy in contested environments.</p>
 
     <div class="fields" style="margin-top:26px">
-      <div class="f"><span class="k">Date</span><span class="v">Friday 13 November 2026</span><span class="s ok">Confirmed</span></div>
-      <div class="f"><span class="k">Venue</span><span class="v">UNSW Canberra City, Reid ACT</span><span class="s ok">Confirmed</span></div>
-      <div class="f"><span class="k">Format</span><span class="v">One day · in person only</span><span class="s ok">Confirmed</span></div>
+      <div class="f"><span class="k">Date</span><span class="v">Friday 13 November 2026</span></div>
+      <div class="f"><span class="k">Venue</span><span class="v">UNSW Canberra City, Reid ACT</span></div>
+      <div class="f"><span class="k">Format</span><span class="v">One day · in person only</span></div>
     </div>
   </div>
 
@@ -283,7 +303,7 @@ a.btn{display:inline-block;text-decoration:none}
   </div>
   <div class="fall-scale">
     <span>2.400 GHz</span>
-    <span class="mid">Spectrum waterfall — synthetic, pending real capture</span>
+    <span class="mid">2.4 GHz ISM — simulated, pending real capture</span>
     <span>2.480 GHz</span>
   </div>
 </header>
@@ -347,16 +367,16 @@ a.btn{display:inline-block;text-decoration:none}
 
     <div class="rows">
       <div class="r"><time>09:00</time><div class="what">Opening</div><span class="dur"></span></div>
-      <div class="r"><time>09:10</time><div class="what">Keynote 1<small>Speaker to be announced</small></div><span class="dur">30 min</span></div>
-      <div class="r"><time>09:40</time><div class="what">Talk session 1<small>Three talks</small></div><span class="dur">45 min</span></div>
-      <div class="r br"><time>10:25</time><div class="what">Coffee · demonstrations open</div><span class="dur">20 min</span></div>
-      <div class="r"><time>10:45</time><div class="what">Keynote 2<small>Speaker to be announced</small></div><span class="dur">45 min</span></div>
-      <div class="r"><time>11:30</time><div class="what">Talk session 2<small>Three talks</small></div><span class="dur">45 min</span></div>
-      <div class="r br"><time>12:15</time><div class="what">Lunch · demonstrations open</div><span class="dur">50 min</span></div>
-      <div class="r"><time>13:05</time><div class="what">Tutorials — first slot<small>Two rooms in parallel</small></div><span class="dur">60 min</span></div>
-      <div class="r"><time>14:05</time><div class="what">Tutorials — second slot<small>Two rooms in parallel</small></div><span class="dur">60 min</span></div>
-      <div class="r br"><time>15:05</time><div class="what">Coffee</div><span class="dur">10 min</span></div>
-      <div class="r"><time>15:15</time><div class="what"><a href="#ctf">Autonomous robot capture-the-flag</a><small>Teams of 2–4 · build, qualify, knockout on the arena</small></div><span class="dur">105 min</span></div>
+      <div class="r g-key"><time>09:10</time><div class="what">Keynote 1<small>Speaker to be announced</small></div><span class="dur">30 min</span></div>
+      <div class="r g-talk"><time>09:40</time><div class="what">Talk session 1<small>Three talks</small></div><span class="dur">45 min</span></div>
+      <div class="r br g-break"><time>10:25</time><div class="what">Coffee · demonstrations open</div><span class="dur">20 min</span></div>
+      <div class="r g-key"><time>10:45</time><div class="what">Keynote 2<small>Speaker to be announced</small></div><span class="dur">45 min</span></div>
+      <div class="r g-talk"><time>11:30</time><div class="what">Talk session 2<small>Three talks</small></div><span class="dur">45 min</span></div>
+      <div class="r br g-break"><time>12:15</time><div class="what">Lunch · demonstrations open</div><span class="dur">50 min</span></div>
+      <div class="r g-tut"><time>13:05</time><div class="what">Tutorials — first slot<small>Two rooms in parallel</small></div><span class="dur">60 min</span></div>
+      <div class="r g-tut"><time>14:05</time><div class="what">Tutorials — second slot<small>Two rooms in parallel</small></div><span class="dur">60 min</span></div>
+      <div class="r br g-break"><time>15:05</time><div class="what">Coffee</div><span class="dur">10 min</span></div>
+      <div class="r g-comp"><time>15:15</time><div class="what"><a href="#ctf">Autonomous robot capture-the-flag</a><small>Teams of 2–4 · build, qualify, knockout on the arena</small></div><span class="dur">105 min</span></div>
       <div class="r"><time>17:00</time><div class="what">Close</div><span class="dur"></span></div>
     </div>
 
@@ -389,8 +409,8 @@ a.btn{display:inline-block;text-decoration:none}
         <div class="card-bar"><b>Detection</b><span>T-03</span></div>
         <div class="card-in">
           <!-- FIG slot — detector output with confidence threshold -->
-          <h3>Target detection with YOLO and beyond</h3>
-          <p>Training and running modern detectors on real imagery, with attention to the constraints that matter at the edge — small targets, limited data, and inference on modest hardware.</p>
+          <h3>Target detection with deep-learning detectors</h3>
+          <p>Training and running current detector architectures on real imagery, with attention to the constraints that matter at the edge — small targets, limited data, and inference on modest hardware.</p>
         </div>
       </div>
     </div>
@@ -440,7 +460,18 @@ a.btn{display:inline-block;text-decoration:none}
       <div class="f"><span class="k">Co-organiser</span><span class="v">National Taiwan University of Science and Technology<small>Jui-Tang (RT) Wang · Jenq-Shiou Leu</small></span><span class="s">Taiwan</span></div>
       <div class="f"><span class="k">Co-organiser</span><span class="v">Lyceum of the Philippines University<small>Gabriel Avelino Sampedro</small></span><span class="s">Philippines</span></div>
     </div>
-    <!-- FIG 03 slot — partner marks, uniform optical height, monochrome. Pending permissions. -->
+    <!-- Partner marks. Drop the files into img/ and delete these comment
+         markers to publish the row. Uniform optical height is handled by
+         .logos img { max-height }. See img/README.md for the file list.
+    <div class="logos">
+      <div><img src="img/logo-unsw-canberra.svg" alt="UNSW Canberra"></div>
+      <div><img src="img/logo-unsw-dri.svg" alt="UNSW Defence Research Institute"></div>
+      <div><img src="img/logo-unsw-canberra-space.svg" alt="UNSW Canberra Space"></div>
+      <div><img src="img/logo-kics.svg" alt="Korean Institute of Communications and Information Sciences"></div>
+      <div><img src="img/logo-ntust.svg" alt="National Taiwan University of Science and Technology"></div>
+      <div><img src="img/logo-lpu.svg" alt="Lyceum of the Philippines University"></div>
+    </div>
+    -->
   </div>
 </section>
 
@@ -488,7 +519,7 @@ a.btn{display:inline-block;text-decoration:none}
     N=[];
     for(var i=0;i<count;i++){
       N.push({x:Math.random()*W,y:Math.random()*H,
-              vx:(Math.random()-0.5)*0.13,vy:(Math.random()-0.5)*0.13,
+              vx:(Math.random()-0.5)*0.42,vy:(Math.random()-0.5)*0.42,
               up:1,t:Math.random()*300});
     }
   }
@@ -551,21 +582,35 @@ a.btn{display:inline-block;text-decoration:none}
     return'rgb('+Math.round(a[0]+(b[0]-a[0])*f)+','+Math.round(a[1]+(b[1]-a[1])*f)+','+Math.round(a[2]+(b[2]-a[2])*f)+')';
   }
 
-  // persistent emitters — narrowband carriers + wider bursty channels
-  var em=[{p:.13,w:.004,a:.72},{p:.27,w:.010,a:.60},{p:.41,w:.003,a:.80},
-          {p:.55,w:.022,a:.48},{p:.69,w:.006,a:.66},{p:.86,w:.014,a:.55}];
+  // Structure of the real 2.400-2.480 GHz ISM band: three overlapping-free
+  // Wi-Fi channels, Bluetooth hopping across 79 1 MHz channels, and the
+  // broad intermittent hump of a microwave oven. Still simulated — the scale
+  // bar says so — but simulated to the shape an SDR actually shows.
+  function toF(mhz){return (mhz-2400)/80;}
+  var WIFI=[{f:toF(2412),hw:8.3/80,a:0.66,duty:0.42},   // ch 1
+            {f:toF(2437),hw:8.3/80,a:0.78,duty:0.28},   // ch 6
+            {f:toF(2462),hw:8.3/80,a:0.60,duty:0.36}];  // ch 11
   var t=0;
 
   function line(y){
-    var n=Math.max(2,Math.floor(W/2));
-    for(var i=0;i<n;i++){
-      var f=i/n, v=0.14+Math.random()*0.10;           // noise floor
-      for(var k=0;k<em.length;k++){
-        var e=em[k], d=(f-e.p)/e.w;
-        var duty=0.55+0.45*Math.sin(t*0.013*(k+1.7)+k*2.1);
-        if(duty>0.35) v+=e.a*Math.exp(-d*d)*(0.75+0.25*Math.random());
+    var n=Math.max(2,Math.floor(W/2)),i,k;
+    var on=[];                                          // which APs key up this sweep
+    for(k=0;k<WIFI.length;k++) if(Math.random()<WIFI[k].duty) on.push(WIFI[k]);
+    var hops=[];                                        // Bluetooth, 3 hops per sweep
+    for(k=0;k<3;k++) hops.push(toF(2402+Math.floor(Math.random()*79)));
+    var mwOn=(t%150)<54, mwF=toF(2450+Math.sin(t*0.09)*3);
+
+    for(i=0;i<n;i++){
+      var f=i/n, v=0.13+Math.random()*0.09;             // noise floor
+      for(k=0;k<on.length;k++){                         // flat-topped OFDM channels
+        var e=on[k], d=Math.abs(f-e.f)/e.hw;
+        if(d<2.2) v+=e.a*Math.exp(-Math.pow(d,6))*(0.82+0.18*Math.random());
       }
-      if(Math.random()<0.00035) v+=0.5;               // sporadic burst
+      for(k=0;k<hops.length;k++){                       // narrow hopping spikes
+        var dh=(f-hops[k])/0.006;
+        if(dh>-4&&dh<4) v+=0.72*Math.exp(-dh*dh);
+      }
+      if(mwOn){var dm=(f-mwF)/0.10; v+=0.5*Math.exp(-dm*dm);}
       ctx.fillStyle=ramp(v);
       ctx.fillRect(i*(W/n),y,(W/n)+1,2);
     }
