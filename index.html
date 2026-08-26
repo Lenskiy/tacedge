@@ -302,9 +302,9 @@ a.btn{display:inline-block;text-decoration:none}
     <canvas id="fall" aria-hidden="true"></canvas>
   </div>
   <div class="fall-scale">
-    <span>2.400 GHz</span>
-    <span class="mid">2.4 GHz ISM — simulated, pending real capture</span>
-    <span>2.480 GHz</span>
+    <span>118.000 MHz</span>
+    <span class="mid">VHF airband — simulated, pending real capture</span>
+    <span>137.000 MHz</span>
   </div>
 </header>
 
@@ -582,35 +582,45 @@ a.btn{display:inline-block;text-decoration:none}
     return'rgb('+Math.round(a[0]+(b[0]-a[0])*f)+','+Math.round(a[1]+(b[1]-a[1])*f)+','+Math.round(a[2]+(b[2]-a[2])*f)+')';
   }
 
-  // Structure of the real 2.400-2.480 GHz ISM band: three overlapping-free
-  // Wi-Fi channels, Bluetooth hopping across 79 1 MHz channels, and the
-  // broad intermittent hump of a microwave oven. Still simulated — the scale
-  // bar says so — but simulated to the shape an SDR actually shows.
-  function toF(mhz){return (mhz-2400)/80;}
-  var WIFI=[{f:toF(2412),hw:8.3/80,a:0.66,duty:0.42},   // ch 1
-            {f:toF(2437),hw:8.3/80,a:0.78,duty:0.28},   // ch 6
-            {f:toF(2462),hw:8.3/80,a:0.60,duty:0.36}];  // ch 11
-  var t=0;
+  // VHF airband, 118-137 MHz: AM voice between a tower and its traffic.
+  // A quiet floor, one continuous information broadcast, and short keyed
+  // exchanges elsewhere in the band. Channel positions are illustrative
+  // spacing, not an operational frequency list — the scale bar says simulated.
+  var CH=[],t=0;
+  (function(){
+    // position, and how busy that channel is — a tower works harder than a
+    // company frequency nobody is using this hour
+    var pos=[[0.036,0.006],[0.118,0.030],[0.195,0.010],[0.271,0.044],[0.330,0.008],
+             [0.402,0.000],[0.487,0.036],[0.560,0.014],[0.648,0.022],[0.729,0.006],
+             [0.812,0.018],[0.905,0.009]];
+    for(var i=0;i<pos.length;i++)
+      CH.push({f:pos[i][0],rate:pos[i][1],on:i===5?1:0,hold:0,lvl:0.6,atis:i===5});
+  })();
+
+  function keying(){
+    for(var i=0;i<CH.length;i++){
+      var c=CH[i];
+      if(c.atis){c.lvl=0.52+Math.random()*0.06;continue;}   // steady carrier
+      if(c.hold>0){
+        c.hold--;
+        c.lvl=0.54+0.40*Math.random();                      // voice modulation
+        if(c.hold===0)c.on=0;
+      } else if(Math.random()<c.rate){
+        c.on=1;c.hold=8+Math.floor(Math.random()*38);       // a transmission
+      }
+    }
+  }
 
   function line(y){
     var n=Math.max(2,Math.floor(W/2)),i,k;
-    var on=[];                                          // which APs key up this sweep
-    for(k=0;k<WIFI.length;k++) if(Math.random()<WIFI[k].duty) on.push(WIFI[k]);
-    var hops=[];                                        // Bluetooth, 3 hops per sweep
-    for(k=0;k<3;k++) hops.push(toF(2402+Math.floor(Math.random()*79)));
-    var mwOn=(t%150)<54, mwF=toF(2450+Math.sin(t*0.09)*3);
-
+    keying();
     for(i=0;i<n;i++){
-      var f=i/n, v=0.13+Math.random()*0.09;             // noise floor
-      for(k=0;k<on.length;k++){                         // flat-topped OFDM channels
-        var e=on[k], d=Math.abs(f-e.f)/e.hw;
-        if(d<2.2) v+=e.a*Math.exp(-Math.pow(d,6))*(0.82+0.18*Math.random());
+      var f=i/n, v=0.05+Math.random()*0.045;                // quiet noise floor
+      for(k=0;k<CH.length;k++){
+        var c=CH[k];if(!c.on)continue;
+        var d=(f-c.f)/0.0027;
+        if(d>-3.2&&d<3.2) v+=c.lvl*Math.exp(-d*d);          // AM carrier and skirts
       }
-      for(k=0;k<hops.length;k++){                       // narrow hopping spikes
-        var dh=(f-hops[k])/0.006;
-        if(dh>-4&&dh<4) v+=0.72*Math.exp(-dh*dh);
-      }
-      if(mwOn){var dm=(f-mwF)/0.10; v+=0.5*Math.exp(-dm*dm);}
       ctx.fillStyle=ramp(v);
       ctx.fillRect(i*(W/n),y,(W/n)+1,2);
     }

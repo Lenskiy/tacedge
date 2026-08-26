@@ -116,10 +116,14 @@ dim, and never bright enough to compete with body text. It honours
 `prefers-reduced-motion` by rendering a single static frame.
 
 **Signature element:** the animated spectrum waterfall canvas in the hero. It
-models the real structure of the 2.400–2.480 GHz ISM band — three Wi-Fi
-channels at 2412/2437/2462 MHz with flat-topped OFDM skirts and realistic duty
-cycles, Bluetooth hopping across 79 1 MHz channels, and the broad intermittent
-hump of a microwave oven. It is still simulated and the scale bar says so. It
+shows the VHF airband, 118–137 MHz: a quiet noise floor, one continuous
+information broadcast, and short keyed AM exchanges between a tower and its
+traffic, each channel with its own traffic rate and speech-modulated level.
+Channel positions are illustrative spacing, **not** an operational frequency
+list, and the scale bar says simulated. An earlier version modelled the
+2.4 GHz ISM band; airband replaced it because it reads far better — a dark
+floor with a few crisp traces, rather than three wide Wi-Fi blocks filling
+the frame. It
 is the one bold thing on the page. Keep everything else quiet — no competing
 animation beyond the background mesh. It respects `prefers-reduced-motion`;
 preserve that. The scale bar's "simulated" declaration comes off only when
@@ -137,10 +141,15 @@ Roughly in priority order. Most items need data, photographs or a decision
 from Artem before they can be built; ask rather than drafting placeholder
 names or inventing figures.
 
-1. **Real spectrum capture.** The hero waterfall is synthetic and says so on
-   its scale bar. Replace with 60–120 s of real 2.40–2.48 GHz PSD (~512 bins),
-   captured at the venue or in the lab, quantised to 8-bit and inlined. Then
-   the caption becomes a provenance line: band, location, date, receiver.
+1. **Real spectrum capture.** The hero waterfall is simulated and says so on
+   its scale bar. Replace with a real airband capture — an RTL-SDR anywhere
+   near Canberra Airport will do it:
+
+       rtl_power -f 118M:137M:8k -i 1 -e 180 -g 40 airband.csv
+
+   Quantise to 8-bit and inline it; the scale bar then becomes a provenance
+   line: band, location, date, receiver. Airband is a far easier capture than
+   the 2.4 GHz band the earlier version simulated.
 2. **Interest form.** Currently a `mailto:` link with pre-filled fields, not a
    form — chosen so no attendee details reach a third-party service before
    UNSW says which tool they want used. See `CONTENT.md` §8. The original
