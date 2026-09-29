@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="TacEdge">
+  <rect width="32" height="32" fill="#0B1119"/>
+  <rect x="6"  y="4"  width="4" height="24" fill="#1BA9A5"/>
+  <rect x="14" y="11" width="4" height="12" fill="#7FD03B"/>
+  <rect x="22" y="8"  width="4" height="9"  fill="#F9FB0E"/>
+</svg>

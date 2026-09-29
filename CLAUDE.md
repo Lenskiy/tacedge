@@ -84,9 +84,6 @@ all-caps string of 40+ characters is a sentence wearing a label's clothes.
 - `.tl-split` — the free/paid bracket sitting above the timeline strip, with
   each label underlined across the span it covers. Hidden below 700px, where
   the `.sbar` labels carry the same information.
-- `.hinge` — a single row belonging to neither adjacent block, with air on
-  both sides. Currently just lunch, which sits between the free morning and
-  the paid afternoon and is claimed by neither.
 - `.logos` — partner mark row, greyscaled to a uniform 46px optical height.
   Written and commented out in §04; see `img/README.md` for the file list.
 - `.rows` / `.r` — ruled time/what/duration rows. Programme rows carry a 3px
@@ -117,6 +114,21 @@ sentence could sit on any workshop's site, it is not earning its place.
 2. **Photographs carry all the warmth.** The chrome is deliberately cold. The
    mitigation is large, human figures — hands, gear, faces, the arena — set
    inside the plates. Until those land, the page will read austere.
+
+**Shareable surface.** `img/favicon.svg` (plus a 32px PNG and a 180px
+apple-touch-icon) is three vertical traces in teal, green and parula yellow on
+the dark field — a spectrum trace, legible at 16px. `theme-color` is `--bg`.
+
+The social card at `img/og.png` (1200×630) is **generated, not drawn**:
+`img/og-source.html` loads the same Google Fonts and palette and is rendered
+headless, so its typography is the site's rather than an approximation, and the
+waterfall in it is a real render of the airband script.
+
+    google-chrome --headless=new --window-size=1200,630 \
+      --screenshot=img/og.png "file://$PWD/img/og-source.html"
+
+**Regenerate it whenever the hero facts change** — the card repeats the title,
+date, venue and admission line, and nothing warns you when it goes stale.
 
 **Status column.** `.f` rows have a third cell (`.s`) for a right-aligned
 readout. It carried `CONFIRMED`/`PROVISIONAL` badges in the hero until every

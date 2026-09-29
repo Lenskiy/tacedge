@@ -22,6 +22,12 @@ avoid marks that rely on colour to be legible.
 
 Confirm each partner is happy to be shown before publishing the row.
 
+## Generated, already present
+
+    favicon.svg / favicon-32.png / apple-touch-icon.png   spectrum-trace mark
+    og.png                                                1200x630 social card
+    og-source.html                                        the card's source; re-render to update
+
 ## Photographs and figures
 
     fig-01-arena.jpg    wide, foyer demonstrations or the robot arena in build

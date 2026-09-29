@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>TacEdge 2026 — social card source (render at 1200x630 to img/og.png)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1119;--bg-2:#0E1620;--rule:#22303F;--rule-2:#2E4054;
+--ink:#E8EEF6;--ink-2:#9DAFC4;--ink-3:#7688A0;--p3:#1BA9A5;
+--display:'Archivo',sans-serif;--body:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;}
+*{box-sizing:border-box;margin:0}
+body{width:1200px;height:630px;background:var(--bg);color:var(--ink);
+  font-family:var(--body);overflow:hidden;font-variant-numeric:tabular-nums;
+  display:flex;flex-direction:column;}
+.bar{display:flex;align-items:center;gap:14px;height:46px;padding:0 44px;
+  background:var(--bg-2);border-bottom:1px solid var(--rule);
+  font-family:var(--mono);font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.bar .id{color:var(--p3)}
+.bar .fill{flex:1;height:1px;background:var(--rule)}
+.body{flex:1;padding:52px 44px 0;display:flex;flex-direction:column}
+h1{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:64px;
+  line-height:1.04;letter-spacing:-.015em;max-width:19ch}
+.sub{font-size:25px;color:var(--ink-2);margin-top:20px;max-width:46ch;line-height:1.35}
+.fields{margin-top:auto;margin-bottom:26px;border-top:1px solid var(--rule)}
+.f{display:grid;grid-template-columns:190px 1fr;gap:18px;align-items:baseline;
+  padding:13px 0;border-bottom:1px solid var(--rule)}
+.f .k{font-family:var(--mono);font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.f .v{font-family:var(--mono);font-size:21px;color:var(--ink)}
+.fall{height:118px;background:#050A11;border-top:1px solid var(--rule)}
+canvas{display:block;width:1200px;height:118px}
+</style></head><body>
+<div class="bar"><span class="id">SYS</span><span>TacEdge 2026</span><span class="fill"></span><span>UNSW Canberra</span></div>
+<div class="body">
+  <h1>International Workshop on Tactical Edge Technologies</h1>
+  <p class="sub">Sensing, communications and autonomy in contested environments.</p>
+  <div class="fields">
+    <div class="f"><span class="k">Date</span><span class="v">Friday 13 November 2026</span></div>
+    <div class="f"><span class="k">Venue</span><span class="v">UNSW Canberra City, Reid ACT</span></div>
+    <div class="f"><span class="k">Admission</span><span class="v">Morning free · afternoon paid, 40 places</span></div>
+  </div>
+</div>
+<div class="fall"><canvas id="fall" width="1200" height="118"></canvas></div>
+<script>
+(function(){
+  var c=document.getElementById('fall'),ctx=c.getContext('2d'),W=1200,H=118;
+  var stops=[[10,14,26],[53,42,135],[16,109,190],[27,169,165],[127,208,59],[249,251,14]];
+  function ramp(t){t=Math.max(0,Math.min(1,t));var x=t*(stops.length-1),i=Math.floor(x),f=x-i;
+    var a=stops[i],b=stops[Math.min(i+1,stops.length-1)];
+    return'rgb('+Math.round(a[0]+(b[0]-a[0])*f)+','+Math.round(a[1]+(b[1]-a[1])*f)+','+Math.round(a[2]+(b[2]-a[2])*f)+')';}
+  var CH=[],t=0;
+  var pos=[[0.036,0.006],[0.118,0.030],[0.195,0.010],[0.271,0.044],[0.330,0.008],
+           [0.402,0.000],[0.487,0.036],[0.560,0.014],[0.648,0.022],[0.729,0.006],
+           [0.812,0.018],[0.905,0.009]];
+  for(var i=0;i<pos.length;i++)CH.push({f:pos[i][0],rate:pos[i][1],on:i===5?1:0,hold:0,lvl:0.6,atis:i===5});
+  function keying(){for(var i=0;i<CH.length;i++){var c2=CH[i];
+    if(c2.atis){c2.lvl=0.52+Math.random()*0.06;continue;}
+    if(c2.hold>0){c2.hold--;c2.lvl=0.54+0.40*Math.random();if(c2.hold===0)c2.on=0;}
+    else if(Math.random()<c2.rate){c2.on=1;c2.hold=8+Math.floor(Math.random()*38);}}}
+  function line(y){var n=600,i,k;keying();
+    for(i=0;i<n;i++){var f=i/n,v=0.05+Math.random()*0.045;
+      for(k=0;k<CH.length;k++){var c3=CH[k];if(!c3.on)continue;
+        var d=(f-c3.f)/0.0027;if(d>-3.2&&d<3.2)v+=c3.lvl*Math.exp(-d*d);}
+      ctx.fillStyle=ramp(v);ctx.fillRect(i*(W/n),y,(W/n)+1,2);}}
+  ctx.fillStyle='#050A11';ctx.fillRect(0,0,W,H);
+  for(var y=H;y>=0;y-=2){t++;line(y);}
+})();
+</script></body></html>
