@@ -94,6 +94,16 @@ all-caps string of 40+ characters is a sentence wearing a label's clothes.
 - `.tl-bar` + `.tl-ticks` + `.legend` — the day as a single 09:00–17:00 axis.
   Segment `left`/`width` are percentages of the 480-minute span; recompute
   them if timings change or the strip will lie.
+- `.tut` — a tutorial row: figure one side, text the other, alternating via
+  `.rev`, stacking below 880px. This replaced a three-across card grid, which
+  gave each demonstration no room and made every section read at the same
+  density. Do not put the tutorials back in equal-size cards.
+- `.demo` + `.ann` — a demonstration canvas and the labels pinned over it.
+  Annotations are positioned HTML, not canvas text, so they stay crisp and
+  cost nothing per frame.
+- `.ctl` / `.readout` / `.cap` — the control rail beneath a demo, the tiled
+  counters beneath that, and the mono caption beneath both. A `.cap` always
+  says what the figure is and whether it is simulated.
 - `.fig` + `figcaption` — figure plates with corner crop marks, for
   photographs and data figures. Caption them as plates (`Fig. 01 · …`).
 - `.status` — the footer is a status bar.
@@ -195,15 +205,22 @@ names or inventing figures.
 5. **Photographs.** Fig. 01 slot in §01 (wide, arena or foyer demonstrations)
    and Fig. 02 in §04. Environmental shots — hands, gear, the arena in build —
    not studio headshot grids. Slots are commented out in the markup.
-6. **Tutorial micro-demos.** One working figure per tutorial card, each built
-   from real data: a spectrum explorer that labels emitters on hover, a
-   SAR↔optical wipe over Canberra (Sentinel-1 GRD + Sentinel-2, Copernicus
-   attribution), and a detector frame with a live confidence threshold
-   (needs the raw boxes as JSON, not a video). Tutorial 2's copy is grounded
-   in the course SAR exercise in `Books/FST/source-materials/lectures/
-   discussion_forums/Discussion_1.docx` — Sentinel-1 GRD dual-pol through
-   calibration, multi-look speckle reduction and terrain correction, then read
-   against optical imagery.
+6. **Tutorial demonstrations — built, and upgradable.** Each tutorial row
+   carries a working demonstration of its own subject, because the page has to
+   perform the expertise it claims rather than assert it. All three simulate a
+   named process and say so in the caption; none of them invents a readout.
+
+   - **T-01** a labelled airband waterfall with a hold control. Upgrades to
+     the real capture (queue item 1) alongside the hero.
+   - **T-02** multiplicative speckle over a synthetic backscatter field,
+     multi-looked by a slider — the same trade as the SNAP exercise in
+     `Books/FST/source-materials/lectures/discussion_forums/Discussion_1.docx`.
+     Upgrades to a real Sentinel-1 scene wiped against optical the moment two
+     processed PNGs exist. Copernicus downloads need an account; the catalogue
+     is public but product requests return 401.
+   - **T-03** a draggable confidence threshold over a deterministic score
+     distribution, with live precision and recall. Upgrades to real detector
+     output given a frame plus boxes as JSON.
 7. **Registration and travel info.** Venue address detail, getting there,
    nearby accommodation, and visa guidance for international attendees.
 8. **Partner logos.** The `.logos` row is written and commented out in §04.

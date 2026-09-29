@@ -229,10 +229,57 @@ h3{
 }
 .prov{margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.10em;color:var(--ink-3)}
 
-/* ---------- tutorial panels ---------- */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule)}
-.card{border-right:1px solid var(--rule)}
-.card:last-child{border-right:0}
+/* ---------- tutorial rows: figure and text, alternating ---------- */
+.tut{
+  display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(22px,3.6vw,46px);
+  align-items:center;padding:34px 0;border-top:1px solid var(--rule);
+}
+.tut:first-of-type{border-top:0;padding-top:6px}
+.tut.rev .tut-fig{order:2}
+@media(max-width:880px){
+  .tut{grid-template-columns:1fr;gap:20px}
+  .tut.rev .tut-fig{order:0}
+}
+.demo{position:relative;background:#050A11;border:1px solid var(--rule);line-height:0}
+.demo canvas{display:block;width:100%;height:auto}
+.ann{
+  position:absolute;transform:translateX(-50%);z-index:2;pointer-events:none;
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink);
+  background:rgba(5,10,17,.86);padding:3px 7px;white-space:nowrap;
+}
+.ann::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:16px;background:var(--p3)}
+@media(max-width:560px){.ann{font-size:11px;padding:2px 5px}}
+.ctl{
+  display:flex;align-items:center;gap:14px;padding:9px 12px;
+  border:1px solid var(--rule);border-top:0;background:var(--bg-2);
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+}
+.ctl label{margin:0;flex:0 0 auto;font-size:11px;letter-spacing:.14em}
+.ctl input[type=range]{flex:1 1 auto;min-width:80px;accent-color:var(--p3);height:3px;cursor:pointer}
+.ctl output{flex:0 0 auto;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:.10em}
+.ctlfill{flex:1 1 auto;height:1px;background:var(--rule)}
+.ctlbtn{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  background:transparent;color:var(--p3);border:1px solid var(--rule-2);
+  padding:5px 11px;border-radius:0;cursor:pointer;
+}
+.ctlbtn:hover{border-color:var(--p3)}
+.ctlbtn[aria-pressed="true"]{background:var(--p3);color:var(--bg);border-color:var(--p3)}
+.readout{
+  display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--rule);border-top:0;background:var(--bg-2);
+}
+.readout div{
+  flex:1 1 90px;padding:9px 12px;border-right:1px solid var(--rule);
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+}
+.readout div:last-child{border-right:0}
+.readout b{display:block;font-weight:500;font-size:16px;letter-spacing:.02em;color:var(--ink);margin-top:4px;
+  font-variant-numeric:tabular-nums}
+.cap{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);margin:9px 0 0;line-height:1.5}
+.tut-txt h3{font-size:clamp(19px,2.2vw,24px);margin:14px 0 10px}
+.tut-txt p{margin:0;font-size:15.5px;color:var(--ink-2);line-height:1.6}
+
+/* ---------- tutorial label bar ---------- */
 .card-bar{
   display:flex;justify-content:space-between;height:30px;align-items:center;padding:0 14px;
   border-bottom:1px solid var(--rule);background:var(--bg-2);
@@ -240,14 +287,6 @@ h3{
 }
 .card-bar b{color:var(--p4);font-weight:500}
 .card-bar span{color:var(--ink-3)}
-.card-in{padding:18px 14px 22px}
-.card h3{font-family:var(--display);font-weight:600;font-stretch:105%;font-size:17px;line-height:1.25;margin:0 0 8px}
-.card p{margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.55}
-@media(max-width:880px){
-  .cards{grid-template-columns:1fr}
-  .card{border-right:0;border-bottom:1px solid var(--rule)}
-  .card:last-child{border-bottom:0}
-}
 
 /* ---------- partner marks ---------- */
 .logos{display:flex;flex-wrap:wrap;border:1px solid var(--rule);margin-top:28px}
@@ -443,30 +482,54 @@ a.btn{display:inline-block;text-decoration:none}
   <div class="panel-bar"><span class="id">03</span><h2>Tutorials</h2><span class="fill"></span><span class="rt">Three in parallel · everyone does all three</span></div>
   <div class="panel-body">
     <p class="lede">Three tutorials run in parallel across three sessions, and every participant rotates through all three, so nobody picks one and misses the others. No prior experience with radio, radar or machine learning is assumed. Bring a laptop.</p>
-    <div class="cards">
-      <div class="card">
+    <div class="tut">
+      <div class="tut-fig">
+        <div class="demo">
+          <span class="ann" style="left:40.2%;top:14px">Continuous broadcast</span>
+          <span class="ann" style="left:27.1%;top:96px">Keyed transmission</span>
+          <span class="ann" style="left:80%;top:52px">Noise floor</span>
+          <canvas id="d1" width="1280" height="520" aria-hidden="true"></canvas>
+        </div>
+        <div class="ctl"><button id="d1f" class="ctlbtn" type="button" aria-pressed="false">Hold display</button><span class="ctlfill"></span><output id="d1o">Running</output></div>
+        <p class="cap">Simulated VHF airband. One transmitter never stops; the others start and stop. Hold the display to inspect it, as you would on a receiver.</p>
+      </div>
+      <div class="tut-txt">
         <div class="card-bar"><b>RF</b><span>T-01</span></div>
-        <div class="card-in">
-          <!-- FIG slot — spectrum explorer -->
-          <h3>Analysing the EM spectrum with SDR</h3>
-          <p>The basics of software-defined radio and EM monitoring: capturing a live band, reading a waterfall, and working out what is transmitting, when, and how wide.</p>
-        </div>
+        <h3>Analysing the EM spectrum with SDR</h3>
+        <p>The basics of software-defined radio and EM monitoring: capturing a live band, reading a waterfall, and working out what is transmitting, when, and how wide. Reading one is a skill, and it is the first thing this session teaches.</p>
       </div>
-      <div class="card">
+    </div>
+
+    <div class="tut rev">
+      <div class="tut-fig">
+        <div class="demo"><canvas id="d2" width="1280" height="760" aria-hidden="true"></canvas></div>
+        <div class="ctl"><label for="d2f">Looks</label><input id="d2f" type="range" min="1" max="8" step="1" value="1"><output id="d2o">1 · single look</output></div>
+        <p class="cap">Simulated radar backscatter with multiplicative speckle, then multi-looked. Averaging suppresses the grain and coarsens the pixel: the same trade the session works through in SNAP.</p>
+      </div>
+      <div class="tut-txt">
         <div class="card-bar"><b>Imagery</b><span>T-02</span></div>
-        <div class="card-in">
-          <!-- FIG slot — SAR / optical wipe -->
-          <h3>SAR and optical satellite imagery</h3>
-          <p>Open-source intelligence from satellite imagery: taking Sentinel-1 radar data through calibration, speckle reduction and terrain correction, then reading it against optical imagery of the same ground.</p>
-        </div>
+        <h3>SAR and optical satellite imagery</h3>
+        <p>Open-source intelligence from satellite imagery: taking Sentinel-1 radar data through calibration, speckle reduction and terrain correction, then reading it against optical imagery of the same ground. Radar does not see what your eye expects, and that is the point.</p>
       </div>
-      <div class="card">
-        <div class="card-bar"><b>Detection</b><span>T-03</span></div>
-        <div class="card-in">
-          <!-- FIG slot — detector output with confidence threshold -->
-          <h3>Target detection with deep-learning detectors</h3>
-          <p>Training models to detect targets in real imagery and to report how confident they are, including where that confidence misleads and what breaks on small targets and limited data.</p>
+    </div>
+
+    <div class="tut">
+      <div class="tut-fig">
+        <div class="demo"><canvas id="d3" width="1280" height="560" aria-hidden="true"></canvas></div>
+        <div class="ctl"><label for="d3f">Threshold</label><input id="d3f" type="range" min="2" max="98" step="1" value="50"><output id="d3o">0.50</output></div>
+        <div class="readout">
+          <div>Detected<b id="d3tp">—</b></div>
+          <div>Missed<b id="d3fn">—</b></div>
+          <div>False alarms<b id="d3fp">—</b></div>
+          <div>Precision<b id="d3p">—</b></div>
+          <div>Recall<b id="d3r">—</b></div>
         </div>
+        <p class="cap">Illustration of the confidence trade-off over a simulated score distribution. Raise the threshold and false alarms fall away, taking real targets with them.</p>
+      </div>
+      <div class="tut-txt">
+        <div class="card-bar"><b>Detection</b><span>T-03</span></div>
+        <h3>Target detection with deep-learning detectors</h3>
+        <p>Training models to detect targets in real imagery and to report how confident they are, including where that confidence misleads and what breaks on small targets and limited data. Where you put the threshold is a decision about which mistake you would rather make.</p>
       </div>
     </div>
   </div>
@@ -680,6 +743,143 @@ a.btn{display:inline-block;text-decoration:none}
       setTimeout(function(){requestAnimationFrame(step);},55);
     })();
   }
+})();
+
+/* ---- T-01 · reading a waterfall -------------------------------------- */
+(function(){
+  var c=document.getElementById('d1');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,held=false,vis=true;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var stops=[[10,14,26],[53,42,135],[16,109,190],[27,169,165],[127,208,59],[249,251,14]];
+  function ramp(t){t=t<0?0:t>1?1:t;var x=t*5,i=Math.floor(x),f=x-i,a=stops[i],b=stops[Math.min(i+1,5)];
+    return'rgb('+Math.round(a[0]+(b[0]-a[0])*f)+','+Math.round(a[1]+(b[1]-a[1])*f)+','+Math.round(a[2]+(b[2]-a[2])*f)+')';}
+  var pos=[[0.036,0.006],[0.118,0.030],[0.195,0.010],[0.271,0.055],[0.330,0.008],
+           [0.402,0.000],[0.487,0.036],[0.560,0.014],[0.648,0.022],[0.729,0.006],
+           [0.812,0.018],[0.905,0.009]],CH=[];
+  for(var i=0;i<pos.length;i++)CH.push({f:pos[i][0],rate:pos[i][1],on:i===5?1:0,hold:0,lvl:0.6,atis:i===5});
+  function keying(){for(var i=0;i<CH.length;i++){var k=CH[i];
+    if(k.atis){k.lvl=0.52+Math.random()*0.06;continue;}
+    if(k.hold>0){k.hold--;k.lvl=0.54+0.40*Math.random();if(k.hold===0)k.on=0;}
+    else if(Math.random()<k.rate){k.on=1;k.hold=10+Math.floor(Math.random()*44);}}}
+  function line(y){var n=640,i,j;keying();
+    for(i=0;i<n;i++){var f=i/n,v=0.05+Math.random()*0.045;
+      for(j=0;j<CH.length;j++){var k=CH[j];if(!k.on)continue;
+        var d=(f-k.f)/0.0030;if(d>-3.2&&d<3.2)v+=k.lvl*Math.exp(-d*d);}
+      ctx.fillStyle=ramp(v);ctx.fillRect(i*(W/n),y,(W/n)+1,4);}}
+  ctx.fillStyle='#050A11';ctx.fillRect(0,0,W,H);
+  for(var y=H;y>=0;y-=4)line(y);
+  var btn=document.getElementById('d1f'),out=document.getElementById('d1o');
+  btn.addEventListener('click',function(){
+    held=!held;btn.setAttribute('aria-pressed',held?'true':'false');
+    btn.textContent=held?'Resume':'Hold display';out.textContent=held?'Held':'Running';});
+  if('IntersectionObserver' in window)
+    new IntersectionObserver(function(e){vis=e[0].isIntersecting;}).observe(c);
+  if(!reduce)(function step(){
+    if(vis&&!held){ctx.drawImage(c,0,0,W,H,0,4,W,H);line(0);}
+    setTimeout(function(){requestAnimationFrame(step);},60);})();
+})();
+
+/* ---- T-02 · speckle and multi-looking --------------------------------- */
+(function(){
+  var c=document.getElementById('d2');if(!c)return;
+  var ctx=c.getContext('2d'),GW=320,GH=190,CELL=4;
+  var base=new Float32Array(GW*GH), look=new Float32Array(GW*GH);
+
+  (function scene(){                                   // reflectivity, not an image
+    for(var y=0;y<GH;y++)for(var x=0;x<GW;x++){
+      var s=0.055+0.02*Math.sin(x*0.05)*Math.cos(y*0.07)+0.012*Math.random();
+      var river=Math.abs(y-(96+34*Math.sin(x*0.018)+10*Math.sin(x*0.05)));
+      if(river<9) s=0.004+0.002*Math.random();          // water: near-specular, dark
+      if(x>196&&x<300&&y>26&&y<128){                    // built-up block
+        var gx=(x-196)%17, gy=(y-26)%15;
+        s=(gx<11&&gy<10)?0.30+0.22*Math.random():0.05+0.03*Math.random();
+      }
+      if(x>40&&x<150&&y>126&&y<180) s=0.085+0.03*Math.random();   // crop
+      base[y*GW+x]=s;
+    }
+    for(var i=0;i<26;i++)                               // corner reflectors
+      base[(30+Math.floor(Math.random()*150))*GW+(200+Math.floor(Math.random()*95))]=2.2;
+  })();
+
+  function speckle(){                                   // single look: I ~ Exp(mean=sigma)
+    for(var i=0;i<base.length;i++){
+      var u=Math.random();if(u<1e-9)u=1e-9;
+      look[i]=base[i]*(-Math.log(u));
+    }
+  }
+  function draw(k){
+    var ow=Math.floor(GW/k), oh=Math.floor(GH/k);
+    ctx.fillStyle='#050A11';ctx.fillRect(0,0,c.width,c.height);
+    for(var oy=0;oy<oh;oy++)for(var ox=0;ox<ow;ox++){
+      var sum=0,n=0;
+      for(var dy=0;dy<k;dy++)for(var dx=0;dx<k;dx++){sum+=look[(oy*k+dy)*GW+(ox*k+dx)];n++;}
+      var db=10*Math.log10(sum/n+1e-6);
+      var g=(db+26)/28; g=g<0?0:g>1?1:g;
+      var v=Math.round(255*Math.pow(g,0.85));
+      ctx.fillStyle='rgb('+v+','+v+','+v+')';
+      ctx.fillRect(ox*k*CELL,oy*k*CELL,k*CELL,k*CELL);
+    }
+  }
+  var sl=document.getElementById('d2f'),out=document.getElementById('d2o');
+  function run(){
+    var k=+sl.value;
+    out.textContent=k===1?'1 · single look':k+' looks · '+k+'× coarser';
+    draw(k);
+  }
+  speckle();run();
+  sl.addEventListener('input',run);
+})();
+
+/* ---- T-03 · where you put the threshold ------------------------------- */
+(function(){
+  var c=document.getElementById('d3');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,PAD=54,BINS=48;
+  function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);
+    t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  var r=rng(20261113),T=[],F=[],i;
+  for(i=0;i<150;i++)T.push(1-Math.pow(r(),2.3));      // real targets, scored high
+  for(i=0;i<340;i++)F.push(Math.pow(r(),2.1));        // false alarms, scored low
+  function hist(a){var h=new Array(BINS).fill(0);
+    for(var j=0;j<a.length;j++){var b=Math.min(BINS-1,Math.floor(a[j]*BINS));h[b]++;}return h;}
+  var hT=hist(T),hF=hist(F),peak=Math.max.apply(null,hT.concat(hF));
+
+  function bars(h,col,t){
+    var bw=(W-PAD*2)/BINS;
+    for(var b=0;b<BINS;b++){
+      if(!h[b])continue;
+      var x=PAD+b*bw, bh=(h[b]/peak)*(H-PAD*2);
+      ctx.fillStyle=((b+0.5)/BINS>=t)?col:col.replace(/[\d.]+\)$/,'0.22)');
+      ctx.fillRect(x,H-PAD-bh,bw-1.5,bh);
+    }
+  }
+  function draw(t){
+    ctx.fillStyle='#050A11';ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='#22303F';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(PAD,H-PAD+.5);ctx.lineTo(W-PAD,H-PAD+.5);ctx.stroke();
+    bars(hF,'rgba(16,109,190,0.85)',t);
+    bars(hT,'rgba(27,169,165,0.85)',t);
+    var x=PAD+t*(W-PAD*2);
+    ctx.strokeStyle='#E8EEF6';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(x,PAD-16);ctx.lineTo(x,H-PAD);ctx.stroke();
+    ctx.font='500 22px "IBM Plex Mono",monospace';ctx.fillStyle='#7688A0';
+    ctx.textAlign='left';ctx.fillText('SCORE',PAD,H-PAD+34);
+    ctx.textAlign='right';ctx.fillText('1.0',W-PAD,H-PAD+34);
+    ctx.textAlign='left';ctx.fillStyle='rgba(27,169,165,0.95)';ctx.fillText('TARGETS',PAD,PAD-6);
+    ctx.fillStyle='rgba(16,109,190,0.95)';ctx.fillText('FALSE ALARMS',PAD+190,PAD-6);
+  }
+  function count(a,t){var n=0;for(var j=0;j<a.length;j++)if(a[j]>=t)n++;return n;}
+  var sl=document.getElementById('d3f'),out=document.getElementById('d3o');
+  var el={tp:'d3tp',fn:'d3fn',fp:'d3fp',p:'d3p',r:'d3r'},N={};
+  for(var kk in el)N[kk]=document.getElementById(el[kk]);
+  function run(){
+    var t=sl.value/100, tp=count(T,t), fp=count(F,t), fn=T.length-tp;
+    out.textContent=t.toFixed(2);
+    N.tp.textContent=tp;N.fn.textContent=fn;N.fp.textContent=fp;
+    N.p.textContent=(tp+fp)?Math.round(100*tp/(tp+fp))+'%':'—';
+    N.r.textContent=Math.round(100*tp/T.length)+'%';
+    draw(t);
+  }
+  run();sl.addEventListener('input',run);
 })();
 </script>
 </body>
