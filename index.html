@@ -236,19 +236,14 @@ h3{
 }
 .tut:first-of-type{border-top:0;padding-top:6px}
 .tut.rev .tut-fig{order:2}
+.tut.solo{grid-template-columns:1fr}
+.tut.solo .tut-txt{max-width:74ch}
 @media(max-width:880px){
   .tut{grid-template-columns:1fr;gap:20px}
   .tut.rev .tut-fig{order:0}
 }
 .demo{position:relative;background:#050A11;border:1px solid var(--rule);line-height:0}
 .demo canvas{display:block;width:100%;height:auto}
-.ann{
-  position:absolute;transform:translateX(-50%);z-index:2;pointer-events:none;
-  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink);
-  background:rgba(5,10,17,.86);padding:3px 7px;white-space:nowrap;
-}
-.ann::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:16px;background:var(--p3)}
-@media(max-width:560px){.ann{font-size:11px;padding:2px 5px}}
 .ctl{
   display:flex;align-items:center;gap:14px;padding:9px 12px;
   border:1px solid var(--rule);border-top:0;background:var(--bg-2);
@@ -297,9 +292,9 @@ h3{
 }
 .logos div{
   background:var(--ink);display:flex;align-items:center;justify-content:center;
-  padding:24px 20px;min-height:106px;
+  padding:18px 16px;min-height:116px;
 }
-.logos img{max-height:50px;max-width:196px;width:auto;height:auto;display:block}
+.logos img{max-height:74px;max-width:290px;width:auto;height:auto;display:block}
 /* a 5:1 lockup and a 2:1 crest do not balance at the same height; cap both axes */
 @media(max-width:560px){.logos{grid-template-columns:1fr}}
 
@@ -396,7 +391,7 @@ a.btn{display:inline-block;text-decoration:none}
 <section class="panel" id="about">
   <div class="panel-bar"><span class="id">01</span><h2>About</h2><span class="fill"></span></div>
   <div class="panel-body">
-    <p class="lede">TacEdge brings together researchers and practitioners working on sensing, communications and autonomy for contested environments: RF and optical surveillance, tactical telecommunications, and applied AI in the field.</p>
+    <p class="lede">TacEdge is for people who want to learn more about sensing, communications and autonomy in contested environments and to get hands-on with the tools, whether that means building new skills or sharpening existing ones. The subjects are RF and optical surveillance, tactical telecommunications, and applied AI in the field.</p>
     <div class="two">
       <div>
         <p>Equipment in the field has to work with contested spectrum, intermittent links and whatever processing fits on the platform. The workshop is about methods that hold up under those constraints.</p>
@@ -408,7 +403,7 @@ a.btn{display:inline-block;text-decoration:none}
       </div>
     </div>
     <div class="note">
-      <b>Travelling for the space conference?</b> TacEdge runs the day after the Australian Space Domain Awareness and Space Traffic Management Conference (10–12 November), at the same venue. Stay one more day.
+      <b>Travelling for the space conference?</b> TacEdge runs the day after the <a href="https://conference.unsw.edu.au/en/2026-australian-space-domain-awareness-space-traffic-management-conference">Australian Space Domain Awareness and Space Traffic Management Conference</a> (10–12 November), at the same venue. Stay one more day.
     </div>
     <!-- FIG 01 slot — wide photograph, foyer demonstrations / robot arena in build.
          Uncomment once the photograph exists:
@@ -488,17 +483,10 @@ a.btn{display:inline-block;text-decoration:none}
   <div class="panel-bar"><span class="id">03</span><h2>Tutorials</h2><span class="fill"></span><span class="rt">Three in parallel · everyone does all three</span></div>
   <div class="panel-body">
     <p class="lede">Three tutorials run in parallel across three sessions, and every participant rotates through all three, so nobody picks one and misses the others. No prior experience with radio, radar or machine learning is assumed. Bring a laptop.</p>
-    <div class="tut">
-      <div class="tut-fig">
-        <div class="demo">
-          <span class="ann" style="left:40.2%;top:14px">Continuous broadcast</span>
-          <span class="ann" style="left:27.1%;top:96px">Keyed transmission</span>
-          <span class="ann" style="left:80%;top:52px">Noise floor</span>
-          <canvas id="d1" width="1280" height="520" aria-hidden="true"></canvas>
-        </div>
-        <div class="ctl"><button id="d1f" class="ctlbtn" type="button" aria-pressed="false">Hold display</button><span class="ctlfill"></span><output id="d1o">Running</output></div>
-        <p class="cap">Simulated VHF airband. One transmitter never stops; the others start and stop. Hold the display to inspect it, as you would on a receiver.</p>
-      </div>
+    <!-- Figure pending: a real 2.4 GHz Wi-Fi capture from Artem's SDR.
+         A simulated waterfall stood here and read as artificial, which is
+         exactly the wrong signal for this audience. -->
+    <div class="tut solo">
       <div class="tut-txt">
         <div class="card-bar"><b>RF</b><span>T-01</span></div>
         <h3>Analysing the EM spectrum with SDR</h3>
@@ -506,12 +494,9 @@ a.btn{display:inline-block;text-decoration:none}
       </div>
     </div>
 
-    <div class="tut rev">
-      <div class="tut-fig">
-        <div class="demo"><canvas id="d2" width="1280" height="760" aria-hidden="true"></canvas></div>
-        <div class="ctl"><label for="d2f">Looks</label><input id="d2f" type="range" min="1" max="8" step="1" value="1"><output id="d2o">1 · single look</output></div>
-        <p class="cap">Simulated radar backscatter with multiplicative speckle, then multi-looked. Averaging suppresses the grain and coarsens the pixel: the same trade the session works through in SNAP.</p>
-      </div>
+    <!-- Figure pending: a real Sentinel-1 scene against optical. The
+         synthetic speckle field that stood here was not evidence. -->
+    <div class="tut solo">
       <div class="tut-txt">
         <div class="card-bar"><b>Imagery</b><span>T-02</span></div>
         <h3>SAR and optical satellite imagery</h3>
@@ -535,7 +520,7 @@ a.btn{display:inline-block;text-decoration:none}
       <div class="tut-txt">
         <div class="card-bar"><b>Detection</b><span>T-03</span></div>
         <h3>Target detection with deep-learning detectors</h3>
-        <p>Training models to detect targets in real imagery and to report how confident they are, including where that confidence misleads and what breaks on small targets and limited data. Where you put the threshold is a decision about which mistake you would rather make.</p>
+        <p>Working with YOLO and comparable detectors on real imagery: training them, reading the confidence they report, and seeing where that confidence misleads. The session then puts several detectors together, because an ensemble cuts misclassification and cuts how much an operator has to check by hand.</p>
       </div>
     </div>
   </div>
@@ -567,10 +552,10 @@ a.btn{display:inline-block;text-decoration:none}
     <p class="lede">In person only, in the centre of Canberra. Attendees are coming from Korea, Taiwan, the Philippines and Vietnam, so plan visas early.</p>
 
     <div class="fields" style="max-width:900px">
-      <div class="f"><span class="k">Venue</span><span class="v">UNSW Canberra City<small>Constitution Avenue, Reid ACT</small></span><span class="s">Room to be confirmed</span></div>
+      <div class="f"><span class="k">Venue</span><span class="v">UNSW Canberra City<small>Constitution Avenue, Reid ACT</small></span></div>
       <div class="f"><span class="k">From the airport</span><span class="v">Roughly 15 minutes by car or taxi<small>Canberra Airport, domestic and limited international</small></span></div>
       <div class="f"><span class="k">Staying</span><span class="v">City-centre location<small>Close to Civic and Braddon accommodation</small></span></div>
-      <div class="f"><span class="k">Adjacent event</span><span class="v">Australian SDA &amp; STM Conference, 10–12 November<small>Same venue, immediately before. Many attendees are already in the building.</small></span></div>
+      <div class="f"><span class="k">Adjacent event</span><span class="v"><a href="https://conference.unsw.edu.au/en/2026-australian-space-domain-awareness-space-traffic-management-conference">Australian SDA &amp; STM Conference</a>, 10–12 November<small>Same venue, immediately before. Many attendees are already in the building.</small></span></div>
     </div>
 
     <div class="note">
@@ -761,91 +746,6 @@ a.btn{display:inline-block;text-decoration:none}
       setTimeout(function(){requestAnimationFrame(step);},55);
     })();
   }
-})();
-
-/* ---- T-01 · reading a waterfall -------------------------------------- */
-(function(){
-  var c=document.getElementById('d1');if(!c)return;
-  var ctx=c.getContext('2d'),W=c.width,H=c.height,held=false,vis=true;
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var stops=[[10,14,26],[53,42,135],[16,109,190],[27,169,165],[127,208,59],[249,251,14]];
-  function ramp(t){t=t<0?0:t>1?1:t;var x=t*5,i=Math.floor(x),f=x-i,a=stops[i],b=stops[Math.min(i+1,5)];
-    return'rgb('+Math.round(a[0]+(b[0]-a[0])*f)+','+Math.round(a[1]+(b[1]-a[1])*f)+','+Math.round(a[2]+(b[2]-a[2])*f)+')';}
-  var pos=[[0.036,0.006],[0.118,0.030],[0.195,0.010],[0.271,0.055],[0.330,0.008],
-           [0.402,0.000],[0.487,0.036],[0.560,0.014],[0.648,0.022],[0.729,0.006],
-           [0.812,0.018],[0.905,0.009]],CH=[];
-  for(var i=0;i<pos.length;i++)CH.push({f:pos[i][0],rate:pos[i][1],on:i===5?1:0,hold:0,lvl:0.6,atis:i===5});
-  function keying(){for(var i=0;i<CH.length;i++){var k=CH[i];
-    if(k.atis){k.lvl=0.52+Math.random()*0.06;continue;}
-    if(k.hold>0){k.hold--;k.lvl=0.54+0.40*Math.random();if(k.hold===0)k.on=0;}
-    else if(Math.random()<k.rate){k.on=1;k.hold=10+Math.floor(Math.random()*44);}}}
-  function line(y){var n=640,i,j;keying();
-    for(i=0;i<n;i++){var f=i/n,v=0.05+Math.random()*0.045;
-      for(j=0;j<CH.length;j++){var k=CH[j];if(!k.on)continue;
-        var d=(f-k.f)/0.0030;if(d>-3.2&&d<3.2)v+=k.lvl*Math.exp(-d*d);}
-      ctx.fillStyle=ramp(v);ctx.fillRect(i*(W/n),y,(W/n)+1,4);}}
-  ctx.fillStyle='#050A11';ctx.fillRect(0,0,W,H);
-  for(var y=H;y>=0;y-=4)line(y);
-  var btn=document.getElementById('d1f'),out=document.getElementById('d1o');
-  btn.addEventListener('click',function(){
-    held=!held;btn.setAttribute('aria-pressed',held?'true':'false');
-    btn.textContent=held?'Resume':'Hold display';out.textContent=held?'Held':'Running';});
-  if('IntersectionObserver' in window)
-    new IntersectionObserver(function(e){vis=e[0].isIntersecting;}).observe(c);
-  if(!reduce)(function step(){
-    if(vis&&!held){ctx.drawImage(c,0,0,W,H,0,4,W,H);line(0);}
-    setTimeout(function(){requestAnimationFrame(step);},60);})();
-})();
-
-/* ---- T-02 · speckle and multi-looking --------------------------------- */
-(function(){
-  var c=document.getElementById('d2');if(!c)return;
-  var ctx=c.getContext('2d'),GW=320,GH=190,CELL=4;
-  var base=new Float32Array(GW*GH), look=new Float32Array(GW*GH);
-
-  (function scene(){                                   // reflectivity, not an image
-    for(var y=0;y<GH;y++)for(var x=0;x<GW;x++){
-      var s=0.055+0.02*Math.sin(x*0.05)*Math.cos(y*0.07)+0.012*Math.random();
-      var river=Math.abs(y-(96+34*Math.sin(x*0.018)+10*Math.sin(x*0.05)));
-      if(river<9) s=0.004+0.002*Math.random();          // water: near-specular, dark
-      if(x>196&&x<300&&y>26&&y<128){                    // built-up block
-        var gx=(x-196)%17, gy=(y-26)%15;
-        s=(gx<11&&gy<10)?0.30+0.22*Math.random():0.05+0.03*Math.random();
-      }
-      if(x>40&&x<150&&y>126&&y<180) s=0.085+0.03*Math.random();   // crop
-      base[y*GW+x]=s;
-    }
-    for(var i=0;i<26;i++)                               // corner reflectors
-      base[(30+Math.floor(Math.random()*150))*GW+(200+Math.floor(Math.random()*95))]=2.2;
-  })();
-
-  function speckle(){                                   // single look: I ~ Exp(mean=sigma)
-    for(var i=0;i<base.length;i++){
-      var u=Math.random();if(u<1e-9)u=1e-9;
-      look[i]=base[i]*(-Math.log(u));
-    }
-  }
-  function draw(k){
-    var ow=Math.floor(GW/k), oh=Math.floor(GH/k);
-    ctx.fillStyle='#050A11';ctx.fillRect(0,0,c.width,c.height);
-    for(var oy=0;oy<oh;oy++)for(var ox=0;ox<ow;ox++){
-      var sum=0,n=0;
-      for(var dy=0;dy<k;dy++)for(var dx=0;dx<k;dx++){sum+=look[(oy*k+dy)*GW+(ox*k+dx)];n++;}
-      var db=10*Math.log10(sum/n+1e-6);
-      var g=(db+26)/28; g=g<0?0:g>1?1:g;
-      var v=Math.round(255*Math.pow(g,0.85));
-      ctx.fillStyle='rgb('+v+','+v+','+v+')';
-      ctx.fillRect(ox*k*CELL,oy*k*CELL,k*CELL,k*CELL);
-    }
-  }
-  var sl=document.getElementById('d2f'),out=document.getElementById('d2o');
-  function run(){
-    var k=+sl.value;
-    out.textContent=k===1?'1 · single look':k+' looks · '+k+'× coarser';
-    draw(k);
-  }
-  speckle();run();
-  sl.addEventListener('input',run);
 })();
 
 /* ---- T-03 · where you put the threshold ------------------------------- */

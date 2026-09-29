@@ -205,22 +205,24 @@ names or inventing figures.
 5. **Photographs.** Fig. 01 slot in §01 (wide, arena or foyer demonstrations)
    and Fig. 02 in §04. Environmental shots — hands, gear, the arena in build —
    not studio headshot grids. Slots are commented out in the markup.
-6. **Tutorial demonstrations — built, and upgradable.** Each tutorial row
-   carries a working demonstration of its own subject, because the page has to
-   perform the expertise it claims rather than assert it. All three simulate a
-   named process and say so in the caption; none of them invents a readout.
+6. **Tutorial figures — real data only.** T-01 and T-02 carried simulated
+   figures and Artem rejected both on 30 September 2026: at this level of
+   workshop a synthetic waterfall and a synthetic speckle field read as
+   artificial and undercut the expertise the page is claiming. Both rows are
+   now text-only (`.tut.solo`) until real captures exist. **Do not put a
+   simulated figure back.** The bar for this section is evidence.
 
-   - **T-01** a labelled airband waterfall with a hold control. Upgrades to
-     the real capture (queue item 1) alongside the hero.
-   - **T-02** multiplicative speckle over a synthetic backscatter field,
-     multi-looked by a slider — the same trade as the SNAP exercise in
+   - **T-01** awaiting a real capture from Artem's SDR. Note a standard
+     RTL-SDR tops out near 1.7 GHz and cannot reach 2.4 GHz Wi-Fi; that needs
+     a HackRF, ADALM-Pluto or USRP.
+   - **T-02** awaiting a real Sentinel-1 scene against optical. Copernicus
+     product downloads need an account (the catalogue is public, downloads
+     return 401). The strongest source is Artem's own processed output from
      `Books/FST/source-materials/lectures/discussion_forums/Discussion_1.docx`.
-     Upgrades to a real Sentinel-1 scene wiped against optical the moment two
-     processed PNGs exist. Copernicus downloads need an account; the catalogue
-     is public but product requests return 401.
-   - **T-03** a draggable confidence threshold over a deterministic score
-     distribution, with live precision and recall. Upgrades to real detector
-     output given a frame plus boxes as JSON.
+   - **T-03** still carries a draggable confidence threshold over a
+     deterministic score distribution. It is statistics rather than invented
+     imagery, which is why it survived, but it should give way to real
+     detector output — including ensemble agreement — when a frame exists.
 7. **Travel — built as §05.** Venue street address, airport, accommodation
    area, the adjacent conference, and a link to the Home Affairs visa finder
    with an offer of invitation letters. Outstanding: the building and room
