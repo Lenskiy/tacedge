@@ -182,7 +182,6 @@ h3{
   color:var(--ink-3);flex:0 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .sbar .rt em{font-style:normal;color:var(--p4)}
-.hinge{margin:18px 0}
 .tl-bar{position:relative;height:34px;background:var(--bg-3);border:1px solid var(--rule)}
 .seg{position:absolute;top:0;bottom:0;border-right:1px solid var(--bg)}
 .tl-ticks{position:relative;height:26px;margin-top:2px}
@@ -371,7 +370,7 @@ a.btn{display:inline-block;text-decoration:none}
   <div class="panel-body">
 
     <div class="tl-split" aria-hidden="true">
-      <span style="left:0;width:37.5%">Free · open to all</span>
+      <span style="left:0;width:45.833%">Free · open to all</span>
       <span class="paid" style="left:45.833%;width:54.167%">Paid · 40 places</span>
     </div>
     <div class="tl-bar">
@@ -402,7 +401,7 @@ a.btn{display:inline-block;text-decoration:none}
       <span><i style="background:var(--bg-2);border:1px solid var(--rule)"></i>Break</span>
     </div>
 
-    <div class="sbar"><b>Morning</b><span class="fill"></span><span class="rt">Free · open to all</span></div>
+    <div class="sbar"><b>Morning</b><span class="fill"></span><span class="rt">Free · registration required</span></div>
     <div class="rows">
       <div class="r"><time>09:00</time><div class="what">Opening</div><span class="dur"></span></div>
       <div class="r g-key"><time>09:10</time><div class="what">Keynote 1<small>Speaker to be announced</small></div><span class="dur">30 min</span></div>
@@ -410,13 +409,10 @@ a.btn{display:inline-block;text-decoration:none}
       <div class="r br g-break"><time>10:20</time><div class="what">Coffee</div><span class="dur">20 min</span></div>
       <div class="r g-key"><time>10:40</time><div class="what">Keynote 2<small>Speaker to be announced</small></div><span class="dur">40 min</span></div>
       <div class="r g-talk"><time>11:20</time><div class="what">Short talks<small>Two talks</small></div><span class="dur">40 min</span></div>
+      <div class="r br g-break"><time>12:00</time><div class="what">Lunch</div><span class="dur">40 min</span></div>
     </div>
 
-    <div class="rows hinge">
-      <div class="r br"><time>12:00</time><div class="what">Lunch</div><span class="dur">40 min</span></div>
-    </div>
-
-    <div class="sbar" style="margin-top:0"><b>Afternoon</b><span class="fill"></span><span class="rt">Paid · limited to 40</span></div>
+    <div class="sbar"><b>Afternoon</b><span class="fill"></span><span class="rt">Paid · limited to 40</span></div>
     <div class="rows">
       <div class="r g-tut"><time>12:40</time><div class="what">Hands-on tutorials, session 1<small>Three running in parallel</small></div><span class="dur">60 min</span></div>
       <div class="r br g-break"><time>13:40</time><div class="what">Changeover</div><span class="dur">10 min</span></div>
@@ -426,6 +422,8 @@ a.btn{display:inline-block;text-decoration:none}
       <div class="r g-comp tbc"><time>16:00</time><div class="what">Robot capture-the-flag competition<small>Autonomous two-against-two on a physical arena</small></div><span class="dur">To be confirmed</span></div>
       <div class="r"><time>17:00</time><div class="what">Close</div><span class="dur"></span></div>
     </div>
+
+    <div class="note"><b>Coffee and lunch are included for everyone attending</b>, morning or afternoon, sponsored by the School of Engineering and Technology at UNSW Canberra.</div>
 
     <p class="prov">Provisional — sessions and timings subject to change</p>
   </div>
@@ -491,16 +489,24 @@ a.btn{display:inline-block;text-decoration:none}
 </section>
 
 <section class="panel" id="register">
-  <div class="panel-bar"><span class="id">05</span><h2>Register</h2><span class="fill"></span><span class="rt">Two tickets · take either or both</span></div>
+  <div class="panel-bar"><span class="id">05</span><h2>Register</h2><span class="fill"></span><span class="rt">Registration opening soon</span></div>
   <div class="panel-body">
     <p class="lede">The morning and the afternoon are booked separately. Take either, or both.</p>
 
     <div class="fields" style="max-width:880px">
-      <div class="f"><span class="k">Morning</span><span class="v">Keynotes and short talks<small>Free, open to all. No cap.</small></span><span class="s">Opens shortly</span></div>
-      <div class="f"><span class="k">Afternoon</span><span class="v">All three hands-on tutorials, in rotation<small>Paid, and limited to 40 participants.</small></span><span class="s">Opens shortly</span></div>
+      <div class="f"><span class="k">Morning</span><span class="v">Keynotes and short talks<small>Free. Registration still required.</small></span><span class="s">Opening soon</span></div>
+      <div class="f"><span class="k">Afternoon</span><span class="v">All three hands-on tutorials, in rotation<small>Limited to 40 participants.</small></span><span class="s">Opening soon</span></div>
     </div>
 
-    <p style="color:var(--ink-2);max-width:62ch;margin:26px 0 0">Both tickets go through UNSW&rsquo;s Eventbrite page. Until those links are live, email us — we will tell you the moment registration opens, and the afternoon is expected to fill.</p>
+    <p class="prov" style="margin-top:30px">Afternoon fee · AUD, GST inclusive</p>
+    <div class="fields" style="margin-top:10px;max-width:520px">
+      <div class="f"><span class="k">Domestic</span><span class="v">$200</span></div>
+      <div class="f"><span class="k">International</span><span class="v">$300</span></div>
+    </div>
+
+    <p style="color:var(--ink-2);max-width:64ch;margin:24px 0 0">Both tickets go through UNSW&rsquo;s Eventbrite page. Payment is by Eventbrite only — invoices and bank transfers are not accepted — and Eventbrite booking fees may apply on top. Registration is subject to the <a href="https://www.events.unsw.edu.au/ticketing-terms-conditions">UNSW ticketing terms and conditions</a>.</p>
+
+    <p style="color:var(--ink-2);max-width:64ch;margin:18px 0 0">Registration is not open yet. Email us and we will tell you the moment it is — the afternoon is expected to fill.</p>
 
     <p class="prov" style="margin-top:26px">Include in your email</p>
     <div class="fields" style="margin-top:10px;max-width:780px">
