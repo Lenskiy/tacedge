@@ -21,7 +21,7 @@
   --rule-2:#2E4054;
   --ink:#E8EEF6;
   --ink-2:#9DAFC4;
-  --ink-3:#6B7F97;
+  --ink-3:#7688A0;
   /* parula ramp — MATLAB's spectrum colormap. Data only, never chrome. */
   --p1:#352A87;
   --p2:#106DBE;
@@ -43,6 +43,12 @@ body{
 a{color:var(--p3);text-decoration:none}
 a:hover{text-decoration:underline}
 :focus-visible{outline:2px solid var(--p4);outline-offset:2px}
+::selection{background:rgba(27,169,165,.30);color:var(--ink)}
+html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--rule-2);border:3px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--ink-3)}
 
 /* ---------- chrome idiom: mono, uppercase, tracked ---------- */
 .m{
@@ -77,11 +83,11 @@ a:hover{text-decoration:underline}
 .nav-links{margin-left:auto;display:flex}
 .nav-links a{
   display:flex;align-items:center;padding:0 13px;border-left:1px solid var(--rule);
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);
 }
 .nav-links a:hover{background:var(--bg-3);color:var(--ink);text-decoration:none}
 .nav-links a.cta{color:var(--p3);background:rgba(27,169,165,.07)}
-@media(max-width:900px){.nav-links a:not(.cta){display:none}}
+@media(max-width:820px){.nav-links a:not(.cta){display:none}}
 
 /* ---------- panels ---------- */
 .panel{border-bottom:1px solid var(--rule)}
@@ -90,7 +96,7 @@ a:hover{text-decoration:underline}
   border-bottom:1px solid var(--rule);background:var(--bg-2);
 }
 .panel-bar h2,.panel-bar span{
-  font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.16em;
+  font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.16em;
   text-transform:uppercase;color:var(--ink-3);margin:0;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto;min-width:0;
 }
@@ -120,7 +126,7 @@ h3{
 @media(max-width:820px){.two{grid-template-columns:1fr}}
 
 .note{
-  margin-top:30px;padding:16px 18px;border:1px solid var(--rule);border-left:2px solid var(--p2);
+  margin-top:30px;padding:16px 18px;border:1px solid var(--rule);border-left:1px solid var(--p2);
   background:var(--bg-2);color:var(--ink-2);font-size:15.5px;
 }
 .note b{color:var(--ink);font-weight:600}
@@ -131,10 +137,10 @@ h3{
   display:grid;grid-template-columns:170px 1fr auto;gap:16px;align-items:baseline;
   padding:11px 0;border-bottom:1px solid var(--rule);
 }
-.f .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.f .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 .f .v{font-family:var(--mono);font-size:14px;color:var(--ink)}
 .f .v small{display:block;font-family:var(--body);font-size:14px;color:var(--ink-3);letter-spacing:0;margin-top:2px}
-.f .s{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.f .s{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 @media(max-width:640px){
   .f{grid-template-columns:1fr auto;gap:4px 12px}
   .f .k{grid-column:1/-1}
@@ -145,7 +151,7 @@ h3{
 .fall canvas{display:block;width:100%;height:150px}
 .fall-scale{
   display:flex;justify-content:space-between;gap:12px;padding:5px 16px;background:var(--bg-2);
-  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ink-3);
 }
 @media(max-width:640px){
   .fall canvas{height:104px}
@@ -153,16 +159,40 @@ h3{
 }
 
 /* ---------- timeline strip ---------- */
+/* the day divides at lunch, and the division is commercial as well as temporal */
+.tl-split{position:relative;height:21px}
+.tl-split span{
+  position:absolute;bottom:0;padding-bottom:5px;border-bottom:1px solid var(--rule-2);
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);white-space:nowrap;overflow:hidden;
+}
+.tl-split .paid{color:var(--p4);border-bottom-color:rgba(127,208,59,.45)}
+@media(max-width:700px){.tl-split{display:none}}
+.sbar{
+  display:flex;align-items:center;gap:12px;height:30px;overflow:hidden;
+  margin:30px 0 0;border-top:1px solid var(--rule-2);
+}
+.sbar b{
+  font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.20em;
+  text-transform:uppercase;color:var(--ink);flex:0 0 auto;
+}
+.sbar .fill{flex:1 1 auto;min-width:8px;height:1px;background:var(--rule)}
+.sbar .rt{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);flex:0 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.sbar .rt em{font-style:normal;color:var(--p4)}
+.hinge{margin:18px 0}
 .tl-bar{position:relative;height:34px;background:var(--bg-3);border:1px solid var(--rule)}
 .seg{position:absolute;top:0;bottom:0;border-right:1px solid var(--bg)}
 .tl-ticks{position:relative;height:26px;margin-top:2px}
 .tl-ticks span{
-  position:absolute;top:0;font-family:var(--mono);font-size:10px;color:var(--ink-3);
+  position:absolute;top:0;font-family:var(--mono);font-size:11px;color:var(--ink-3);
   padding-top:7px;border-left:1px solid var(--rule-2);padding-left:4px;
 }
 .legend{
   display:flex;flex-wrap:wrap;gap:16px;margin:14px 0 26px;
-  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
 }
 .legend i{display:inline-block;width:22px;height:8px;margin-right:7px;vertical-align:1px}
 
@@ -175,7 +205,7 @@ h3{
 .r time{font-family:var(--mono);font-size:14px;color:var(--p3)}
 .r .what{font-family:var(--mono);font-size:14px;color:var(--ink)}
 .r .what small{display:block;font-family:var(--body);font-size:14.5px;color:var(--ink-3);margin-top:2px}
-.r .dur{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.r .dur{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 .r.br .what{color:var(--ink-3)}
 .r::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;background:transparent}
 .r.g-key::before{background:var(--p2)}
@@ -183,11 +213,12 @@ h3{
 .r.g-tut::before{background:var(--p3)}
 .r.g-comp::before{background:var(--p4)}
 .r.g-break::before{background:var(--rule-2)}
+.r.tbc::before{opacity:.45}
 @media(max-width:640px){
   .r{grid-template-columns:66px 1fr;gap:12px}
   .r .dur{grid-column:2;margin-top:2px}
 }
-.prov{margin-top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.prov{margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.10em;color:var(--ink-3)}
 
 /* ---------- tutorial panels ---------- */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule)}
@@ -196,7 +227,7 @@ h3{
 .card-bar{
   display:flex;justify-content:space-between;height:30px;align-items:center;padding:0 14px;
   border-bottom:1px solid var(--rule);background:var(--bg-2);
-  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
 }
 .card-bar b{color:var(--p4);font-weight:500}
 .card-bar span{color:var(--ink-3)}
@@ -230,7 +261,7 @@ h3{
 .fig img{display:block;width:100%;height:auto}
 figure{margin:0}
 figcaption{
-  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--ink-3);padding:8px 0 0;
 }
 
@@ -249,7 +280,7 @@ a.btn{display:inline-block;text-decoration:none}
 /* ---------- status bar footer ---------- */
 .status{
   display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;
-  padding:12px 16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  padding:12px 16px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--ink-3);border-top:1px solid var(--rule);
 }
 .status a{color:var(--ink-2)}
@@ -270,7 +301,6 @@ a.btn{display:inline-block;text-decoration:none}
       <a href="#about">About</a>
       <a href="#programme">Programme</a>
       <a href="#tutorials">Tutorials</a>
-      <a href="#ctf">Capture the flag</a>
       <a href="#organisers">Organisers</a>
       <a class="cta" href="#register">Register interest</a>
     </div>
@@ -295,6 +325,7 @@ a.btn{display:inline-block;text-decoration:none}
       <div class="f"><span class="k">Date</span><span class="v">Friday 13 November 2026</span></div>
       <div class="f"><span class="k">Venue</span><span class="v">UNSW Canberra City, Reid ACT</span></div>
       <div class="f"><span class="k">Format</span><span class="v">One day · in person only</span></div>
+      <div class="f"><span class="k">Admission</span><span class="v">Morning free · afternoon paid, 40 places</span></div>
     </div>
   </div>
 
@@ -315,10 +346,10 @@ a.btn{display:inline-block;text-decoration:none}
     <div class="two">
       <div>
         <p>Equipment in the field has to work with contested spectrum, intermittent links and whatever processing fits on the platform. The workshop is about methods that hold up under those constraints.</p>
-        <p>The morning is two keynotes and two talk sessions. The afternoon is three hands-on tutorials across two parallel slots, and the day closes with a 105-minute autonomous robot capture-the-flag competition.</p>
+        <p>The morning is two keynotes and two sessions of short talks, free and open to everyone. The afternoon is three hands-on tutorials that every participant rotates through — paid, and limited to 40 places.</p>
       </div>
       <div>
-        <p>It is aimed at researchers, Defence and defence-industry practitioners, and graduate students. Demonstrations run continuously through the day, including passive RF sensing and an educational robot arena.</p>
+        <p>It is aimed at people who are not already specialists in these fields — Defence and defence-industry practitioners, researchers and students — who want a working grasp of the state of the art and of where it still falls short.</p>
         <p>TacEdge 2026 is the first of what is intended to become an annual workshop.</p>
       </div>
     </div>
@@ -339,18 +370,24 @@ a.btn{display:inline-block;text-decoration:none}
   <div class="panel-bar"><span class="id">02</span><h2>Programme</h2><span class="fill"></span><span class="rt">09:00–17:00 AEDT · provisional</span></div>
   <div class="panel-body">
 
+    <div class="tl-split" aria-hidden="true">
+      <span style="left:0;width:37.5%">Free · open to all</span>
+      <span class="paid" style="left:45.833%;width:54.167%">Paid · 40 places</span>
+    </div>
     <div class="tl-bar">
       <span class="seg" style="left:0%;width:2.083%;background:var(--ink-3)"></span>
       <span class="seg" style="left:2.083%;width:6.25%;background:var(--p2)"></span>
-      <span class="seg" style="left:8.333%;width:9.375%;background:var(--p1)"></span>
-      <span class="seg" style="left:17.708%;width:4.167%;background:var(--bg-2)"></span>
-      <span class="seg" style="left:21.875%;width:9.375%;background:var(--p2)"></span>
-      <span class="seg" style="left:31.25%;width:9.375%;background:var(--p1)"></span>
-      <span class="seg" style="left:40.625%;width:10.417%;background:var(--bg-2)"></span>
-      <span class="seg" style="left:51.042%;width:12.5%;background:var(--p3)"></span>
-      <span class="seg" style="left:63.542%;width:12.5%;background:var(--p3)"></span>
-      <span class="seg" style="left:76.042%;width:2.083%;background:var(--bg-2)"></span>
-      <span class="seg" style="left:78.125%;width:21.875%;background:var(--p4)"></span>
+      <span class="seg" style="left:8.333%;width:8.333%;background:var(--p1)"></span>
+      <span class="seg" style="left:16.667%;width:4.167%;background:var(--bg-2)"></span>
+      <span class="seg" style="left:20.833%;width:8.333%;background:var(--p2)"></span>
+      <span class="seg" style="left:29.167%;width:8.333%;background:var(--p1)"></span>
+      <span class="seg" style="left:37.5%;width:8.333%;background:var(--bg-2)"></span>
+      <span class="seg" style="left:45.833%;width:12.5%;background:var(--p3)"></span>
+      <span class="seg" style="left:58.333%;width:2.083%;background:var(--bg-2)"></span>
+      <span class="seg" style="left:60.417%;width:12.5%;background:var(--p3)"></span>
+      <span class="seg" style="left:72.917%;width:2.083%;background:var(--bg-2)"></span>
+      <span class="seg" style="left:75%;width:12.5%;background:var(--p3)"></span>
+      <span class="seg" style="left:87.5%;width:12.5%;background:var(--p4);opacity:.45"></span>
     </div>
     <div class="tl-ticks" aria-hidden="true">
       <span style="left:0%">09</span><span style="left:12.5%">10</span><span style="left:25%">11</span>
@@ -361,22 +398,32 @@ a.btn{display:inline-block;text-decoration:none}
       <span><i style="background:var(--p2)"></i>Keynote</span>
       <span><i style="background:var(--p1)"></i>Talks</span>
       <span><i style="background:var(--p3)"></i>Tutorials</span>
-      <span><i style="background:var(--p4)"></i>Competition</span>
-      <span><i style="background:var(--bg-2);border:1px solid var(--rule)"></i>Break · demonstrations</span>
+      <span><i style="background:var(--p4);opacity:.45"></i>Competition · to be confirmed</span>
+      <span><i style="background:var(--bg-2);border:1px solid var(--rule)"></i>Break</span>
     </div>
 
+    <div class="sbar"><b>Morning</b><span class="fill"></span><span class="rt">Free · open to all</span></div>
     <div class="rows">
       <div class="r"><time>09:00</time><div class="what">Opening</div><span class="dur"></span></div>
       <div class="r g-key"><time>09:10</time><div class="what">Keynote 1<small>Speaker to be announced</small></div><span class="dur">30 min</span></div>
-      <div class="r g-talk"><time>09:40</time><div class="what">Talk session 1<small>Three talks</small></div><span class="dur">45 min</span></div>
-      <div class="r br g-break"><time>10:25</time><div class="what">Coffee · demonstrations open</div><span class="dur">20 min</span></div>
-      <div class="r g-key"><time>10:45</time><div class="what">Keynote 2<small>Speaker to be announced</small></div><span class="dur">45 min</span></div>
-      <div class="r g-talk"><time>11:30</time><div class="what">Talk session 2<small>Three talks</small></div><span class="dur">45 min</span></div>
-      <div class="r br g-break"><time>12:15</time><div class="what">Lunch · demonstrations open</div><span class="dur">50 min</span></div>
-      <div class="r g-tut"><time>13:05</time><div class="what">Tutorials — first slot<small>Two rooms in parallel</small></div><span class="dur">60 min</span></div>
-      <div class="r g-tut"><time>14:05</time><div class="what">Tutorials — second slot<small>Two rooms in parallel</small></div><span class="dur">60 min</span></div>
-      <div class="r br g-break"><time>15:05</time><div class="what">Coffee</div><span class="dur">10 min</span></div>
-      <div class="r g-comp"><time>15:15</time><div class="what"><a href="#ctf">Autonomous robot capture-the-flag</a><small>Teams of 2–4 · build, qualify, knockout on the arena</small></div><span class="dur">105 min</span></div>
+      <div class="r g-talk"><time>09:40</time><div class="what">Short talks<small>Two talks</small></div><span class="dur">40 min</span></div>
+      <div class="r br g-break"><time>10:20</time><div class="what">Coffee</div><span class="dur">20 min</span></div>
+      <div class="r g-key"><time>10:40</time><div class="what">Keynote 2<small>Speaker to be announced</small></div><span class="dur">40 min</span></div>
+      <div class="r g-talk"><time>11:20</time><div class="what">Short talks<small>Two talks</small></div><span class="dur">40 min</span></div>
+    </div>
+
+    <div class="rows hinge">
+      <div class="r br"><time>12:00</time><div class="what">Lunch</div><span class="dur">40 min</span></div>
+    </div>
+
+    <div class="sbar" style="margin-top:0"><b>Afternoon</b><span class="fill"></span><span class="rt">Paid · limited to 40</span></div>
+    <div class="rows">
+      <div class="r g-tut"><time>12:40</time><div class="what">Hands-on tutorials, session 1<small>Three running in parallel</small></div><span class="dur">60 min</span></div>
+      <div class="r br g-break"><time>13:40</time><div class="what">Changeover</div><span class="dur">10 min</span></div>
+      <div class="r g-tut"><time>13:50</time><div class="what">Hands-on tutorials, session 2<small>Three running in parallel</small></div><span class="dur">60 min</span></div>
+      <div class="r br g-break"><time>14:50</time><div class="what">Coffee</div><span class="dur">10 min</span></div>
+      <div class="r g-tut"><time>15:00</time><div class="what">Hands-on tutorials, session 3<small>Three running in parallel</small></div><span class="dur">60 min</span></div>
+      <div class="r g-comp tbc"><time>16:00</time><div class="what">Robot capture-the-flag competition<small>Autonomous two-against-two on a physical arena</small></div><span class="dur">To be confirmed</span></div>
       <div class="r"><time>17:00</time><div class="what">Close</div><span class="dur"></span></div>
     </div>
 
@@ -385,16 +432,16 @@ a.btn{display:inline-block;text-decoration:none}
 </section>
 
 <section class="panel" id="tutorials">
-  <div class="panel-bar"><span class="id">03</span><h2>Tutorials</h2><span class="fill"></span><span class="rt">3 sessions · 2 parallel slots</span></div>
+  <div class="panel-bar"><span class="id">03</span><h2>Tutorials</h2><span class="fill"></span><span class="rt">Three in parallel · everyone does all three</span></div>
   <div class="panel-body">
-    <p class="lede">Three hands-on tutorials run in two parallel slots. Bring a laptop.</p>
+    <p class="lede">Three tutorials run in parallel across three sessions, and every participant rotates through all three — nobody picks one and misses the others. No prior experience with radio, radar or machine learning is assumed. Bring a laptop.</p>
     <div class="cards">
       <div class="card">
         <div class="card-bar"><b>RF</b><span>T-01</span></div>
         <div class="card-in">
           <!-- FIG slot — spectrum explorer -->
           <h3>Analysing the EM spectrum with SDR</h3>
-          <p>Working with software-defined radio to capture, visualise and characterise signals — from finding a carrier in the noise floor to identifying what is transmitting and when.</p>
+          <p>The basics of software-defined radio and EM monitoring: capturing a live band, reading a waterfall, and working out what is transmitting, when, and how wide.</p>
         </div>
       </div>
       <div class="card">
@@ -402,7 +449,7 @@ a.btn{display:inline-block;text-decoration:none}
         <div class="card-in">
           <!-- FIG slot — SAR / optical wipe -->
           <h3>SAR and optical satellite imagery</h3>
-          <p>Taking Sentinel-1 radar data through calibration, speckle reduction and terrain correction, then reading the result against optical imagery of the same ground — what each sensor shows, and what can actually be concluded from it.</p>
+          <p>Open-source intelligence from satellite imagery: taking Sentinel-1 radar data through calibration, speckle reduction and terrain correction, then reading it against optical imagery of the same ground.</p>
         </div>
       </div>
       <div class="card">
@@ -410,47 +457,15 @@ a.btn{display:inline-block;text-decoration:none}
         <div class="card-in">
           <!-- FIG slot — detector output with confidence threshold -->
           <h3>Target detection with deep-learning detectors</h3>
-          <p>Training and running current detector architectures on real imagery, with attention to the constraints that matter at the edge — small targets, limited data, and inference on modest hardware.</p>
+          <p>Training models to detect targets in real imagery and to report how confident they are — including where that confidence misleads, and what breaks on small targets and limited data.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="panel" id="ctf">
-  <div class="panel-bar"><span class="id">04</span><h2>Capture the flag</h2><span class="fill"></span><span class="rt">105 min · 2 v 2 · teams of 2–4</span></div>
-  <div class="panel-body">
-    <p class="lede">An asymmetric two-against-two autonomous robot game, run as the closing session of the day. Teams of two to four write the strategy; the robots execute it without human control.</p>
-
-    <div class="two" style="margin-top:26px">
-      <div>
-        <p>One side attacks and the other defends, and the two sides do not have the same capabilities. Teams develop and test their attack and defence strategies during the session; nothing on the arena is driven by hand.</p>
-        <p>The build phase runs against a simulator rather than the arena, so every team can keep testing continuously. LLM assistance is available throughout it.</p>
-      </div>
-      <div>
-        <p>Qualifying runs go against a reference defender across parallel simulators. The top four teams go through to a knockout bracket on the physical arena, and the day closes with the awards.</p>
-        <p>Bring a laptop. The rules, the API documentation and the context pack for LLM assistance will be published here ahead of the event.</p>
-      </div>
-    </div>
-
-    <p class="prov" style="margin-top:34px">How the 105 minutes run</p>
-    <div class="rows" style="margin-top:10px">
-      <div class="r"><time datetime="PT10M">10 min</time><div class="what">Briefing and API walkthrough</div><span class="dur"></span></div>
-      <div class="r"><time datetime="PT55M">55 min</time><div class="what">Build phase<small>Attack and defence strategies, developed with LLM assistance</small></div><span class="dur">Simulator</span></div>
-      <div class="r"><time datetime="PT20M">20 min</time><div class="what">Qualifying runs<small>Against a reference defender, in parallel</small></div><span class="dur">Simulator</span></div>
-      <div class="r"><time datetime="PT15M">15 min</time><div class="what">Knockout bracket<small>Top four teams</small></div><span class="dur">Arena</span></div>
-      <div class="r br"><span></span><div class="what">Awards</div><span class="dur"></span></div>
-    </div>
-
-    <div class="note">
-      <b>Want to enter?</b> <a href="#register">Register your interest</a> and say you are entering the robot competition — we will send you the rules and the API documentation as soon as they are ready.
-    </div>
-    <!-- FIG 02 slot — arena schematic / playable demonstration run -->
-  </div>
-</section>
-
 <section class="panel" id="organisers">
-  <div class="panel-bar"><span class="id">05</span><h2>Organisers</h2><span class="fill"></span><span class="rt">5 co-organisers · 4 countries</span></div>
+  <div class="panel-bar"><span class="id">04</span><h2>Organisers</h2><span class="fill"></span><span class="rt">5 co-organisers · 4 countries</span></div>
   <div class="panel-body">
     <div class="fields">
       <div class="f"><span class="k">Organiser</span><span class="v">School of Engineering and Technology, UNSW Canberra</span><span class="s">Australia</span></div>
@@ -476,21 +491,27 @@ a.btn{display:inline-block;text-decoration:none}
 </section>
 
 <section class="panel" id="register">
-  <div class="panel-bar"><span class="id">06</span><h2>Register interest</h2><span class="fill"></span><span class="rt">Not a binding registration</span></div>
+  <div class="panel-bar"><span class="id">05</span><h2>Register</h2><span class="fill"></span><span class="rt">Two tickets · take either or both</span></div>
   <div class="panel-body">
-    <p class="lede">Tell us you are coming, or put your hand up to speak, demonstrate or enter the robot competition. Full registration opens closer to the date.</p>
+    <p class="lede">The morning and the afternoon are booked separately. Take either, or both.</p>
 
-    <p style="color:var(--ink-2);max-width:62ch;margin:0 0 4px">Email us with the details below and we will keep you posted. An online form will replace this once the registration tool is settled.</p>
+    <div class="fields" style="max-width:880px">
+      <div class="f"><span class="k">Morning</span><span class="v">Keynotes and short talks<small>Free, open to all. No cap.</small></span><span class="s">Opens shortly</span></div>
+      <div class="f"><span class="k">Afternoon</span><span class="v">All three hands-on tutorials, in rotation<small>Paid, and limited to 40 participants.</small></span><span class="s">Opens shortly</span></div>
+    </div>
 
-    <div class="fields" style="margin-top:22px;max-width:780px">
+    <p style="color:var(--ink-2);max-width:62ch;margin:26px 0 0">Both tickets go through UNSW&rsquo;s Eventbrite page. Until those links are live, email us — we will tell you the moment registration opens, and the afternoon is expected to fill.</p>
+
+    <p class="prov" style="margin-top:26px">Include in your email</p>
+    <div class="fields" style="margin-top:10px;max-width:780px">
       <div class="f"><span class="k">Name</span><span class="v">As you would like it published</span></div>
       <div class="f"><span class="k">Affiliation</span><span class="v">Institution or organisation</span></div>
       <div class="f"><span class="k">Country</span><span class="v"></span></div>
-      <div class="f"><span class="k">Interested in</span><span class="v">Attending · giving a talk · running a demonstration · entering the robot competition</span></div>
+      <div class="f"><span class="k">Interested in</span><span class="v">Morning talks · afternoon tutorials · giving a talk · running a demonstration</span></div>
       <div class="f"><span class="k">Topic</span><span class="v">Optional</span></div>
     </div>
 
-    <p style="margin:28px 0 0"><a class="btn" href="mailto:a.lenskiy@unsw.edu.au?subject=TacEdge%202026%20interest&amp;body=Name%3A%0AAffiliation%3A%0ACountry%3A%0A%0AInterested%20in%20(delete%20as%20appropriate)%3A%0A-%20Attending%0A-%20Giving%20a%20talk%0A-%20Running%20a%20demonstration%0A-%20Entering%20the%20robot%20competition%0A%0ATopic%20or%20anything%20else%3A%0A">Email your interest</a></p>
+    <p style="margin:28px 0 0"><a class="btn" href="mailto:a.lenskiy@unsw.edu.au?subject=TacEdge%202026&amp;body=Name%3A%0AAffiliation%3A%0ACountry%3A%0A%0AInterested%20in%20(delete%20as%20appropriate)%3A%0A-%20Morning%20talks%20(free)%0A-%20Afternoon%20tutorials%20(paid%2C%2040%20places)%0A-%20Giving%20a%20talk%0A-%20Running%20a%20demonstration%0A%0ATopic%20or%20anything%20else%3A%0A">Email your interest</a></p>
     <p class="privacy">We will use your details only to contact you about TacEdge 2026.</p>
   </div>
 </section>

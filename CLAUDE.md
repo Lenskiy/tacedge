@@ -42,7 +42,7 @@ you actually see in a spectrum waterfall. Defined as CSS custom properties in
 
     --bg #0B1119   --bg-2 #0E1620   --bg-3 #141F2C
     --rule #22303F --rule-2 #2E4054
-    --ink #E8EEF6  --ink-2 #9DAFC4  --ink-3 #6B7F97
+    --ink #E8EEF6  --ink-2 #9DAFC4  --ink-3 #7688A0
     --p1 #352A87   --p2 #106DBE     --p3 #1BA9A5   --p4 #7FD03B  --p5 #F9FB0E
 
 **Colour rule — this is the one that keeps the page coherent:**
@@ -55,9 +55,15 @@ you actually see in a spectrum waterfall. Defined as CSS custom properties in
 
 **Type.** Archivo (display, variable width axis — `font-stretch:112%` for the
 institutional/signage feel), IBM Plex Sans (body), IBM Plex Mono (all chrome).
-Chrome is mono, uppercase, 10–11px, `.14–.16em` tracking. **Body copy is never
-mono.** That single rule is what stops the instrument idiom becoming
+Chrome is mono, `.14–.16em` tracking, and **never below 11px** — that is a
+legibility floor, not a style value, and it holds even in the footer. **Body
+copy is never mono**, which is what stops the instrument idiom becoming
 unreadable.
+
+**Caps are for labels, not sentences.** Short chrome labels are uppercase.
+A readout that is actually a sentence — the programme's provisional note, the
+waterfall's provenance line — stays in sentence case with looser tracking. An
+all-caps string of 40+ characters is a sentence wearing a label's clothes.
 
 **Components.**
 
@@ -70,13 +76,24 @@ unreadable.
   760px.
 - `.kicker` — small tracked teal line above the `<h1>`, carrying the short
   name so the `<h1>` can be the full workshop title.
-- `.fields` / `.f` — `LABEL — value — readout` ruled rows.
+- `.fields` / `.f` — `LABEL — value — readout` ruled rows. The `.s` cell
+  carries a soft-fact badge (`Opens shortly`) or a country.
+- `.sbar` — sub-bar dividing a panel body into named blocks: bold label, rule,
+  right-hand readout. Used to split the programme into its free morning and
+  paid afternoon.
+- `.tl-split` — the free/paid bracket sitting above the timeline strip, with
+  each label underlined across the span it covers. Hidden below 700px, where
+  the `.sbar` labels carry the same information.
+- `.hinge` — a single row belonging to neither adjacent block, with air on
+  both sides. Currently just lunch, which sits between the free morning and
+  the paid afternoon and is claimed by neither.
 - `.logos` — partner mark row, greyscaled to a uniform 46px optical height.
-  Written and commented out in §05; see `img/README.md` for the file list.
-- `.rows` / `.r` — ruled time/what/duration rows, used by both the programme
-  and the competition phase list. Programme rows carry a 3px colour chip
-  (`.g-key`, `.g-talk`, `.g-tut`, `.g-comp`, `.g-break`) keyed to the timeline
-  segment colours, so the legend means the same thing in both places.
+  Written and commented out in §04; see `img/README.md` for the file list.
+- `.rows` / `.r` — ruled time/what/duration rows. Programme rows carry a 3px
+  colour chip (`.g-key`, `.g-talk`, `.g-tut`, `.g-comp`, `.g-break`) keyed to
+  the timeline segment colours, so the legend means the same thing in both
+  places. `.tbc` mutes a chip to 45% for an unconfirmed session, matching the
+  same treatment on its timeline segment.
 - `.tl-bar` + `.tl-ticks` + `.legend` — the day as a single 09:00–17:00 axis.
   Segment `left`/`width` are percentages of the 480-minute span; recompute
   them if timings change or the strip will lie.
@@ -150,10 +167,11 @@ names or inventing figures.
    Quantise to 8-bit and inline it; the scale bar then becomes a provenance
    line: band, location, date, receiver. Airband is a far easier capture than
    the 2.4 GHz band the earlier version simulated.
-2. **Interest form.** Currently a `mailto:` link with pre-filled fields, not a
-   form — chosen so no attendee details reach a third-party service before
-   UNSW says which tool they want used. See `CONTENT.md` §8. The original
-   form markup and CSS are recoverable from the initial commit.
+2. **Eventbrite links.** Registration is settled: two separate tickets on
+   UNSW's Eventbrite — free morning, paid afternoon capped at 40. Both rows in
+   §05 currently read `Opens shortly`; replace each with its own link and
+   button when Artem supplies them, and retire the `mailto:` rather than
+   keeping both. See `CONTENT.md` §8.
 3. **Session leads.** Add tutorial and session presenters — students and
    colleagues running the sessions. Names under each tutorial card is the
    lightest touch; a separate "Presenters" section is warranted if there are
@@ -176,11 +194,14 @@ names or inventing figures.
    against optical imagery.
 7. **Registration and travel info.** Venue address detail, getting there,
    nearby accommodation, and visa guidance for international attendees.
-8. **Partner logos.** The `.logos` row is written and commented out in §05.
+8. **Partner logos.** The `.logos` row is written and commented out in §04.
    Drop the six files listed in `img/README.md` into `img/` and delete the
    comment markers. Confirm each partner is happy to be shown first.
-9. **Capture-the-flag arena schematic**, or a playable 30-second demonstration
-   run. Must not misrepresent the real rules.
+9. **Capture-the-flag.** The dedicated panel was removed on 29 September 2026
+   because the session is no longer confirmed; it survives as one programme
+   row at 16:00 with a muted chip and a `To be confirmed` readout. If it is
+   confirmed, the panel comes back from git history (`b26f2cc`), along with
+   the arena schematic and the promise to publish rules and API docs.
 10. **Blockchain scope.** Unresolved mismatch — see `CONTENT.md` §7.
 
 ## Deployment
