@@ -221,8 +221,11 @@ names or inventing figures.
    - **T-03** a draggable confidence threshold over a deterministic score
      distribution, with live precision and recall. Upgrades to real detector
      output given a frame plus boxes as JSON.
-7. **Registration and travel info.** Venue address detail, getting there,
-   nearby accommodation, and visa guidance for international attendees.
+7. **Travel — built as §05.** Venue street address, airport, accommodation
+   area, the adjacent conference, and a link to the Home Affairs visa finder
+   with an offer of invitation letters. Outstanding: the building and room
+   (TO CONFIRM with Steph), and whether Artem will actually issue invitation
+   letters, which the page now offers on his behalf.
 8. **Partner logos.** The `.logos` row is written and commented out in §04.
    Drop the six files listed in `img/README.md` into `img/` and delete the
    comment markers. Confirm each partner is happy to be shown first.
