@@ -6,21 +6,24 @@ as a media folder.
 
 ## Partner marks
 
-The logo row in §05 is written and commented out in `index.html`. Drop these
-files in and delete the comment markers around `<div class="logos">`:
+The row is live in §04. It shows **institutions, not org units** — the School,
+the Defence Research Institute and UNSW Canberra Space are all UNSW, so the
+UNSW mark appears once.
 
-    logo-unsw-canberra.svg          School of Engineering and Technology, UNSW Canberra
-    logo-unsw-dri.svg               UNSW Defence Research Institute
-    logo-unsw-canberra-space.svg    UNSW Canberra Space
-    logo-kics.svg                   Korean Institute of Communications and Information Sciences
-    logo-ntust.svg                  National Taiwan University of Science and Technology
-    logo-lpu.svg                    Lyceum of the Philippines University
+    logo-unsw-canberra.svg   UNSW Canberra    unsw.edu.au content DAM, official
+    logo-kics.png            KICS             en.kics.or.kr header, official
+    logo-ntust.png           Taiwan Tech      ntust.edu.tw, official, downscaled to 800px
 
-SVG preferred; transparent PNG at 2x otherwise. They are rendered greyscale at
-a uniform 46px optical height, so supply them on a transparent background and
-avoid marks that rely on colour to be legible.
+**Still needed: `logo-lpu.png`** — Lyceum of the Philippines University. Every
+lpu.edu.ph domain sits behind a Cloudflare challenge that blocks automated
+fetches, so it has to come from Gabriel Avelino Sampedro directly. Until then
+the fourth chip carries the institution's name typeset in the page's own face,
+so no partner is left out of the row. Swapping it in is one line in §04.
 
-Confirm each partner is happy to be shown before publishing the row.
+Marks sit on light chips rather than reversed out: they are drawn for light
+grounds, and inverting a heraldic crest produces something its owner never
+approved. Both axes are capped (50px high, 196px wide) because a 5:1 lockup
+and a 2:1 crest do not balance at equal height.
 
 ## Generated, already present
 
