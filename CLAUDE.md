@@ -226,12 +226,10 @@ names or inventing figures.
    with an offer of invitation letters. Outstanding: the building and room
    (TO CONFIRM with Steph), and whether Artem will actually issue invitation
    letters, which the page now offers on his behalf.
-8. **Partner logos — live in §04, one short.** Four institutional chips:
-   UNSW Canberra, KICS, Taiwan Tech, and a typeset nameplate standing in for
-   the Lyceum of the Philippines University, whose site is behind a Cloudflare
-   challenge. Swapping the nameplate for the real mark is one line. Marks sit
-   on light chips rather than reversed out, and both axes are capped so a
-   wide lockup and a tall crest balance. See `img/README.md`.
+8. **Partner logos — live in §04.** Three institutional chips: UNSW Canberra,
+   KICS and Taiwan Tech. Marks sit on light chips rather than reversed out,
+   and both axes are capped so a wide lockup and a tall crest balance. See
+   `img/README.md`.
 9. **Capture-the-flag.** The dedicated panel was removed on 29 September 2026
    because the session is no longer confirmed; it survives as one programme
    row at 16:00 with a muted chip and a `To be confirmed` readout. If it is

@@ -14,12 +14,6 @@ UNSW mark appears once.
     logo-kics.png            KICS             en.kics.or.kr header, official
     logo-ntust.png           Taiwan Tech      ntust.edu.tw, official, downscaled to 800px
 
-**Still needed: `logo-lpu.png`** — Lyceum of the Philippines University. Every
-lpu.edu.ph domain sits behind a Cloudflare challenge that blocks automated
-fetches, so it has to come from Gabriel Avelino Sampedro directly. Until then
-the fourth chip carries the institution's name typeset in the page's own face,
-so no partner is left out of the row. Swapping it in is one line in §04.
-
 Marks sit on light chips rather than reversed out: they are drawn for light
 grounds, and inverting a heraldic crest produces something its owner never
 approved. Both axes are capped (50px high, 196px wide) because a 5:1 lockup
