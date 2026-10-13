@@ -165,6 +165,15 @@ information, and is `aria-hidden`. It must stay subordinate to the waterfall —
 dim, and never bright enough to compete with body text. It honours
 `prefers-reduced-motion` by rendering a single static frame.
 
+**Waterfall model, rewritten 13 October 2026.** The paragraph below describes
+the first version. The script now models a narrow slice of the airband
+(about 500 kHz on a wide screen, 400 Hz a bin) in decibels: averaged thermal
+noise, AM carriers with mirrored speech sidebands, call-and-readback
+exchanges between a ground station and aircraft of differing strength and
+carrier offset, one continuous broadcast, two kinds of data burst, and the
+receiver's own centre spike, spurs and band-edge roll-off. It is a stopgap:
+Artem is recording a real capture to replace it (queue item 1).
+
 **Signature element:** the animated spectrum waterfall canvas in the hero. It
 shows the VHF airband, 118–137 MHz: a quiet noise floor, one continuous
 information broadcast, and short keyed AM exchanges between a tower and its

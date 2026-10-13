@@ -555,79 +555,205 @@ a.btn{display:inline-block;text-decoration:none}
 </div>
 
 <script>
+/* Hero waterfall. A model of a narrow slice of the VHF airband as a receiver
+   would display it: power per FFT bin, in decibels, one row per sweep.
+   Illustrative, not a capture, and not an operational frequency list. */
 (function(){
   var c=document.getElementById('fall');if(!c)return;
-  var ctx=c.getContext('2d'),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2);
+  var ctx=c.getContext('2d');
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var RPS=16;            // rows drawn per second, near enough
+  var DB0=-5,DB1=42;     // display range, dB relative to the noise floor
 
-  // parula-ish ramp
+  // parula-ish ramp, as a lookup table
   var stops=[[10,14,26],[53,42,135],[16,109,190],[27,169,165],[127,208,59],[249,251,14]];
-  function ramp(t){
-    t=Math.max(0,Math.min(1,t));
-    var x=t*(stops.length-1),i=Math.floor(x),f=x-i;
-    var a=stops[i],b=stops[Math.min(i+1,stops.length-1)];
-    return'rgb('+Math.round(a[0]+(b[0]-a[0])*f)+','+Math.round(a[1]+(b[1]-a[1])*f)+','+Math.round(a[2]+(b[2]-a[2])*f)+')';
-  }
-
-  // VHF airband, 118-137 MHz: AM voice between a tower and its traffic.
-  // A quiet floor, one continuous information broadcast, and short keyed
-  // exchanges elsewhere in the band. Channel positions are illustrative
-  // spacing, not an operational frequency list. Illustrative, not a capture.
-  var CH=[],t=0;
+  var LUT=new Uint8Array(768);
   (function(){
-    // position, and how busy that channel is — a tower works harder than a
-    // company frequency nobody is using this hour
-    var pos=[[0.036,0.006],[0.118,0.030],[0.195,0.010],[0.271,0.044],[0.330,0.008],
-             [0.402,0.000],[0.487,0.036],[0.560,0.014],[0.648,0.022],[0.729,0.006],
-             [0.812,0.018],[0.905,0.009]];
-    for(var i=0;i<pos.length;i++)
-      CH.push({f:pos[i][0],rate:pos[i][1],on:i===5?1:0,hold:0,lvl:0.6,atis:i===5});
+    for(var k=0;k<256;k++){
+      var x=k/255*(stops.length-1),i=Math.min(Math.floor(x),stops.length-2),f=x-i;
+      for(var j=0;j<3;j++)LUT[k*3+j]=Math.round(stops[i][j]+(stops[i+1][j]-stops[i][j])*f);
+    }
   })();
 
-  function keying(){
-    for(var i=0;i<CH.length;i++){
-      var c=CH[i];
-      if(c.atis){c.lvl=0.52+Math.random()*0.06;continue;}   // steady carrier
-      if(c.hold>0){
-        c.hold--;
-        c.lvl=0.54+0.40*Math.random();                      // voice modulation
-        if(c.hold===0)c.on=0;
-      } else if(Math.random()<c.rate){
-        c.on=1;c.hold=8+Math.floor(Math.random()*38);       // a transmission
+  // 25 kHz channel raster. g: ground station level in dB, null where only the
+  // aircraft are in range; r: chance per row that an exchange begins.
+  var PLAN=[0,{g:36,r:.004},0,{g:null,r:.0016},0,{atis:30},0,{g:31,r:.003},0,0,
+            {g:22,r:.002},0,{acars:1},0,{g:null,r:.0012},0,{g:34,r:.0025},0,{vdl:1},0];
+
+  var Wd=0,Hd=0,rd=1,n=0,binHz=400,P,G,V,row,CH=[],SP=[],dc=0,lastW=-1,lastH=-1;
+  var rnd=new Float32Array(64);
+  function db(x){return Math.pow(10,x/10);}
+  function R(a,b){return a+Math.random()*(b-a);}
+  function rows(s){return Math.max(1,Math.round(s*RPS));}
+  function ex(){return -Math.log(1-Math.random());}       // one noise-like bin
+  function sq(x){return x*x;}
+  function clamp(x,a,b){return x<a?a:x>b?b:x;}
+
+  function mk(C,x,len){
+    return{C:C,x:x,left:len,age:0,lead:rows(R(.1,.4)),tail:rows(R(.05,.2)),
+           env:0,tg:0,sy:0,v:false,fl:0,ph:R(0,6),gap:0,
+           F:[R(400,700),R(1100,1800),R(2300,2900)]};
+  }
+
+  // A carrier through a windowed FFT: a narrow line, a faint skirt on the
+  // strong ones, and a click across the channel when the transmitter keys.
+  function carrier(C,x,click){
+    var i,d,h,i0=Math.max(0,Math.ceil(x-1.99)),i1=Math.min(n-1,Math.floor(x+1.99));
+    for(i=i0;i<=i1;i++){h=.5+.5*Math.cos(Math.PI*(i-x)/2);P[i]+=C*h*h;}
+    if(C>200||click){
+      var w=click?40:12;
+      i0=Math.max(0,Math.ceil(x-w));i1=Math.min(n-1,Math.floor(x+w));
+      for(i=i0;i<=i1;i++){
+        d=Math.abs(i-x);
+        if(d>=1.5)P[i]+=C*1e-3/Math.pow(d,1.6);
+        if(click)P[i]+=C*3e-3/(1+d*d/36);
       }
     }
   }
 
-  function line(y){
-    var n=Math.max(2,Math.floor(W/2)),i,k;
-    keying();
-    for(i=0;i<n;i++){
-      var f=i/n, v=0.05+Math.random()*0.045;                // quiet noise floor
-      for(k=0;k<CH.length;k++){
-        var c=CH[k];if(!c.on)continue;
-        var d=(f-c.f)/0.0027;
-        if(d>-3.2&&d<3.2) v+=c.lvl*Math.exp(-d*d);          // AM carrier and skirts
-      }
-      ctx.fillStyle=ramp(v);
-      ctx.fillRect(i*(W/n),y,(W/n)+1,2);
+  // Speech: syllables and pauses, with formants that wander.
+  function speak(tx){
+    if(--tx.sy<=0){
+      tx.v=!tx.v;
+      if(tx.v){tx.tg=R(.4,1);tx.sy=2+Math.floor(Math.random()*5);}
+      else{tx.tg=.03;tx.sy=Math.random()<.15?rows(R(.3,.7)):1+Math.floor(Math.random()*2);}
     }
+    tx.env+=(tx.tg-tx.env)*.65;
+    tx.F[0]=clamp(tx.F[0]+R(-90,90),320,820);
+    tx.F[1]=clamp(tx.F[1]+R(-160,160),950,2000);
+    tx.F[2]=clamp(tx.F[2]+R(-120,120),2200,3000);
+  }
+
+  // AM sidebands: mirror images either side of the carrier, 300 Hz to 3.4 kHz.
+  function sidebands(tx,C){
+    var i,d,hz,sh,w=3400/binHz,J=Math.min(63,Math.ceil(w)+1);
+    for(i=0;i<=J;i++)rnd[i]=ex();
+    var i0=Math.max(0,Math.ceil(tx.x-w)),i1=Math.min(n-1,Math.floor(tx.x+w)),e=tx.env*tx.env;
+    for(i=i0;i<=i1;i++){
+      d=Math.abs(i-tx.x);hz=d*binHz;if(hz<250)continue;
+      sh=Math.exp(-sq((hz-tx.F[0])/260))+.3*Math.exp(-sq((hz-tx.F[1])/380))+.1*Math.exp(-sq((hz-tx.F[2])/420))+.01;
+      P[i]+=C*.08*e*sh*rnd[Math.min(J,Math.round(d))];
+    }
+  }
+
+  // Data on an AM carrier: two tones, no syllables.
+  function tones(tx){
+    var i,d,hz,w=3200/binHz,J=Math.min(63,Math.ceil(w)+1);
+    for(i=0;i<=J;i++)rnd[i]=.5+.5*ex();
+    var i0=Math.max(0,Math.ceil(tx.x-w)),i1=Math.min(n-1,Math.floor(tx.x+w));
+    for(i=i0;i<=i1;i++){
+      d=Math.abs(i-tx.x);hz=d*binHz;if(hz<400)continue;
+      P[i]+=tx.C*.07*(Math.exp(-sq((hz-1200)/300))+Math.exp(-sq((hz-2400)/300))+.12)*rnd[Math.min(J,Math.round(d))];
+    }
+  }
+
+  // A digital burst: a flat-topped block with no carrier.
+  function block(tx){
+    var i,hz,e,w=7000/binHz,i0=Math.max(0,Math.ceil(tx.x-w)),i1=Math.min(n-1,Math.floor(tx.x+w));
+    for(i=i0;i<=i1;i++){
+      hz=Math.abs(i-tx.x)*binHz;
+      e=hz<5200?1:.5+.5*Math.cos(Math.PI*(hz-5200)/1800);
+      P[i]+=tx.C*e*e*(.4+.6*ex());
+    }
+  }
+
+  // A call and its readbacks: ground and aircraft take turns on one channel,
+  // each at its own strength and a slightly different carrier frequency.
+  function exchange(ch){
+    var p=ch.p,air={C:db(R(10,30)),x:ch.x+R(-700,700)/binHz,fl:R(.5,2)};
+    var gnd=p.g==null?null:{C:db(p.g),x:ch.x+R(-80,80)/binHz,fl:0};
+    var turns=gnd?2+Math.floor(Math.random()*4):1+Math.floor(Math.random()*3);
+    var a=Math.random()<.5,k,who,t;
+    for(k=0;k<turns;k++){
+      who=gnd&&!a?gnd:air;
+      t=mk(who.C,who.x,rows(who===air?R(1,3.5):R(1.5,5)));
+      t.fl=who.fl;t.gap=rows(gnd?R(.3,1.2):R(2,6));
+      ch.q.push(t);a=!a;
+    }
+    ch.wait=0;
+  }
+
+  function step(ch){
+    var p=ch.p,tx=ch.tx;
+    if(p.vdl){
+      if(tx){block(tx);if(--tx.left<=0)ch.tx=null;}
+      else if(Math.random()<.05)ch.tx={C:db(R(8,24)),x:ch.x+R(-.3,.3),left:1+Math.floor(Math.random()*5)};
+      return;
+    }
+    if(p.acars){
+      if(tx){carrier(tx.C,tx.x,tx.age===0);tones(tx);tx.age++;if(--tx.left<=0)ch.tx=null;}
+      else if(Math.random()<.006)ch.tx=mk(db(R(12,30)),ch.x+R(-400,400)/binHz,rows(R(.4,1)));
+      return;
+    }
+    if(tx){
+      var C=tx.fl?tx.C*db(tx.fl*Math.sin(tx.ph+=.35)):tx.C;   // an aircraft's signal flutters
+      carrier(C,tx.x,!p.atis&&(tx.age===0||tx.left===1));
+      if(p.atis||(tx.age>=tx.lead&&tx.left>tx.tail)){speak(tx);sidebands(tx,C);}
+      tx.age++;
+      if(!p.atis&&--tx.left<=0){ch.wait=tx.gap;ch.tx=null;}
+    }else if(ch.q.length){
+      if(--ch.wait<=0)ch.tx=ch.q.shift();
+    }else if(Math.random()<p.r)exchange(ch);
+  }
+
+  function gen(){
+    var i,k,v,o,d=row.data,s=255/(DB1-DB0);
+    var imp=Math.random()<.001?R(1.3,2):1;                    // a row of impulsive noise, now and then
+    for(i=0;i<n;i++)                                          // thermal noise, four sweeps averaged
+      P[i]=-Math.log((1-Math.random())*(1-Math.random())*(1-Math.random())*(1-Math.random()))/4*imp;
+    P[dc]+=db(11)*R(.85,1.15);                                // the receiver's own centre spike
+    if(dc>0)P[dc-1]+=2;if(dc<n-1)P[dc+1]+=2;
+    for(k=0;k<SP.length;k++)P[SP[k][0]]+=SP[k][1]*R(.7,1.3);  // and its spurs
+    for(k=0;k<CH.length;k++)step(CH[k]);
+    for(i=0;i<n;i++){
+      v=(10*Math.log10(P[i]*G[i])-DB0)*s;
+      V[i]=v<0?0:v>255?255:v;
+    }
+    var line=Wd*4;
+    for(i=0,o=0;i<Wd;i++,o+=4){
+      v=V[Math.min(n-1,Math.floor(i*n/Wd))]*3;
+      d[o]=LUT[v];d[o+1]=LUT[v+1];d[o+2]=LUT[v+2];d[o+3]=255;
+    }
+    for(k=1;k<rd;k++)d.copyWithin(k*line,0,line);
   }
 
   function size(){
-    W=c.clientWidth;H=c.clientHeight;
-    c.width=W*dpr;c.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
-    ctx.fillStyle='#050A11';ctx.fillRect(0,0,W,H);
-    for(var y=H;y>=0;y-=2){t++;line(y);}              // prefill
+    var W=c.clientWidth,H=c.clientHeight;
+    if(W===lastW&&H===lastH)return;
+    lastW=W;lastH=H;if(W<8||H<2)return;
+    var dpr=Math.min(window.devicePixelRatio||1,2),i,s;
+    n=Math.floor(W);Wd=Math.round(W*dpr);Hd=Math.round(H*dpr);rd=Math.max(1,Math.round(dpr));
+    c.width=Wd;c.height=Hd;
+    var span=Math.max(300e3,n*400);binHz=span/n;              // about 400 Hz a bin on a wide screen
+    var per=25e3/binHz,slots=Math.min(PLAN.length,Math.floor(span/25e3)),pad=(n-slots*per)/2;
+    CH=[];
+    for(s=0;s<slots;s++){
+      if(!PLAN[s])continue;
+      var ch={x:pad+(s+.5)*per,p:PLAN[s],tx:null,q:[],wait:0};
+      if(ch.p.atis){ch.tx=mk(db(ch.p.atis),ch.x+R(-60,60)/binHz,1e9);ch.tx.lead=0;}
+      CH.push(ch);
+    }
+    P=new Float64Array(n);G=new Float32Array(n);V=new Uint8Array(n);
+    for(i=0;i<n;i++){                                         // filter roll-off at the band edges, and ripple
+      var e=Math.min(i,n-1-i)/(.035*n),roll=e<1?Math.pow(10,-.6*(1-e)*(1-e)):1;
+      G[i]=roll*db(.6*Math.sin(i/n*9.4+1)+.3*Math.sin(i/n*31));
+    }
+    dc=Math.floor(n/2);
+    SP=[[.137,4],[.415,6],[.683,3],[.871,5]].map(function(q){return[Math.floor(q[0]*n),db(q[1])];});
+    row=ctx.createImageData(Wd,rd);
+    ctx.fillStyle='#050A11';ctx.fillRect(0,0,Wd,Hd);
+    for(var y=Hd-rd;y>-rd;y-=rd){gen();ctx.putImageData(row,0,y);}   // prefill, oldest row at the bottom
   }
   size();
   var ro=new ResizeObserver(size);ro.observe(c);
 
   if(!reduce){
-    (function step(){
-      t++;
-      ctx.drawImage(c,0,0,W*dpr,H*dpr,0,2,W,H);       // scroll down
-      line(0);
-      setTimeout(function(){requestAnimationFrame(step);},55);
+    (function tick(){
+      if(row){
+        ctx.drawImage(c,0,0,Wd,Hd-rd,0,rd,Wd,Hd-rd);        // scroll down
+        gen();ctx.putImageData(row,0,0);
+      }
+      setTimeout(function(){requestAnimationFrame(tick);},50);
     })();
   }
 })();
