@@ -66,6 +66,13 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   text-transform:uppercase;color:var(--ink-3);
 }
 
+/* ---------- background mesh: drifting nodes, links forming and dropping ----
+   Subordinate to the waterfall by design — dim, slow, and behind everything. */
+#mesh{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:-1;pointer-events:none;display:block;
+}
+
 /* ---------- rails: the page sits inside a bezel ---------- */
 .rails{
   max-width:var(--wrap);margin:0 auto;
@@ -297,6 +304,8 @@ a.btn{display:inline-block;text-decoration:none}
 </style>
 </head>
 <body>
+
+<canvas id="mesh" aria-hidden="true"></canvas>
 
 <nav class="nav">
   <div class="nav-in">
@@ -555,6 +564,70 @@ a.btn{display:inline-block;text-decoration:none}
 </div>
 
 <script>
+/* Background mesh — nodes drift, links form and break by range, and a node
+   drops off the net now and then and rejoins. Decorative furniture: it carries
+   no information and is hidden from assistive technology. */
+(function(){
+  var c=document.getElementById('mesh');if(!c)return;
+  var ctx=c.getContext('2d'),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2);
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var N=[],LINK=0;
+
+  function seed(){
+    var count=Math.max(14,Math.min(40,Math.round(W*H/38000)));
+    LINK=Math.max(140,Math.min(250,Math.min(W,H)*0.30));
+    N=[];
+    for(var i=0;i<count;i++){
+      N.push({x:Math.random()*W,y:Math.random()*H,
+              vx:(Math.random()-0.5)*0.42,vy:(Math.random()-0.5)*0.42,
+              up:1,t:Math.random()*300});
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<N.length;i++){
+      var a=N[i];if(!a.up)continue;
+      for(var j=i+1;j<N.length;j++){
+        var b=N[j];if(!b.up)continue;
+        var dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<LINK){
+          var q=1-d/LINK;                                  // link quality by range
+          ctx.strokeStyle='rgba(16,109,190,'+(q*0.44).toFixed(3)+')';
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+        }
+      }
+    }
+    for(var k=0;k<N.length;k++){
+      var n=N[k];
+      ctx.fillStyle=n.up?'rgba(27,169,165,0.52)':'rgba(107,127,151,0.20)';
+      ctx.fillRect(n.x-2,n.y-2,4,4);                       // square nodes, not dots
+    }
+  }
+
+  function size(){
+    W=c.clientWidth;H=c.clientHeight;
+    c.width=W*dpr;c.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.lineWidth=1;seed();draw();
+  }
+  size();
+  var ro=new ResizeObserver(size);ro.observe(c);
+
+  if(!reduce){
+    (function step(){
+      for(var i=0;i<N.length;i++){
+        var n=N[i];
+        n.x+=n.vx;n.y+=n.vy;n.t++;
+        if(n.x<0||n.x>W)n.vx*=-1;
+        if(n.y<0||n.y>H)n.vy*=-1;
+        if(n.t>240&&Math.random()<0.0006){n.up=n.up?0:1;n.t=0;}
+      }
+      draw();
+      setTimeout(function(){requestAnimationFrame(step);},33);
+    })();
+  }
+})();
+
 /* Hero waterfall. A model of a narrow slice of the VHF airband as a receiver
    would display it: power per FFT bin, in decibels, one row per sweep.
    Illustrative, not a capture, and not an operational frequency list. */

@@ -39,7 +39,8 @@ the hero's `SYS` panel bar; the scale bar under the waterfall, including the
 mesh canvas and its script; the "Include in your email" field list; and copy
 that was aphoristic or unsupported ("that is the point", "expected to fill",
 "already in the building"). The waterfall is now an unlabelled illustration and
-makes no claim to be data. Do not bring any of these back, and do not add
+makes no claim to be data. **The background mesh was restored on 14 October
+2026 at Artem's request; it stays.** Do not bring any of the others back, and do not add
 self-referential captions about what is simulated or pending — if something is
 not real, leave it out rather than apologising for it on the page.
 
