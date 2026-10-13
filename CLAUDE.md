@@ -13,6 +13,10 @@ CSS in one block — portability matters more than cleverness here.
 
 ## Ground rules
 
+- **Plain punctuation only in visible text** (Artem, 14 October 2026): no
+  middle dots or other decorative Unicode separators. Use commas, semicolons,
+  colons and plain hyphens. The footer carries no name or email address.
+
 - **One file of code.** All CSS in the `<style>` block, all JS in the
   `<script>` block at the end. Do not split into CSS/JS assets and do not add
   a bundler.
