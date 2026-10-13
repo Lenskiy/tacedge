@@ -32,6 +32,17 @@ CSS in one block — portability matters more than cleverness here.
 
 ## Design system — instrument panel
 
+**Clean-up of 13 October 2026 — this overrides anything below that disagrees.**
+Artem asked for the page to read as professional rather than generated. Removed:
+the hero's `SYS` panel bar; the scale bar under the waterfall, including the
+"simulated, pending real capture" line and the frequency labels; the background
+mesh canvas and its script; the "Include in your email" field list; and copy
+that was aphoristic or unsupported ("that is the point", "expected to fill",
+"already in the building"). The waterfall is now an unlabelled illustration and
+makes no claim to be data. Do not bring any of these back, and do not add
+self-referential captions about what is simulated or pending — if something is
+not real, leave it out rather than apologising for it on the page.
+
 The page is built to read as a piece of test equipment: ruled, addressed,
 tabular, and honest about its own state. Extend this idiom rather than
 replacing it.
@@ -205,7 +216,14 @@ names or inventing figures.
 5. **Photographs.** Fig. 01 slot in §01 (wide, arena or foyer demonstrations)
    and Fig. 02 in §04. Environmental shots — hands, gear, the arena in build —
    not studio headshot grids. Slots are commented out in the markup.
-6. **Tutorial figures — real data only.** T-01 and T-02 carried simulated
+6. **Tutorial figures — placed 13 October 2026, from Artem's book**
+   (`Books/FST`, *Fundamentals of Surveillance Technologies*). T-01:
+   `img/tut-sdr-fm-band.jpg` (book Fig. 11.2). T-02:
+   `img/tut-sar-gibraltar.jpg` (Fig. 12.1). T-03:
+   `img/tut-detection-ships.jpg` (Fig. 17.22), which replaced the simulated
+   threshold widget. Artem chose to show them without credit lines; the
+   sources and licence terms are in the book's `PERMISSIONS-AND-CREDITS.md`.
+   The notes below are the history. **Real data only** remains the rule. T-01 and T-02 carried simulated
    figures and Artem rejected both on 30 September 2026: at this level of
    workshop a synthetic waterfall and a synthetic speckle field read as
    artificial and undercut the expertise the page is claiming. Both rows are
@@ -232,7 +250,12 @@ names or inventing figures.
    KICS and Taiwan Tech. Marks sit on light chips rather than reversed out,
    and both axes are capped so a wide lockup and a tall crest balance. See
    `img/README.md`.
-9. **Capture-the-flag.** The dedicated panel was removed on 29 September 2026
+9. **Capture-the-flag.** A short `#competition` panel (§04) came back on
+   13 October 2026 at Artem's request: one paragraph and
+   `img/arena-plato-pod.jpg`, copied from platopod.com. That picture shows a
+   surveillance game, not capture the flag, so its caption describes the
+   arena and does not claim to show the competition. The panel bar and the
+   programme row still read "to be confirmed". Earlier history: The dedicated panel was removed on 29 September 2026
    because the session is no longer confirmed; it survives as one programme
    row at 16:00 with a muted chip and a `To be confirmed` readout. If it is
    confirmed, the panel comes back from git history (`b26f2cc`), along with

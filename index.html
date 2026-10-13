@@ -66,13 +66,6 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   text-transform:uppercase;color:var(--ink-3);
 }
 
-/* ---------- background mesh: drifting nodes, links forming and dropping ----
-   Subordinate to the waterfall by design — dim, slow, and behind everything. */
-#mesh{
-  position:fixed;inset:0;width:100%;height:100%;
-  z-index:-1;pointer-events:none;display:block;
-}
-
 /* ---------- rails: the page sits inside a bezel ---------- */
 .rails{
   max-width:var(--wrap);margin:0 auto;
@@ -157,19 +150,13 @@ h3{
 }
 
 /* ---------- waterfall (signature) ---------- */
-.fall{position:relative;background:#050A11;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.fall{position:relative;background:#050A11;border-top:1px solid var(--rule)}
 .fall canvas{display:block;width:100%;height:150px}
-.fall-scale{
-  display:flex;justify-content:space-between;gap:12px;padding:5px 16px;background:var(--bg-2);
-  font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ink-3);
-}
 @media(max-width:640px){
   .fall canvas{height:104px}
-  .fall-scale .mid{display:none}
 }
 
 /* ---------- timeline strip ---------- */
-/* the day divides at lunch, and the division is commercial as well as temporal */
 .tl-split{position:relative;height:21px}
 .tl-split span{
   position:absolute;bottom:0;padding-bottom:5px;border-bottom:1px solid var(--rule-2);
@@ -231,46 +218,19 @@ h3{
 
 /* ---------- tutorial rows: figure and text, alternating ---------- */
 .tut{
-  display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(22px,3.6vw,46px);
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(22px,3.6vw,46px);
   align-items:center;padding:34px 0;border-top:1px solid var(--rule);
 }
 .tut:first-of-type{border-top:0;padding-top:6px}
+.tut.rev{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
 .tut.rev .tut-fig{order:2}
 .tut.solo{grid-template-columns:1fr}
 .tut.solo .tut-txt{max-width:74ch}
 @media(max-width:880px){
-  .tut{grid-template-columns:1fr;gap:20px}
+  .tut,.tut.rev{grid-template-columns:1fr;gap:20px}
   .tut.rev .tut-fig{order:0}
 }
-.demo{position:relative;background:#050A11;border:1px solid var(--rule);line-height:0}
-.demo canvas{display:block;width:100%;height:auto}
-.ctl{
-  display:flex;align-items:center;gap:14px;padding:9px 12px;
-  border:1px solid var(--rule);border-top:0;background:var(--bg-2);
-  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
-}
-.ctl label{margin:0;flex:0 0 auto;font-size:11px;letter-spacing:.14em}
-.ctl input[type=range]{flex:1 1 auto;min-width:80px;accent-color:var(--p3);height:3px;cursor:pointer}
-.ctl output{flex:0 0 auto;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:.10em}
-.ctlfill{flex:1 1 auto;height:1px;background:var(--rule)}
-.ctlbtn{
-  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  background:transparent;color:var(--p3);border:1px solid var(--rule-2);
-  padding:5px 11px;border-radius:0;cursor:pointer;
-}
-.ctlbtn:hover{border-color:var(--p3)}
-.ctlbtn[aria-pressed="true"]{background:var(--p3);color:var(--bg);border-color:var(--p3)}
-.readout{
-  display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--rule);border-top:0;background:var(--bg-2);
-}
-.readout div{
-  flex:1 1 90px;padding:9px 12px;border-right:1px solid var(--rule);
-  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
-}
-.readout div:last-child{border-right:0}
-.readout b{display:block;font-weight:500;font-size:16px;letter-spacing:.02em;color:var(--ink);margin-top:4px;
-  font-variant-numeric:tabular-nums}
-.cap{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);margin:9px 0 0;line-height:1.5}
+.cap{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);margin:9px 0 0;padding:0;line-height:1.5;text-transform:none}
 .tut-txt h3{font-size:clamp(19px,2.2vw,24px);margin:14px 0 10px}
 .tut-txt p{margin:0;font-size:15.5px;color:var(--ink-2);line-height:1.6}
 
@@ -283,9 +243,7 @@ h3{
 .card-bar b{color:var(--p4);font-weight:500}
 .card-bar span{color:var(--ink-3)}
 
-/* ---------- partner marks ----------
-   On light chips, not reversed out. These marks are drawn for light grounds;
-   inverting a heraldic crest produces something its owner never approved. */
+/* ---------- partner marks: on light chips, not reversed out ---------- */
 .logos{
   display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
   background:var(--rule);border:1px solid var(--rule);margin-top:28px;
@@ -340,8 +298,6 @@ a.btn{display:inline-block;text-decoration:none}
 </head>
 <body>
 
-<canvas id="mesh" aria-hidden="true"></canvas>
-
 <nav class="nav">
   <div class="nav-in">
     <a class="mark" href="#top">Tac<span>Edge</span>&nbsp;2026</a>
@@ -359,12 +315,6 @@ a.btn{display:inline-block;text-decoration:none}
 <div class="rails">
 
 <header class="panel" id="top">
-  <div class="panel-bar">
-    <span class="id">SYS</span>
-    <span class="sub">TacEdge 2026 · International Workshop on Tactical Edge Technologies</span>
-    <span class="fill"></span>
-    <span class="rt">UNSW Canberra</span>
-  </div>
   <div class="panel-body" style="padding-bottom:22px">
     <p class="kicker">TacEdge 2026</p>
     <h1>International Workshop on Tactical Edge Technologies</h1>
@@ -381,29 +331,24 @@ a.btn{display:inline-block;text-decoration:none}
   <div class="fall">
     <canvas id="fall" aria-hidden="true"></canvas>
   </div>
-  <div class="fall-scale">
-    <span>118.000 MHz</span>
-    <span class="mid">VHF airband — simulated, pending real capture</span>
-    <span>137.000 MHz</span>
-  </div>
 </header>
 
 <section class="panel" id="about">
   <div class="panel-bar"><span class="id">01</span><h2>About</h2><span class="fill"></span></div>
   <div class="panel-body">
-    <p class="lede">TacEdge is for people who want to learn more about sensing, communications and autonomy in contested environments and to get hands-on with the tools, whether that means building new skills or sharpening existing ones. The subjects are RF and optical surveillance, tactical telecommunications, and applied AI in the field.</p>
+    <p class="lede">TacEdge is a one-day workshop on sensing, communications and autonomy in contested environments, pairing a morning of invited talks with an afternoon of hands-on tutorials. The subjects are RF and optical surveillance, tactical telecommunications, and applied AI in the field.</p>
     <div class="two">
       <div>
-        <p>Equipment in the field has to work with contested spectrum, intermittent links and whatever processing fits on the platform. The workshop is about methods that hold up under those constraints.</p>
+        <p>Equipment in the field has to work with contested spectrum, intermittent links and whatever processing fits on the platform. The workshop covers methods that hold up under those constraints.</p>
         <p>The morning is two keynotes and two sessions of short talks, free and open to everyone. The afternoon is three hands-on tutorials that every participant rotates through, paid and limited to 40 places.</p>
       </div>
       <div>
-        <p>It is aimed at people who are not already specialists in these fields: Defence and defence-industry practitioners, researchers and students who want a working grasp of the state of the art and of where it still falls short.</p>
+        <p>It is aimed at people who are not already specialists in these fields: Defence and defence-industry practitioners, researchers and students who want a working understanding of the state of the art and its open problems.</p>
         <p>TacEdge 2026 is the first of what is intended to become an annual workshop.</p>
       </div>
     </div>
     <div class="note">
-      <b>Travelling for the space conference?</b> TacEdge runs the day after the <a href="https://conference.unsw.edu.au/en/2026-australian-space-domain-awareness-space-traffic-management-conference">Australian Space Domain Awareness and Space Traffic Management Conference</a> (10–12 November), at the same venue. Stay one more day.
+      <b>Attending the space conference?</b> TacEdge runs the day after the <a href="https://conference.unsw.edu.au/en/2026-australian-space-domain-awareness-space-traffic-management-conference">Australian Space Domain Awareness and Space Traffic Management Conference</a> (10–12 November), at the same venue.
     </div>
     <!-- FIG 01 slot — wide photograph, foyer demonstrations / robot arena in build.
          Uncomment once the photograph exists:
@@ -416,7 +361,7 @@ a.btn{display:inline-block;text-decoration:none}
 </section>
 
 <section class="panel" id="programme">
-  <div class="panel-bar"><span class="id">02</span><h2>Programme</h2><span class="fill"></span><span class="rt">09:00–17:00 AEDT · provisional</span></div>
+  <div class="panel-bar"><span class="id">02</span><h2>Programme</h2><span class="fill"></span><span class="rt">09:00–17:00 AEDT</span></div>
   <div class="panel-body">
 
     <div class="tl-split" aria-hidden="true">
@@ -469,65 +414,77 @@ a.btn{display:inline-block;text-decoration:none}
       <div class="r g-tut"><time>13:50</time><div class="what">Hands-on tutorials, session 2<small>Three running in parallel</small></div><span class="dur">60 min</span></div>
       <div class="r br g-break"><time>14:50</time><div class="what">Coffee</div><span class="dur">10 min</span></div>
       <div class="r g-tut"><time>15:00</time><div class="what">Hands-on tutorials, session 3<small>Three running in parallel</small></div><span class="dur">60 min</span></div>
-      <div class="r g-comp tbc"><time>16:00</time><div class="what">Robot capture-the-flag competition<small>Eight teams of two in a knockout on the <a href="https://platopod.com">Plato Pod</a> robot arena. The early rounds are played in simulation; the final and the third-place match are played with real robots.</small></div><span class="dur">To be confirmed</span></div>
+      <div class="r g-comp tbc"><time>16:00</time><div class="what">Robot capture-the-flag competition<small>Eight teams of two in a knockout on the <a href="#competition">Plato Pod robot arena</a></small></div><span class="dur">To be confirmed</span></div>
       <div class="r"><time>17:00</time><div class="what">Close</div><span class="dur"></span></div>
     </div>
 
     <div class="note"><b>Coffee and lunch are included for everyone attending</b>, morning or afternoon, sponsored by the School of Engineering and Technology at UNSW Canberra.</div>
 
-    <p class="prov">Provisional — sessions and timings subject to change</p>
+    <p class="prov">Provisional. Sessions and timings are subject to change.</p>
   </div>
 </section>
 
 <section class="panel" id="tutorials">
-  <div class="panel-bar"><span class="id">03</span><h2>Tutorials</h2><span class="fill"></span><span class="rt">Three in parallel · everyone does all three</span></div>
+  <div class="panel-bar"><span class="id">03</span><h2>Tutorials</h2><span class="fill"></span><span class="rt">Three sessions · three tutorials</span></div>
   <div class="panel-body">
-    <p class="lede">Three tutorials run in parallel across three sessions, and every participant rotates through all three, so nobody picks one and misses the others. No prior experience with radio, radar or machine learning is assumed. Bring a laptop.</p>
-    <!-- Figure pending: a real 2.4 GHz Wi-Fi capture from Artem's SDR.
-         A simulated waterfall stood here and read as artificial, which is
-         exactly the wrong signal for this audience. -->
-    <div class="tut solo">
+    <p class="lede">Three tutorials run in parallel across three sessions, and every participant rotates through all three. No prior experience with radio, radar or machine learning is assumed. Bring a laptop.</p>
+    <div class="tut">
+      <figure class="tut-fig">
+        <div class="fig"><img src="img/tut-sdr-fm-band.jpg" width="1102" height="724" loading="lazy" alt="Receiver display of the FM broadcast band from 101.2 to 105.2 MHz: a spectrum trace with four station peaks above a waterfall in which each station is a vertical stripe."></div>
+        <figcaption class="cap">The FM broadcast band, 101.2 to 105.2 MHz, received on a HackRF. Spectrum above, waterfall below; each stripe is a station.</figcaption>
+      </figure>
       <div class="tut-txt">
         <div class="card-bar"><b>RF</b><span>T-01</span></div>
         <h3>Analysing the EM spectrum with SDR</h3>
-        <p>The basics of software-defined radio and EM monitoring: capturing a live band, reading a waterfall, and working out what is transmitting, when, and how wide. Reading one is a skill, and it is the first thing this session teaches.</p>
+        <p>The basics of software-defined radio and EM monitoring: capturing a live band, reading a waterfall, and working out what is transmitting, when, and over what bandwidth.</p>
       </div>
     </div>
 
-    <!-- Figure pending: a real Sentinel-1 scene against optical. The
-         synthetic speckle field that stood here was not evidence. -->
-    <div class="tut solo">
+    <div class="tut rev">
+      <figure class="tut-fig">
+        <div class="fig"><img src="img/tut-sar-gibraltar.jpg" width="1208" height="838" loading="lazy" alt="Radar image of the Strait of Gibraltar: textured land in green and yellow, dark blue sea, and ships as bright points in the bay and the strait."></div>
+        <figcaption class="cap">Sentinel-1 radar image of the Strait of Gibraltar, 2023. The bright points on the water are ships.</figcaption>
+      </figure>
       <div class="tut-txt">
         <div class="card-bar"><b>Imagery</b><span>T-02</span></div>
         <h3>SAR and optical satellite imagery</h3>
-        <p>Open-source intelligence from satellite imagery: taking Sentinel-1 radar data through calibration, speckle reduction and terrain correction, then reading it against optical imagery of the same ground. Radar does not see what your eye expects, and that is the point.</p>
+        <p>Open-source intelligence from satellite imagery: taking Sentinel-1 radar data through calibration, speckle reduction and terrain correction, then reading it against optical imagery of the same ground.</p>
       </div>
     </div>
 
     <div class="tut">
-      <div class="tut-fig">
-        <div class="demo"><canvas id="d3" width="1280" height="560" aria-hidden="true"></canvas></div>
-        <div class="ctl"><label for="d3f">Threshold</label><input id="d3f" type="range" min="2" max="98" step="1" value="50"><output id="d3o">0.50</output></div>
-        <div class="readout">
-          <div>Detected<b id="d3tp">—</b></div>
-          <div>Missed<b id="d3fn">—</b></div>
-          <div>False alarms<b id="d3fp">—</b></div>
-          <div>Precision<b id="d3p">—</b></div>
-          <div>Recall<b id="d3r">—</b></div>
-        </div>
-        <p class="cap">Illustration of the confidence trade-off over a simulated score distribution. Raise the threshold and false alarms fall away, taking real targets with them.</p>
-      </div>
+      <figure class="tut-fig">
+        <div class="fig"><img src="img/tut-detection-ships.jpg" width="1100" height="1100" loading="lazy" alt="Greyscale radar image of open sea with ships as bright marks, each enclosed in an orange detection box."></div>
+        <figcaption class="cap">Ships found by a YOLOX detector in a Sentinel-1 radar image.</figcaption>
+      </figure>
       <div class="tut-txt">
         <div class="card-bar"><b>Detection</b><span>T-03</span></div>
         <h3>Target detection with deep-learning detectors</h3>
-        <p>Working with YOLO and comparable detectors on real imagery: training them, reading the confidence they report, and seeing where that confidence misleads. The session then puts several detectors together, because an ensemble cuts misclassification and cuts how much an operator has to check by hand.</p>
+        <p>Working with YOLO and comparable detectors on real imagery: training them, reading the confidence they report, and seeing where that confidence misleads. The session then combines several detectors in an ensemble, which reduces misclassification and the amount an operator has to check by hand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="competition">
+  <div class="panel-bar"><span class="id">04</span><h2>Competition</h2><span class="fill"></span><span class="rt">16:00 · to be confirmed</span></div>
+  <div class="panel-body">
+    <div class="tut rev">
+      <figure class="tut-fig">
+        <div class="fig"><img src="img/arena-plato-pod.jpg" width="1630" height="890" loading="lazy" alt="Camera view of a bare table with an arena drawn over it: a blue start strip, a green objective strip, three sensors shown as yellow rings, two black discs of cover, a blue robot and a red robot, and two dashed circles marking virtual robots."></div>
+        <figcaption class="cap">The Plato Pod arena as its console shows it during a game. Only the two robots are on the table; the arena, sensors and cover are drawn in software.</figcaption>
+      </figure>
+      <div class="tut-txt">
+        <div class="card-bar"><b>Robotics</b><span>16:00</span></div>
+        <h3>Robot capture-the-flag competition</h3>
+        <p>The day closes with a knockout tournament on <a href="https://platopod.com">Plato Pod</a>, a table-top arena built at UNSW Canberra in which small robots share one playing field with virtual ones. Eight teams of two take part. The early rounds are played in simulation; the final and the third-place match are played with real robots.</p>
       </div>
     </div>
   </div>
 </section>
 
 <section class="panel" id="organisers">
-  <div class="panel-bar"><span class="id">04</span><h2>Organisers</h2><span class="fill"></span><span class="rt">4 co-organisers · 3 countries</span></div>
+  <div class="panel-bar"><span class="id">05</span><h2>Organisers</h2><span class="fill"></span><span class="rt">4 co-organisers · 3 countries</span></div>
   <div class="panel-body">
     <div class="fields">
       <div class="f"><span class="k">Organiser</span><span class="v">School of Engineering and Technology, UNSW Canberra</span><span class="s">Australia</span></div>
@@ -547,25 +504,25 @@ a.btn{display:inline-block;text-decoration:none}
 </section>
 
 <section class="panel" id="travel">
-  <div class="panel-bar"><span class="id">05</span><h2>Getting there</h2><span class="fill"></span><span class="rt">Canberra, Australia</span></div>
+  <div class="panel-bar"><span class="id">06</span><h2>Getting there</h2><span class="fill"></span><span class="rt">Canberra, Australia</span></div>
   <div class="panel-body">
-    <p class="lede">In person only, in the centre of Canberra. Attendees are coming from Korea, Taiwan, the Philippines and Vietnam, so plan visas early.</p>
+    <p class="lede">In person only, in the centre of Canberra. Attendees are expected from Korea, Taiwan, the Philippines and Vietnam; international visitors should arrange visas early.</p>
 
     <div class="fields" style="max-width:900px">
       <div class="f"><span class="k">Venue</span><span class="v">UNSW Canberra City<small>Constitution Avenue, Reid ACT</small></span></div>
       <div class="f"><span class="k">From the airport</span><span class="v">Roughly 15 minutes by car or taxi<small>Canberra Airport, domestic and limited international</small></span></div>
       <div class="f"><span class="k">Staying</span><span class="v">City-centre location<small>Close to Civic and Braddon accommodation</small></span></div>
-      <div class="f"><span class="k">Adjacent event</span><span class="v"><a href="https://conference.unsw.edu.au/en/2026-australian-space-domain-awareness-space-traffic-management-conference">Australian SDA &amp; STM Conference</a>, 10–12 November<small>Same venue, immediately before. Many attendees are already in the building.</small></span></div>
+      <div class="f"><span class="k">Adjacent event</span><span class="v"><a href="https://conference.unsw.edu.au/en/2026-australian-space-domain-awareness-space-traffic-management-conference">Australian SDA &amp; STM Conference</a>, 10–12 November<small>Same venue, immediately before</small></span></div>
     </div>
 
     <div class="note">
-      <b>International attendees:</b> entry requirements differ by nationality and some take weeks. Check the Department of Home Affairs <a href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-finder">visa finder</a> before booking, and write to us if you need a letter of invitation for your application.
+      <b>International attendees:</b> entry requirements differ by nationality, and some visas take weeks to issue. Check the Department of Home Affairs <a href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-finder">visa finder</a> before booking, and write to us if you need a letter of invitation for your application.
     </div>
   </div>
 </section>
 
 <section class="panel" id="register">
-  <div class="panel-bar"><span class="id">06</span><h2>Register</h2><span class="fill"></span><span class="rt">Registration opening soon</span></div>
+  <div class="panel-bar"><span class="id">07</span><h2>Register</h2><span class="fill"></span><span class="rt">Registration opening soon</span></div>
   <div class="panel-body">
     <p class="lede">The morning and the afternoon are booked separately. Take either, or both.</p>
 
@@ -582,16 +539,7 @@ a.btn{display:inline-block;text-decoration:none}
 
     <p style="color:var(--ink-2);max-width:64ch;margin:24px 0 0">Both tickets go through UNSW&rsquo;s Eventbrite page. Payment is by Eventbrite only; invoices and bank transfers are not accepted, and Eventbrite booking fees may apply on top. Registration is subject to the <a href="https://www.events.unsw.edu.au/ticketing-terms-conditions">UNSW ticketing terms and conditions</a>.</p>
 
-    <p style="color:var(--ink-2);max-width:64ch;margin:18px 0 0">Registration is not open yet. Email us and we will tell you the moment it is. The afternoon is expected to fill.</p>
-
-    <p class="prov" style="margin-top:26px">Include in your email</p>
-    <div class="fields" style="margin-top:10px;max-width:780px">
-      <div class="f"><span class="k">Name</span><span class="v">As you would like it published</span></div>
-      <div class="f"><span class="k">Affiliation</span><span class="v">Institution or organisation</span></div>
-      <div class="f"><span class="k">Country</span><span class="v"></span></div>
-      <div class="f"><span class="k">Interested in</span><span class="v">Morning talks · afternoon tutorials · giving a talk · running a demonstration</span></div>
-      <div class="f"><span class="k">Topic</span><span class="v">Optional</span></div>
-    </div>
+    <p style="color:var(--ink-2);max-width:64ch;margin:18px 0 0">Registration is not yet open. Email us and we will let you know when it opens.</p>
 
     <p style="margin:28px 0 0"><a class="btn" href="mailto:a.lenskiy@unsw.edu.au?subject=TacEdge%202026&amp;body=Name%3A%0AAffiliation%3A%0ACountry%3A%0A%0AInterested%20in%20(delete%20as%20appropriate)%3A%0A-%20Morning%20talks%20(free)%0A-%20Afternoon%20tutorials%20(paid%2C%2040%20places)%0A-%20Giving%20a%20talk%0A-%20Running%20a%20demonstration%0A%0ATopic%20or%20anything%20else%3A%0A">Email your interest</a></p>
     <p class="privacy">We will use your details only to contact you about TacEdge 2026.</p>
@@ -607,70 +555,6 @@ a.btn{display:inline-block;text-decoration:none}
 </div>
 
 <script>
-/* Background mesh — nodes drift, links form and break by range, and a node
-   drops off the net now and then and rejoins. Decorative furniture: it carries
-   no information and is hidden from assistive technology. */
-(function(){
-  var c=document.getElementById('mesh');if(!c)return;
-  var ctx=c.getContext('2d'),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2);
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var N=[],LINK=0;
-
-  function seed(){
-    var count=Math.max(14,Math.min(40,Math.round(W*H/38000)));
-    LINK=Math.max(140,Math.min(250,Math.min(W,H)*0.30));
-    N=[];
-    for(var i=0;i<count;i++){
-      N.push({x:Math.random()*W,y:Math.random()*H,
-              vx:(Math.random()-0.5)*0.42,vy:(Math.random()-0.5)*0.42,
-              up:1,t:Math.random()*300});
-    }
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    for(var i=0;i<N.length;i++){
-      var a=N[i];if(!a.up)continue;
-      for(var j=i+1;j<N.length;j++){
-        var b=N[j];if(!b.up)continue;
-        var dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
-        if(d<LINK){
-          var q=1-d/LINK;                                  // link quality by range
-          ctx.strokeStyle='rgba(16,109,190,'+(q*0.44).toFixed(3)+')';
-          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
-        }
-      }
-    }
-    for(var k=0;k<N.length;k++){
-      var n=N[k];
-      ctx.fillStyle=n.up?'rgba(27,169,165,0.52)':'rgba(107,127,151,0.20)';
-      ctx.fillRect(n.x-2,n.y-2,4,4);                       // square nodes, not dots
-    }
-  }
-
-  function size(){
-    W=c.clientWidth;H=c.clientHeight;
-    c.width=W*dpr;c.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
-    ctx.lineWidth=1;seed();draw();
-  }
-  size();
-  var ro=new ResizeObserver(size);ro.observe(c);
-
-  if(!reduce){
-    (function step(){
-      for(var i=0;i<N.length;i++){
-        var n=N[i];
-        n.x+=n.vx;n.y+=n.vy;n.t++;
-        if(n.x<0||n.x>W)n.vx*=-1;
-        if(n.y<0||n.y>H)n.vy*=-1;
-        if(n.t>240&&Math.random()<0.0006){n.up=n.up?0:1;n.t=0;}
-      }
-      draw();
-      setTimeout(function(){requestAnimationFrame(step);},33);
-    })();
-  }
-})();
-
 (function(){
   var c=document.getElementById('fall');if(!c)return;
   var ctx=c.getContext('2d'),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2);
@@ -688,7 +572,7 @@ a.btn{display:inline-block;text-decoration:none}
   // VHF airband, 118-137 MHz: AM voice between a tower and its traffic.
   // A quiet floor, one continuous information broadcast, and short keyed
   // exchanges elsewhere in the band. Channel positions are illustrative
-  // spacing, not an operational frequency list — the scale bar says simulated.
+  // spacing, not an operational frequency list. Illustrative, not a capture.
   var CH=[],t=0;
   (function(){
     // position, and how busy that channel is — a tower works harder than a
@@ -746,58 +630,6 @@ a.btn{display:inline-block;text-decoration:none}
       setTimeout(function(){requestAnimationFrame(step);},55);
     })();
   }
-})();
-
-/* ---- T-03 · where you put the threshold ------------------------------- */
-(function(){
-  var c=document.getElementById('d3');if(!c)return;
-  var ctx=c.getContext('2d'),W=c.width,H=c.height,PAD=54,BINS=48;
-  function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);
-    t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-  var r=rng(20261113),T=[],F=[],i;
-  for(i=0;i<150;i++)T.push(1-Math.pow(r(),2.3));      // real targets, scored high
-  for(i=0;i<340;i++)F.push(Math.pow(r(),2.1));        // false alarms, scored low
-  function hist(a){var h=new Array(BINS).fill(0);
-    for(var j=0;j<a.length;j++){var b=Math.min(BINS-1,Math.floor(a[j]*BINS));h[b]++;}return h;}
-  var hT=hist(T),hF=hist(F),peak=Math.max.apply(null,hT.concat(hF));
-
-  function bars(h,col,t){
-    var bw=(W-PAD*2)/BINS;
-    for(var b=0;b<BINS;b++){
-      if(!h[b])continue;
-      var x=PAD+b*bw, bh=(h[b]/peak)*(H-PAD*2);
-      ctx.fillStyle=((b+0.5)/BINS>=t)?col:col.replace(/[\d.]+\)$/,'0.22)');
-      ctx.fillRect(x,H-PAD-bh,bw-1.5,bh);
-    }
-  }
-  function draw(t){
-    ctx.fillStyle='#050A11';ctx.fillRect(0,0,W,H);
-    ctx.strokeStyle='#22303F';ctx.lineWidth=1;
-    ctx.beginPath();ctx.moveTo(PAD,H-PAD+.5);ctx.lineTo(W-PAD,H-PAD+.5);ctx.stroke();
-    bars(hF,'rgba(16,109,190,0.85)',t);
-    bars(hT,'rgba(27,169,165,0.85)',t);
-    var x=PAD+t*(W-PAD*2);
-    ctx.strokeStyle='#E8EEF6';ctx.lineWidth=2;
-    ctx.beginPath();ctx.moveTo(x,PAD-16);ctx.lineTo(x,H-PAD);ctx.stroke();
-    ctx.font='500 22px "IBM Plex Mono",monospace';ctx.fillStyle='#7688A0';
-    ctx.textAlign='left';ctx.fillText('SCORE',PAD,H-PAD+34);
-    ctx.textAlign='right';ctx.fillText('1.0',W-PAD,H-PAD+34);
-    ctx.textAlign='left';ctx.fillStyle='rgba(27,169,165,0.95)';ctx.fillText('TARGETS',PAD,PAD-6);
-    ctx.fillStyle='rgba(16,109,190,0.95)';ctx.fillText('FALSE ALARMS',PAD+190,PAD-6);
-  }
-  function count(a,t){var n=0;for(var j=0;j<a.length;j++)if(a[j]>=t)n++;return n;}
-  var sl=document.getElementById('d3f'),out=document.getElementById('d3o');
-  var el={tp:'d3tp',fn:'d3fn',fp:'d3fp',p:'d3p',r:'d3r'},N={};
-  for(var kk in el)N[kk]=document.getElementById(el[kk]);
-  function run(){
-    var t=sl.value/100, tp=count(T,t), fp=count(F,t), fn=T.length-tp;
-    out.textContent=t.toFixed(2);
-    N.tp.textContent=tp;N.fn.textContent=fn;N.fp.textContent=fp;
-    N.p.textContent=(tp+fp)?Math.round(100*tp/(tp+fp))+'%':'—';
-    N.r.textContent=Math.round(100*tp/T.length)+'%';
-    draw(t);
-  }
-  run();sl.addEventListener('input',run);
 })();
 </script>
 </body>
