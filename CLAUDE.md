@@ -236,7 +236,11 @@ names or inventing figures.
    because the session is no longer confirmed; it survives as one programme
    row at 16:00 with a muted chip and a `To be confirmed` readout. If it is
    confirmed, the panel comes back from git history (`b26f2cc`), along with
-   the arena schematic and the promise to publish rules and API docs.
+   the arena schematic and the promise to publish rules and API docs — but
+   rewrite it first: the format changed on 13 October 2026 (eight teams of
+   two, knockout, early rounds simulated, final on the Plato Pod arena) and
+   the old panel describes the superseded one. The row links to platopod.com
+   and carries the general idea only; see `CONTENT.md` §4.
 10. **Blockchain scope.** Unresolved mismatch — see `CONTENT.md` §7.
 
 ## Deployment
