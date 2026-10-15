@@ -261,7 +261,9 @@ h3{
 }
 .logos img{max-height:74px;max-width:290px;width:auto;height:auto;display:block}
 /* a 5:1 lockup and a 2:1 crest do not balance at the same height; cap both axes */
-@media(max-width:560px){.logos{grid-template-columns:1fr}}
+.logos.two{grid-template-columns:repeat(2,1fr);margin-top:-1px}
+.logos div.dark{background:#171F26}
+@media(max-width:560px){.logos,.logos.two{grid-template-columns:1fr}}
 
 /* ---------- figure plate (used once assets land) ---------- */
 .fig{
@@ -498,7 +500,7 @@ a.btn{display:inline-block;text-decoration:none}
 </section>
 
 <section class="panel" id="organisers">
-  <div class="panel-bar"><span class="id">05</span><h2>Organisers</h2><span class="fill"></span><span class="rt">5 co-organisers, 4 countries</span></div>
+  <div class="panel-bar"><span class="id">05</span><h2>Organisers</h2><span class="fill"></span><span class="rt">6 co-organisers, 4 countries</span></div>
   <div class="panel-body">
     <div class="fields">
       <div class="f"><span class="k">Organiser</span><span class="v">School of Engineering and Technology, UNSW Canberra</span><span class="s">Australia</span></div>
@@ -507,13 +509,19 @@ a.btn{display:inline-block;text-decoration:none}
       <div class="f"><span class="k">Co-organiser</span><span class="v">Korean Institute of Communications and Information Sciences<small>Dong-Seong Kim</small></span><span class="s">Korea</span></div>
       <div class="f"><span class="k">Co-organiser</span><span class="v">National Taiwan University of Science and Technology<small>Jui-Tang (RT) Wang, Jenq-Shiou Leu</small></span><span class="s">Taiwan</span></div>
       <div class="f"><span class="k">Co-organiser</span><span class="v">Philippine Coding Camp<small>Gabriel Avelino Sampedro</small></span><span class="s">Philippines</span></div>
+      <div class="f"><span class="k">Co-organiser</span><span class="v">ASR Defence</span><span class="s">Australia</span></div>
     </div>
-    <!-- Institutions, not org units: the School, the Defence Research Institute
-         and UNSW Canberra Space are all UNSW, so the UNSW mark appears once. -->
+    <!-- First row: institutions. Second row (16 October 2026, at Artem's
+         request): UNSW Canberra Space's own mark, and ASR Defence, whose mark
+         only exists reversed out on navy, so its chip takes that colour. -->
     <div class="logos">
       <div><img src="img/logo-unsw-canberra.svg" alt="UNSW Canberra" width="219" height="93"></div>
       <div><img src="img/logo-kics.png" alt="Korean Institute of Communications and Information Sciences" width="152" height="99"></div>
       <div><img src="img/logo-ntust.png" alt="Taiwan Tech, National Taiwan University of Science and Technology" width="800" height="155"></div>
+    </div>
+    <div class="logos two">
+      <div><img src="img/logo-unsw-canberra-space.png" alt="UNSW Canberra Space" width="888" height="367"></div>
+      <div class="dark"><img src="img/logo-asr-defence.png" alt="ASR Defence" width="794" height="274"></div>
     </div>
   </div>
 </section>
