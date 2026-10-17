@@ -8,7 +8,7 @@ if something is marked TO CONFIRM, ask rather than filling it in.
 
 Single-page static site (`index.html`), no build step, no dependencies, no
 framework. Deployed on GitHub Pages at tacedge.org. Will migrate to
-WordPress on a self-hosted server later, so keep the markup semantic and the
+a self-hosted web server on Kamatera later (Artem, 17 October 2026; not WordPress), so keep the markup semantic and the
 CSS in one block — portability matters more than cleverness here.
 
 ## Ground rules
@@ -23,7 +23,7 @@ CSS in one block — portability matters more than cleverness here.
 - **Media files are content, not dependencies.** Photographs, SAR tiles,
   detector frames, captured spectrum and partner marks live in `img/` and are
   referenced normally. This is the one exception to the single-file rule; it
-  survives the WordPress migration as a media folder.
+  survives the server migration as a media folder.
 - **No dependencies** beyond the Google Fonts link already present.
 - **No localStorage/sessionStorage.**
 - **Accuracy over polish.** This site is read by Defence officers, academics

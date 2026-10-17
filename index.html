@@ -209,6 +209,12 @@ h3{
 .r .what{font-family:var(--mono);font-size:14px;color:var(--ink)}
 .r .what small{display:block;font-family:var(--body);font-size:14.5px;color:var(--ink-3);margin-top:2px}
 .r .dur{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+/* abstract and speaker bio, collapsed under a programme row */
+.abs{margin-top:8px}
+.abs summary{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--p3);cursor:pointer;width:max-content;max-width:100%}
+.abs summary:hover{color:var(--ink)}
+.abs p{font-family:var(--body);font-size:15px;line-height:1.6;color:var(--ink-2);max-width:68ch;margin:10px 0 0}
+.abs p b{color:var(--ink);font-weight:500}
 .r.br .what{color:var(--ink-3)}
 .r::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;background:transparent}
 .r.g-key::before{background:var(--p2)}
@@ -413,7 +419,7 @@ a.btn{display:inline-block;text-decoration:none}
       <div class="r br"><time>08:30</time><div class="what">Doors open</div><span class="dur"></span></div>
       <div class="r"><time>09:00</time><div class="what">Opening</div><span class="dur"></span></div>
       <div class="r g-key"><time>09:10</time><div class="what">Keynote 1<small>Speaker to be announced</small></div><span class="dur">30 min</span></div>
-      <div class="r g-talk"><time>09:40</time><div class="what">Short talk: terahertz communications and ISAC<small>Prof. Nan Yang, Australian National University. Title to follow.</small></div><span class="dur">20 min</span></div>
+      <div class="r g-talk"><time>09:40</time><div class="what">Short talk: THz Communications for 6G and Beyond: Opportunities and Challenges in Integrated Sensing and Communications<small>Prof. Nan Yang, Australian National University</small><details class="abs"><summary>Abstract and speaker</summary><p>Terahertz (THz) communications offer abundant spectrum, ultra-wide bandwidths and highly directional transmission, making them a key enabling technology for 6G and beyond. These properties also open the way to integrated sensing and communication (ISAC), where communication and sensing are designed together so that wireless systems can perceive their surroundings. The talk introduces THz communications in 6G, reviews recent advances in THz ISAC, and discusses key challenges and the open problems in turning its theoretical potential into practice.</p><p><b>Prof. Nan Yang</b> is a Professor at the Australian National University, where he leads the Information and Signal Processing Cluster in the School of Engineering. He is an IEEE Vehicular Technology Society Distinguished Lecturer (2025-2027) and was an IEEE ComSoc Distinguished Lecturer (2023-2024). He is a co-recipient of Best Paper Awards at IEEE ICC 2024 and IEEE GLOBECOM 2022 and 2016. His research interests include terahertz communications, ultra-reliable and low-latency communications, cyber-physical security and molecular communications.</p></details></div><span class="dur">20 min</span></div>
       <div class="r g-talk"><time>10:00</time><div class="what">Short talk: AI assurance<small>GPCAPT Randall McCutcheon, RAAF and UNSW Canberra. Title to follow.</small></div><span class="dur">20 min</span></div>
       <div class="r br g-break"><time>10:20</time><div class="what">Coffee</div><span class="dur">10 min</span></div>
       <div class="r g-key"><time>10:30</time><div class="what">Keynote 2: From Signals to Understanding: The Evolution of Electronic Warfare and Radar<small>Dr Len Sciacca, CEO, ASR Defence</small></div><span class="dur">30 min</span></div>
