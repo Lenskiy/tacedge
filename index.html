@@ -259,7 +259,7 @@ h3{
 
 /* ---------- partner marks: on light chips, not reversed out ---------- */
 .logos{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
   background:var(--rule);border:1px solid var(--rule);margin-top:28px;
 }
 .logos div{
@@ -268,9 +268,8 @@ h3{
 }
 .logos img{max-height:74px;max-width:290px;width:auto;height:auto;display:block}
 /* a 5:1 lockup and a 2:1 crest do not balance at the same height; cap both axes */
-.logos.two{grid-template-columns:repeat(2,1fr);margin-top:-1px}
 .logos div.dark{background:#171F26}
-@media(max-width:560px){.logos,.logos.two{grid-template-columns:1fr}}
+@media(max-width:560px){.logos{grid-template-columns:1fr}}
 
 /* ---------- figure plate (used once assets land) ---------- */
 .fig{
@@ -522,15 +521,12 @@ a.btn{display:inline-block;text-decoration:none}
       <div class="f"><span class="k">Co-organiser</span><span class="v">Philippine Coding Camp<small>Gabriel Avelino Sampedro</small></span><span class="s">Philippines</span></div>
       <div class="f"><span class="k">Co-organiser</span><span class="v">ASR Defence</span><span class="s">Australia</span></div>
     </div>
-    <!-- First row: institutions. Second row (16 October 2026, at Artem's
-         request): UNSW Canberra Space's own mark, and ASR Defence, whose mark
-         only exists reversed out on navy, so its chip takes that colour. -->
+    <!-- Two by two. Taiwan Tech's mark removed at Artem's request (26 October
+         2026); NTUST stays in the list above. ASR Defence's mark only exists
+         reversed out on navy, so its chip takes that colour. -->
     <div class="logos">
       <div><img src="img/logo-unsw-canberra.svg" alt="UNSW Canberra" width="219" height="93"></div>
       <div><img src="img/logo-kics.png" alt="Korean Institute of Communications and Information Sciences" width="152" height="99"></div>
-      <div><img src="img/logo-ntust.png" alt="Taiwan Tech, National Taiwan University of Science and Technology" width="800" height="155"></div>
-    </div>
-    <div class="logos two">
       <div><img src="img/logo-unsw-canberra-space.png" alt="UNSW Canberra Space" width="888" height="367"></div>
       <div class="dark"><img src="img/logo-asr-defence.png" alt="ASR Defence" width="794" height="274"></div>
     </div>
