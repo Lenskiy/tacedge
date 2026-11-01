@@ -147,6 +147,15 @@ Chrome is not installed on Artem's Mac; the Playwright copy works:
 `~/Library/Caches/ms-playwright/chromium-1248/chrome-mac-x64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`.
 The card was restyled with the site on 2 November 2026: no `SYS` bar, no mono.
 
+**Search data (added 2 November 2026).** The `<head>` carries a schema.org
+`EducationEvent` block (JSON-LD): date and times, venue address, the six
+speakers, and the three Eventbrite tickets with prices. It is data, not
+script, so it does not break the one-script-block rule. **Update it whenever
+a speaker, price, time or ticket changes** — Google shows it in search
+results, and nothing on the page warns you when it disagrees. `robots.txt`
+and `sitemap.xml` sit at the root; bump the sitemap's `lastmod` on
+substantive changes.
+
 **Regenerate it whenever the hero facts change** — the card repeats the title,
 date, venue and admission line, and nothing warns you when it goes stale.
 
