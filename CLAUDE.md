@@ -145,8 +145,7 @@ waterfall in it is a real render of the airband script.
 
 Chrome is not installed on Artem's Mac; the Playwright copy works:
 `~/Library/Caches/ms-playwright/chromium-1248/chrome-mac-x64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`.
-The card still uses the pre-2 November look (a `SYS` bar and mono labels);
-bring `og-source.html` in line with the redesign when it is next touched.
+The card was restyled with the site on 2 November 2026: no `SYS` bar, no mono.
 
 **Regenerate it whenever the hero facts change** — the card repeats the title,
 date, venue and admission line, and nothing warns you when it goes stale.

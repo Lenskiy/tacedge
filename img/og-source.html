@@ -2,33 +2,30 @@
 <title>TacEdge 2026 — social card source (render at 1200x630 to img/og.png)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0B1119;--bg-2:#0E1620;--rule:#22303F;--rule-2:#2E4054;
 --ink:#E8EEF6;--ink-2:#9DAFC4;--ink-3:#7688A0;--p3:#1BA9A5;
---display:'Archivo',sans-serif;--body:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;}
+--display:'Archivo',sans-serif;--body:'IBM Plex Sans',sans-serif;}
 *{box-sizing:border-box;margin:0}
 body{width:1200px;height:630px;background:var(--bg);color:var(--ink);
   font-family:var(--body);overflow:hidden;font-variant-numeric:tabular-nums;
   display:flex;flex-direction:column;}
-.bar{display:flex;align-items:center;gap:14px;height:46px;padding:0 44px;
-  background:var(--bg-2);border-bottom:1px solid var(--rule);
-  font-family:var(--mono);font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
-.bar .id{color:var(--p3)}
-.bar .fill{flex:1;height:1px;background:var(--rule)}
-.body{flex:1;padding:52px 44px 0;display:flex;flex-direction:column}
-h1{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:64px;
-  line-height:1.04;letter-spacing:-.015em;max-width:19ch}
-.sub{font-size:25px;color:var(--ink-2);margin-top:20px;max-width:46ch;line-height:1.35}
-.fields{margin-top:auto;margin-bottom:26px;border-top:1px solid var(--rule)}
-.f{display:grid;grid-template-columns:190px 1fr;gap:18px;align-items:baseline;
-  padding:13px 0;border-bottom:1px solid var(--rule)}
-.f .k{font-family:var(--mono);font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
-.f .v{font-family:var(--mono);font-size:21px;color:var(--ink)}
-.fall{height:118px;background:#050A11;border-top:1px solid var(--rule)}
+.top{display:flex;align-items:baseline;padding:36px 56px 0;font-size:22px}
+.top .name{color:var(--p3);font-weight:600}
+.top .org{margin-left:auto;color:var(--ink-3)}
+.body{flex:1;padding:18px 56px 0;display:flex;flex-direction:column}
+h1{font-family:var(--display);font-weight:800;font-stretch:105%;font-size:58px;
+  line-height:1.05;letter-spacing:-.015em;max-width:19ch}
+.sub{font-size:25px;color:var(--ink-2);margin-top:16px;max-width:52ch;line-height:1.35}
+.fields{margin-top:auto;padding-top:20px;margin-bottom:26px}
+.f{display:grid;grid-template-columns:170px 1fr;gap:18px;align-items:baseline;padding:5px 0}
+.f .k{font-size:20px;color:var(--ink-3)}
+.f .v{font-size:24px;font-weight:500;color:var(--ink)}
+.fall{height:118px;background:#050A11}
 canvas{display:block;width:1200px;height:118px}
 </style></head><body>
-<div class="bar"><span class="id">SYS</span><span>TacEdge 2026</span><span class="fill"></span><span>UNSW Canberra</span></div>
+<div class="top"><span class="name">TacEdge 2026</span><span class="org">UNSW Canberra</span></div>
 <div class="body">
   <h1>International Workshop on Tactical Edge Technologies</h1>
   <p class="sub">Sensing, communications and autonomy in contested environments.</p>
