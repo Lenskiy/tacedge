@@ -34,23 +34,27 @@ CSS in one block — portability matters more than cleverness here.
 - **Names and titles are load-bearing.** Never adjust, abbreviate or guess a
   person's name, title or institution. Copy them exactly from `CONTENT.md`.
 
-## Design system — instrument panel
+## Design system — dark, plain
 
-**Clean-up of 13 October 2026 — this overrides anything below that disagrees.**
-Artem asked for the page to read as professional rather than generated. Removed:
-the hero's `SYS` panel bar; the scale bar under the waterfall, including the
-"simulated, pending real capture" line and the frequency labels; the background
-mesh canvas and its script; the "Include in your email" field list; and copy
-that was aphoristic or unsupported ("that is the point", "expected to fill",
-"already in the building"). The waterfall is now an unlabelled illustration and
-makes no claim to be data. **The background mesh was restored on 14 October
-2026 at Artem's request; it stays.** Do not bring any of the others back, and do not add
-self-referential captions about what is simulated or pending — if something is
-not real, leave it out rather than apologising for it on the page.
+**Redesign of 2 November 2026 — this overrides anything below or in git
+history that disagrees.** Artem asked again for the page to look professional
+rather than generated, and picked this direction from two mockups (a light
+institutional version was rejected; dark stays). Removed as tells of generated
+design: the hairlines down both page edges and between nav links; the small
+mono uppercase section bars with their numbers (`01`, `02`) and filler rules;
+the `T-01` tags on tutorials; corner crop marks on figures; mono type for
+content (programme titles, times, hero facts); uppercase tracked labels
+everywhere; the ghost-outline buttons and the "status bar" footer. IBM Plex
+Mono is no longer loaded. **Do not bring any of these back.** Kept: the dark
+parula palette, the hero waterfall, the background mesh (Artem, 2 November
+2026), the programme's colour chips and timeline strip, and one light rule
+between programme rows and between tutorials.
 
-The page is built to read as a piece of test equipment: ruled, addressed,
-tabular, and honest about its own state. Extend this idiom rather than
-replacing it.
+Earlier clean-up of 13 October 2026, still in force: no `SYS` bar, no scale
+bar or frequency labels under the waterfall, no "Include in your email" list,
+no aphoristic copy, and no self-referential captions about what is simulated
+or pending. The waterfall is an unlabelled illustration and makes no claim to
+be data. If something is not real, leave it out rather than apologising for it.
 
 **Palette** is MATLAB's *parula* colormap, chosen because it is the colormap
 you actually see in a spectrum waterfall. Defined as CSS custom properties in
@@ -64,67 +68,53 @@ you actually see in a spectrum waterfall. Defined as CSS custom properties in
 **Colour rule — this is the one that keeps the page coherent:**
 
 - **Grey** (`--ink*`, `--rule*`) is chrome. Frames, labels, rules, furniture.
-- **Teal** (`--p3`) means interactive. Links, focus, buttons, panel addresses.
+- **Teal** (`--p3`) means interactive. Links, buttons, the kicker.
 - **Parula** (`--p1`–`--p4`) is reserved for *data*: the waterfall ramp and
   the programme timeline's categorical segments. Never use it to decorate.
 - `--p5` (yellow) is the top of the waterfall ramp only.
 
-**Type.** Archivo (display, variable width axis — `font-stretch:112%` for the
-institutional/signage feel), IBM Plex Sans (body), IBM Plex Mono (all chrome).
-Chrome is mono, `.14–.16em` tracking, and **never below 11px** — that is a
-legibility floor, not a style value, and it holds even in the footer. **Body
-copy is never mono**, which is what stops the instrument idiom becoming
-unreadable.
-
-**Caps are for labels, not sentences.** Short chrome labels are uppercase.
-A readout that is actually a sentence — the programme's provisional note, the
-waterfall's provenance line — stays in sentence case with looser tracking. An
-all-caps string of 40+ characters is a sentence wearing a label's clothes.
+**Type.** Archivo for display (`font-stretch:105%`): the `<h1>`, section
+`<h2>`s, sub-headings and tutorial `<h3>`s. IBM Plex Sans for everything else,
+including times, labels, captions and the footer. No monospace, no uppercase
+tracked labels, nothing below 13px. Sentence case throughout.
 
 **Components.**
 
-- `.rails` — the page sits inside a bezel: hairlines down both edges.
-- `.panel` + `.panel-bar` — every section is a panel. The bar carries an
-  address (`02`), the section name, a rule that fills the gap, and an
-  optional right-hand readout (`.rt`). The bar's label *is* the section
-  `<h2>`, styled small and mono; big display lines inside the body are `<h3>`.
-  Bar items clamp to one line with ellipsis; `.rt` and `.sub` hide below
-  760px.
-- `.kicker` — small tracked teal line above the `<h1>`, carrying the short
-  name so the `<h1>` can be the full workshop title.
-- `.fields` / `.f` — `LABEL — value — readout` ruled rows. The `.s` cell
-  carries a soft-fact badge (`Opens shortly`) or a country.
-- `.sbar` — sub-bar dividing a panel body into named blocks: bold label, rule,
-  right-hand readout. Used to split the programme into its free morning and
-  paid afternoon.
-- `.tl-split` — the free/paid bracket sitting above the timeline strip, with
-  each label underlined across the span it covers. Hidden below 700px, where
-  the `.sbar` labels carry the same information.
-- `.logos` — partner mark row, greyscaled to a uniform 46px optical height.
-  Written and commented out in §04; see `img/README.md` for the file list.
-- `.rows` / `.r` — ruled time/what/duration rows. Programme rows carry a 3px
-  colour chip (`.g-key`, `.g-talk`, `.g-tut`, `.g-comp`, `.g-break`) keyed to
-  the timeline segment colours, so the legend means the same thing in both
-  places. `.tbc` mutes a chip to 45% for an unconfirmed session, matching the
-  same treatment on its timeline segment.
+- `.rails` — the centred page column (`--wrap`), with no borders.
+- `.nav` — sticky bar: wordmark left, plain text links, one solid teal
+  Register button. Links other than Register hide below 820px.
+- `.panel` + `.panel-bar` — each section. The bar holds the section `<h2>` as
+  a plain display heading, and an optional muted right-hand note (`.rt`,
+  hidden below 760px). Big display lines inside the body are `<h3>`.
+- `.kicker` — short teal line above the `<h1>`, carrying the short name so the
+  `<h1>` can be the full workshop title.
+- `.fields` / `.f` — label, value, note rows without rules. The `.s` cell
+  carries a soft-fact note (`Opens shortly`), a country or a link.
+- `.sbar` — sub-heading splitting the programme into its free morning and paid
+  afternoon, with a muted note beside it.
+- `.tl-split` — the free/paid bracket above the timeline strip, each label
+  underlined across the span it covers. Hidden below 700px, where the `.sbar`
+  notes carry the same information.
+- `.rows` / `.r` — programme rows, one light rule between each. Rows carry a
+  3px colour chip (`.g-key`, `.g-talk`, `.g-tut`, `.g-comp`, `.g-break`) keyed
+  to the timeline segment colours, so the legend means the same thing in both
+  places. `.tbc` mutes a chip to 45% for an unconfirmed session, matching its
+  timeline segment. Abstracts and bios sit in a collapsed `.abs` under the row.
 - `.tl-bar` + `.tl-ticks` + `.legend` — the day as a single 09:00–17:00 axis.
   Segment `left`/`width` are percentages of the 480-minute span; recompute
   them if timings change or the strip will lie.
 - `.tut` — a tutorial row: figure one side, text the other, alternating via
-  `.rev`, stacking below 880px. This replaced a three-across card grid, which
-  gave each demonstration no room and made every section read at the same
-  density. Do not put the tutorials back in equal-size cards.
-- `.demo` + `.ann` — a demonstration canvas and the labels pinned over it.
-  Annotations are positioned HTML, not canvas text, so they stay crisp and
-  cost nothing per frame.
-- `.ctl` / `.readout` / `.cap` — the control rail beneath a demo, the tiled
-  counters beneath that, and the mono caption beneath both. A `.cap` always
-  says what the figure is and whether it is simulated.
-- `.fig` + `figcaption` — figure plates with corner crop marks, for
-  photographs and data figures. Caption them as plates (`Fig. 01 · …`).
-- `.status` — the footer is a status bar.
-- Squared corners throughout (`border-radius:0`), ghost buttons, no shadows,
-  no blur, no gradients.
+  `.rev`, stacking below 880px. `.card-bar` is a small green subject label
+  above the title. Do not put the tutorials back in equal-size cards.
+- `.cap` / `figcaption` — plain muted caption under a figure. It says what the
+  figure is.
+- `.fig` — a figure frame with no border or crop marks.
+- `.logos` — partner marks on light chips, two across, small radius.
+- `.note` — a callout with a 3px teal left border on `--bg-2`.
+- `.btn` — solid teal button, 4px radius.
+- `.status` — plain footer: place and date, no name or email.
+- No shadows, no blur, no gradients. Radius only on buttons, logo chips and
+  the timeline strip (3–4px).
 
 **Voice.** Plain, factual, specific. Prefer concrete nouns, numbers and dates
 to claims about significance. Avoid aphorisms, three-part rhetorical lists and
@@ -153,6 +143,11 @@ waterfall in it is a real render of the airband script.
     google-chrome --headless=new --window-size=1200,630 \
       --screenshot=img/og.png "file://$PWD/img/og-source.html"
 
+Chrome is not installed on Artem's Mac; the Playwright copy works:
+`~/Library/Caches/ms-playwright/chromium-1248/chrome-mac-x64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`.
+The card still uses the pre-2 November look (a `SYS` bar and mono labels);
+bring `og-source.html` in line with the redesign when it is next touched.
+
 **Regenerate it whenever the hero facts change** — the card repeats the title,
 date, venue and admission line, and nothing warns you when it goes stale.
 
@@ -160,8 +155,8 @@ date, venue and admission line, and nothing warns you when it goes stale.
 readout. It carried `CONFIRMED`/`PROVISIONAL` badges in the hero until every
 fact firmed up; those were removed as noise once everything read CONFIRMED. It
 now carries the country in the organisers list. If a fact goes soft again,
-bring the badge back for that row only — never mark something CONFIRMED that
-`CONTENT.md` has as TO CONFIRM.
+add a plain note to that row only ("To be confirmed"), in sentence case —
+never mark something confirmed that `CONTENT.md` has as TO CONFIRM.
 
 **Background mesh.** A fixed full-page canvas (`#mesh`, `z-index:-1`) of
 drifting nodes whose links form and break by range, with nodes occasionally

@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0B1119;
@@ -40,7 +40,6 @@
   --p5:#F9FB0E;
   --display:'Archivo',system-ui,sans-serif;
   --body:'IBM Plex Sans',system-ui,sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;
   --wrap:1240px;
 }
 *{box-sizing:border-box}
@@ -60,12 +59,6 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
 ::-webkit-scrollbar-thumb{background:var(--rule-2);border:3px solid var(--bg)}
 ::-webkit-scrollbar-thumb:hover{background:var(--ink-3)}
 
-/* ---------- chrome idiom: mono, uppercase, tracked ---------- */
-.m{
-  font-family:var(--mono);font-size:11px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--ink-3);
-}
-
 /* ---------- background mesh: drifting nodes, links forming and dropping ----
    Subordinate to the waterfall by design — dim, slow, and behind everything. */
 #mesh{
@@ -73,58 +66,47 @@ html{scrollbar-color:var(--rule-2) var(--bg);scrollbar-width:thin}
   z-index:-1;pointer-events:none;display:block;
 }
 
-/* ---------- rails: the page sits inside a bezel ---------- */
-.rails{
-  max-width:var(--wrap);margin:0 auto;
-  border-left:1px solid var(--rule);border-right:1px solid var(--rule);
-}
+/* ---------- page column ---------- */
+.rails{max-width:var(--wrap);margin:0 auto}
 
-/* ---------- soft-key nav ---------- */
-.nav{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--rule)}
-.nav-in{
-  max-width:var(--wrap);margin:0 auto;display:flex;align-items:stretch;height:50px;
-  border-left:1px solid var(--rule);border-right:1px solid var(--rule);
-}
-.mark{
-  display:flex;align-items:center;padding:0 16px;font-family:var(--display);
-  font-weight:800;font-stretch:112%;font-size:15px;letter-spacing:.01em;color:var(--ink);
-}
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:40;background:rgba(11,17,25,.94);border-bottom:1px solid var(--rule)}
+.nav-in{max-width:var(--wrap);margin:0 auto;display:flex;align-items:center;height:64px;padding:0 24px}
+.mark{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:18px;letter-spacing:.01em;color:var(--ink)}
 .mark span{color:var(--p3)}
-.nav-links{margin-left:auto;display:flex}
-.nav-links a{
-  display:flex;align-items:center;padding:0 13px;border-left:1px solid var(--rule);
-  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);
+.mark:hover{text-decoration:none}
+.nav-links{margin-left:auto;display:flex;align-items:center;gap:4px}
+.nav-links a{padding:8px 12px;font-size:15px;color:var(--ink-2)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.cta{
+  margin-left:10px;padding:9px 18px;border-radius:4px;
+  background:var(--p3);color:var(--bg);font-weight:600;
 }
-.nav-links a:hover{background:var(--bg-3);color:var(--ink);text-decoration:none}
-.nav-links a.cta{color:var(--p3);background:rgba(27,169,165,.07)}
+.nav-links a.cta:hover{text-decoration:none;filter:brightness(1.1)}
 @media(max-width:820px){.nav-links a:not(.cta){display:none}}
 
-/* ---------- panels ---------- */
-.panel{border-bottom:1px solid var(--rule)}
-.panel-bar{
-  display:flex;align-items:center;gap:12px;height:34px;padding:0 16px;overflow:hidden;
-  border-bottom:1px solid var(--rule);background:var(--bg-2);
+/* ---------- sections ---------- */
+section.panel{padding:clamp(48px,6vw,84px) 24px 0}
+.panel-bar{display:flex;align-items:baseline;gap:16px;margin-bottom:22px}
+.panel-bar h2{
+  font-family:var(--display);font-weight:700;font-stretch:105%;
+  font-size:clamp(26px,3vw,34px);line-height:1.15;letter-spacing:-.01em;color:var(--ink);margin:0;
 }
-.panel-bar h2,.panel-bar span{
-  font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--ink-3);margin:0;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto;min-width:0;
+.panel-bar .rt{margin-left:auto;font-size:15px;color:var(--ink-3);white-space:nowrap}
+@media(max-width:760px){.panel-bar .rt{display:none}}
+header.panel .panel-body{padding:clamp(56px,8vw,104px) 24px 40px}
+@media(max-width:640px){
+  .nav-in{padding:0 16px}
+  section.panel{padding-left:16px;padding-right:16px}
+  header.panel .panel-body{padding-left:16px;padding-right:16px}
 }
-.panel-bar .id{color:var(--p3)}
-.panel-bar .fill{flex:1 1 auto;min-width:8px;height:1px;background:var(--rule);align-self:center}
-.panel-bar .rt{margin-left:auto}
-@media(max-width:760px){.panel-bar .rt,.panel-bar .sub{display:none}}
-.panel-body{padding:clamp(20px,3.2vw,38px) 16px}
 
 h1{
-  font-family:var(--display);font-weight:800;font-stretch:112%;
-  font-size:clamp(26px,4vw,46px);line-height:1.08;letter-spacing:-.01em;
-  margin:0 0 12px;max-width:24ch;
+  font-family:var(--display);font-weight:800;font-stretch:105%;
+  font-size:clamp(32px,5vw,58px);line-height:1.08;letter-spacing:-.01em;
+  margin:0 0 12px;max-width:20ch;
 }
-.kicker{
-  font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--p3);margin:0 0 12px;
-}
+.kicker{font-size:15px;font-weight:600;color:var(--p3);margin:0 0 12px}
 h3{
   font-family:var(--display);font-weight:700;font-stretch:112%;
   font-size:clamp(23px,3vw,34px);line-height:1.1;letter-spacing:-.005em;margin:0 0 18px;
@@ -136,28 +118,24 @@ h3{
 @media(max-width:820px){.two{grid-template-columns:1fr}}
 
 .note{
-  margin-top:30px;padding:16px 18px;border:1px solid var(--rule);border-left:1px solid var(--p2);
+  margin-top:30px;padding:16px 18px;border-left:3px solid var(--p3);
   background:var(--bg-2);color:var(--ink-2);font-size:15.5px;
 }
 .note b{color:var(--ink);font-weight:600}
 
 /* ---------- field list: label, value, status ---------- */
-.fields{border-top:1px solid var(--rule)}
-.f{
-  display:grid;grid-template-columns:170px 1fr auto;gap:16px;align-items:baseline;
-  padding:11px 0;border-bottom:1px solid var(--rule);
-}
-.f .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-.f .v{font-family:var(--mono);font-size:14px;color:var(--ink)}
-.f .v small{display:block;font-family:var(--body);font-size:14px;color:var(--ink-3);letter-spacing:0;margin-top:2px}
-.f .s{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.f{display:grid;grid-template-columns:170px 1fr auto;gap:16px;align-items:baseline;padding:9px 0}
+.f .k{font-size:14px;color:var(--ink-3)}
+.f .v{font-size:17px;font-weight:500;color:var(--ink)}
+.f .v small{display:block;font-size:14px;font-weight:400;color:var(--ink-3);margin-top:2px}
+.f .s{font-size:14px;color:var(--ink-3)}
 @media(max-width:640px){
-  .f{grid-template-columns:1fr auto;gap:4px 12px}
+  .f{grid-template-columns:1fr auto;gap:2px 12px}
   .f .k{grid-column:1/-1}
 }
 
 /* ---------- waterfall (signature) ---------- */
-.fall{position:relative;background:#050A11;border-top:1px solid var(--rule)}
+.fall{position:relative;background:#050A11}
 .fall canvas{display:block;width:100%;height:150px}
 @media(max-width:640px){
   .fall canvas{height:104px}
@@ -167,55 +145,48 @@ h3{
 .tl-split{position:relative;height:21px}
 .tl-split span{
   position:absolute;bottom:0;padding-bottom:5px;border-bottom:1px solid var(--rule-2);
-  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-3);white-space:nowrap;overflow:hidden;
+  font-size:13px;color:var(--ink-3);white-space:nowrap;overflow:hidden;
 }
 .tl-split .paid{color:var(--p4);border-bottom-color:rgba(127,208,59,.45)}
 @media(max-width:700px){.tl-split{display:none}}
-.sbar{
-  display:flex;align-items:center;gap:12px;height:30px;overflow:hidden;
-  margin:30px 0 0;border-top:1px solid var(--rule-2);
-}
+.sbar{display:flex;align-items:baseline;gap:12px;margin:40px 0 10px}
 .sbar b{
-  font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.20em;
-  text-transform:uppercase;color:var(--ink);flex:0 0 auto;
+  font-family:var(--display);font-weight:700;font-stretch:105%;font-size:20px;
+  color:var(--ink);flex:0 0 auto;
 }
-.sbar .fill{flex:1 1 auto;min-width:8px;height:1px;background:var(--rule)}
 .sbar .rt{
-  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-3);flex:0 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font-size:15px;color:var(--ink-3);flex:0 1 auto;min-width:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .sbar .rt em{font-style:normal;color:var(--p4)}
-.tl-bar{position:relative;height:34px;background:var(--bg-3);border:1px solid var(--rule)}
+.tl-bar{position:relative;height:34px;background:var(--bg-3);border-radius:3px;overflow:hidden}
 .seg{position:absolute;top:0;bottom:0;border-right:1px solid var(--bg)}
 .tl-ticks{position:relative;height:26px;margin-top:2px}
 .tl-ticks span{
-  position:absolute;top:0;font-family:var(--mono);font-size:11px;color:var(--ink-3);
+  position:absolute;top:0;font-size:13px;color:var(--ink-3);
   padding-top:7px;border-left:1px solid var(--rule-2);padding-left:4px;
 }
-.legend{
-  display:flex;flex-wrap:wrap;gap:16px;margin:14px 0 26px;
-  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
-}
+.tl-ticks span:last-child{transform:translateX(-100%);border-left:0;border-right:1px solid var(--rule-2);padding-left:0;padding-right:4px}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin:14px 0 26px;font-size:13px;color:var(--ink-3)}
 .legend i{display:inline-block;width:22px;height:8px;margin-right:7px;vertical-align:1px}
 
 /* ---------- ruled rows: programme, competition phases ---------- */
 .rows{border-top:1px solid var(--rule)}
 .r{
-  display:grid;grid-template-columns:82px 1fr auto;gap:18px;align-items:baseline;
-  padding:12px 0 12px 14px;border-bottom:1px solid var(--rule);position:relative;
+  display:grid;grid-template-columns:72px 1fr auto;gap:18px;align-items:baseline;
+  padding:16px 0 16px 16px;border-bottom:1px solid var(--rule);position:relative;
 }
-.r time{font-family:var(--mono);font-size:14px;color:var(--p3)}
-.r .what{font-family:var(--mono);font-size:14px;color:var(--ink)}
-.r .what small{display:block;font-family:var(--body);font-size:14.5px;color:var(--ink-3);margin-top:2px}
-.r .dur{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.r time{font-size:15px;font-weight:600;color:var(--ink-2)}
+.r .what{font-size:16.5px;font-weight:600;color:var(--ink)}
+.r .what small{display:block;font-size:15px;font-weight:400;color:var(--ink-2);margin-top:2px}
+.r .dur{font-size:14px;color:var(--ink-3);white-space:nowrap}
 /* abstract and speaker bio, collapsed under a programme row */
 .abs{margin-top:8px}
-.abs summary{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--p3);cursor:pointer;width:max-content;max-width:100%}
+.abs summary{font-size:14.5px;font-weight:500;color:var(--p3);cursor:pointer;width:max-content;max-width:100%}
 .abs summary:hover{color:var(--ink)}
-.abs p{font-family:var(--body);font-size:15px;line-height:1.6;color:var(--ink-2);max-width:68ch;margin:10px 0 0}
+.abs p{font-size:15px;font-weight:400;line-height:1.6;color:var(--ink-2);max-width:68ch;margin:10px 0 0}
 .abs p b{color:var(--ink);font-weight:500}
-.r.br .what{color:var(--ink-3)}
+.r.br .what{color:var(--ink-3);font-weight:400}
 .r::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;background:transparent}
 .r.g-key::before{background:var(--p2)}
 .r.g-talk::before{background:var(--p1)}
@@ -224,15 +195,15 @@ h3{
 .r.g-break::before{background:var(--rule-2)}
 .r.tbc::before{opacity:.45}
 @media(max-width:640px){
-  .r{grid-template-columns:66px 1fr;gap:12px}
+  .r{grid-template-columns:60px 1fr;gap:12px}
   .r .dur{grid-column:2;margin-top:2px}
 }
-.prov{margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.10em;color:var(--ink-3)}
+.prov{margin-top:16px;font-size:14px;color:var(--ink-3)}
 
 /* ---------- tutorial rows: figure and text, alternating ---------- */
 .tut{
   display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(22px,3.6vw,46px);
-  align-items:center;padding:34px 0;border-top:1px solid var(--rule);
+  align-items:center;padding:44px 0;border-top:1px solid var(--rule);
 }
 .tut:first-of-type{border-top:0;padding-top:6px}
 .tut.rev{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
@@ -243,66 +214,51 @@ h3{
   .tut,.tut.rev{grid-template-columns:1fr;gap:20px}
   .tut.rev .tut-fig{order:0}
 }
-.cap{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);margin:9px 0 0;padding:0;line-height:1.5;text-transform:none}
+.cap{font-size:14px;color:var(--ink-3);margin:9px 0 0;padding:0;line-height:1.5}
 .tut-txt h3{font-size:clamp(19px,2.2vw,24px);margin:14px 0 10px}
 .tut-txt p{margin:0;font-size:15.5px;color:var(--ink-2);line-height:1.6}
 .tut-txt p.by{margin-top:14px;color:var(--ink)}
 
-/* ---------- tutorial label bar ---------- */
-.card-bar{
-  display:flex;justify-content:space-between;height:30px;align-items:center;padding:0 14px;
-  border-bottom:1px solid var(--rule);background:var(--bg-2);
-  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-}
-.card-bar b{color:var(--p4);font-weight:500}
-.card-bar span{color:var(--ink-3)}
+/* ---------- tutorial subject label ---------- */
+.card-bar{font-size:13px;letter-spacing:.06em}
+.card-bar b{color:var(--p4);font-weight:600}
 
 /* ---------- partner marks: on light chips, not reversed out ---------- */
-.logos{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
-  background:var(--rule);border:1px solid var(--rule);margin-top:28px;
-}
+.logos{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
 .logos div{
   background:var(--ink);display:flex;align-items:center;justify-content:center;
-  padding:18px 16px;min-height:116px;
+  padding:18px 16px;min-height:116px;border-radius:4px;
 }
 .logos img{max-height:74px;max-width:290px;width:auto;height:auto;display:block}
 /* a 5:1 lockup and a 2:1 crest do not balance at the same height; cap both axes */
 .logos div.dark{background:#171F26}
 @media(max-width:560px){.logos{grid-template-columns:1fr}}
 
-/* ---------- figure plate (used once assets land) ---------- */
+/* ---------- figures ---------- */
 .fig{
-  position:relative;background:var(--bg-3);border:1px solid var(--rule);
+  position:relative;background:var(--bg-3);
   display:flex;align-items:center;justify-content:center;text-align:center;
 }
-.fig::before,.fig::after{content:"";position:absolute;width:11px;height:11px}
-.fig::before{left:-1px;top:-1px;border-left:1px solid var(--p3);border-top:1px solid var(--p3)}
-.fig::after{right:-1px;bottom:-1px;border-right:1px solid var(--p3);border-bottom:1px solid var(--p3)}
 .fig img{display:block;width:100%;height:auto}
 figure{margin:0}
-figcaption{
-  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-3);padding:8px 0 0;
-}
+figcaption{font-size:14px;line-height:1.5;color:var(--ink-3);padding:8px 0 0}
 
 /* ---------- action ---------- */
 /* The interest form's markup and CSS were removed when it was replaced by a
    mailto link; both are recoverable from the initial commit. */
 .btn{
-  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  background:transparent;color:var(--p3);border:1px solid var(--p3);padding:13px 28px;
-  border-radius:0;cursor:pointer;margin-top:4px;
+  font-family:var(--body);font-size:16px;font-weight:600;
+  background:var(--p3);color:var(--bg);border:0;padding:13px 28px;
+  border-radius:4px;cursor:pointer;margin-top:4px;
 }
 a.btn{display:inline-block;text-decoration:none}
-.btn:hover{background:var(--p3);color:var(--bg);text-decoration:none}
+.btn:hover{filter:brightness(1.1);text-decoration:none}
 .privacy{margin-top:14px;font-size:13.5px;color:var(--ink-3);max-width:56ch}
 
-/* ---------- status bar footer ---------- */
+/* ---------- footer ---------- */
 .status{
   display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;
-  padding:12px 16px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--ink-3);border-top:1px solid var(--rule);
+  margin-top:72px;padding:28px 24px;font-size:14px;color:var(--ink-3);border-top:1px solid var(--rule);
 }
 .status a{color:var(--ink-2)}
 
@@ -332,7 +288,7 @@ a.btn{display:inline-block;text-decoration:none}
 <div class="rails">
 
 <header class="panel" id="top">
-  <div class="panel-body" style="padding-bottom:22px">
+  <div class="panel-body">
     <p class="kicker">TacEdge 2026</p>
     <h1>International Workshop on Tactical Edge Technologies</h1>
     <p class="lede" style="margin-bottom:0;color:var(--ink-2)">Sensing, communications and autonomy in contested environments.</p>
@@ -351,7 +307,7 @@ a.btn{display:inline-block;text-decoration:none}
 </header>
 
 <section class="panel" id="about">
-  <div class="panel-bar"><span class="id">01</span><h2>About</h2><span class="fill"></span></div>
+  <div class="panel-bar"><h2>About</h2></div>
   <div class="panel-body">
     <p class="lede">TacEdge is a one-day workshop on sensing, communications and autonomy in contested environments, with invited talks in the morning and hands-on tutorials in the afternoon. The subjects are RF and optical surveillance, tactical telecommunications and applied AI in the field.</p>
     <div class="two">
@@ -378,7 +334,7 @@ a.btn{display:inline-block;text-decoration:none}
 </section>
 
 <section class="panel" id="programme">
-  <div class="panel-bar"><span class="id">02</span><h2>Programme</h2><span class="fill"></span><span class="rt">08:30-17:00 AEDT</span></div>
+  <div class="panel-bar"><h2>Programme</h2><span class="rt">08:30-17:00 AEDT</span></div>
   <div class="panel-body">
 
     <div class="tl-split" aria-hidden="true">
@@ -411,7 +367,7 @@ a.btn{display:inline-block;text-decoration:none}
       <span><i style="background:var(--bg-2);border:1px solid var(--rule)"></i>Break</span>
     </div>
 
-    <div class="sbar"><b>Morning</b><span class="fill"></span><span class="rt">Free, 70 places, registration required</span></div>
+    <div class="sbar"><b>Morning</b><span class="rt">Free, 70 places, registration required</span></div>
     <div class="rows">
       <div class="r br"><time>08:30</time><div class="what">Doors open</div><span class="dur"></span></div>
       <div class="r"><time>09:00</time><div class="what">Opening</div><span class="dur"></span></div>
@@ -425,7 +381,7 @@ a.btn{display:inline-block;text-decoration:none}
       <div class="r br g-break"><time>12:00</time><div class="what">Lunch &amp; Networking</div><span class="dur">40 min</span></div>
     </div>
 
-    <div class="sbar"><b>Afternoon</b><span class="fill"></span><span class="rt">Full-day ticket, limited to 80</span></div>
+    <div class="sbar"><b>Afternoon</b><span class="rt">Full-day ticket, limited to 80</span></div>
     <div class="rows">
       <div class="r g-tut"><time>12:40</time><div class="what">Hands-on tutorials, session 1<small>Four running in parallel, one in each room</small></div><span class="dur">90 min</span></div>
       <div class="r br g-break"><time>14:10</time><div class="what">Coffee</div><span class="dur">20 min</span></div>
@@ -441,7 +397,7 @@ a.btn{display:inline-block;text-decoration:none}
 </section>
 
 <section class="panel" id="tutorials">
-  <div class="panel-bar"><span class="id">03</span><h2>Tutorials</h2><span class="fill"></span><span class="rt">12:40 to 16:00</span></div>
+  <div class="panel-bar"><h2>Tutorials</h2><span class="rt">12:40 to 16:00</span></div>
   <div class="panel-body">
     <p class="lede">Four tutorials run in parallel, one in each room, and each runs twice. Every participant attends two of the four, and gives a first and second choice when registering. Each room takes up to 20 people per session. No prior experience with radio, radar or machine learning is assumed. Bring a laptop.</p>
     <div class="tut">
@@ -450,7 +406,7 @@ a.btn{display:inline-block;text-decoration:none}
         <figcaption class="cap">The FM broadcast band, 101.2 to 105.2 MHz, received on a HackRF. The spectrum is above and the waterfall below. Each stripe is a station.</figcaption>
       </figure>
       <div class="tut-txt">
-        <div class="card-bar"><b>RF</b><span>T-01</span></div>
+        <div class="card-bar"><b>RF</b></div>
         <h3>Analysing the EM spectrum with SDR</h3>
         <p>An introduction to software-defined radio and spectrum monitoring. Participants capture a live band with an SDR receiver and learn to read the waterfall display: which signals are present, when they transmit and how much bandwidth they occupy.</p>
       </div>
@@ -462,7 +418,7 @@ a.btn{display:inline-block;text-decoration:none}
         <figcaption class="cap">Sentinel-1 radar image of the Strait of Gibraltar, 2023. The bright points on the water are ships.</figcaption>
       </figure>
       <div class="tut-txt">
-        <div class="card-bar"><b>Imagery</b><span>T-02</span></div>
+        <div class="card-bar"><b>Imagery</b></div>
         <h3>SAR and optical satellite imagery</h3>
         <p>How to use open satellite imagery as an intelligence source. Participants process Sentinel-1 radar data (calibration, speckle reduction and terrain correction) and compare the result with optical imagery of the same area.</p>
         <p class="by">Led by MAJ Matthew Hume and Dr Lily Qiao</p>
@@ -475,7 +431,7 @@ a.btn{display:inline-block;text-decoration:none}
         <figcaption class="cap">Ships found by a YOLOX detector in a Sentinel-1 radar image.</figcaption>
       </figure>
       <div class="tut-txt">
-        <div class="card-bar"><b>Detection</b><span>T-03</span></div>
+        <div class="card-bar"><b>Detection</b></div>
         <h3>Target detection with deep-learning detectors</h3>
         <p>Participants train YOLO and similar detectors on real imagery and examine the confidence scores they report, including cases where a confident detection is wrong. The session then shows how an ensemble of detectors reduces misclassification and the number of detections an operator has to check by hand.</p>
         <p class="by">Led by Muhammad Saeed and Drew Stevenson</p>
@@ -483,7 +439,7 @@ a.btn{display:inline-block;text-decoration:none}
     </div>
     <div class="tut solo">
       <div class="tut-txt">
-        <div class="card-bar"><b>Human-AI</b><span>T-04</span></div>
+        <div class="card-bar"><b>Human-AI</b></div>
         <h3>Human-AI interaction at the tactical edge</h3>
         <p>A scenario-based workshop on how AI and autonomous systems could change the relationship between people and machines in contested, resource-constrained environments. Working in small groups, participants use a structured Prepare-Make-Reflect process to build scenarios involving people, AI systems, autonomous platforms and their operating environment. They then examine how sensing, communications, autonomy and decision-making interact, considering human oversight, trust, responsibility, operational dependencies and unintended consequences.</p>
         <p class="by">Led by Dr Josh Andres</p>
@@ -493,7 +449,7 @@ a.btn{display:inline-block;text-decoration:none}
 </section>
 
 <section class="panel" id="competition">
-  <div class="panel-bar"><span class="id">04</span><h2>Competition</h2><span class="fill"></span><span class="rt">16:00, to be confirmed</span></div>
+  <div class="panel-bar"><h2>Competition</h2><span class="rt">16:00, to be confirmed</span></div>
   <div class="panel-body">
     <div class="tut rev">
       <figure class="tut-fig">
@@ -501,7 +457,7 @@ a.btn{display:inline-block;text-decoration:none}
         <figcaption class="cap">The Plato Pod arena as its console shows it during a game. Only the two robots are on the table. The arena, sensors and cover are drawn in software.</figcaption>
       </figure>
       <div class="tut-txt">
-        <div class="card-bar"><b>Robotics</b><span>16:00</span></div>
+        <div class="card-bar"><b>Robotics</b></div>
         <h3>Robot capture-the-flag competition</h3>
         <p>The day closes with a knockout tournament on <a href="https://platopod.com">Plato Pod</a>, a table-top arena built at UNSW Canberra in which small robots share one playing field with virtual ones. Eight teams of two take part. The early rounds are played in simulation. The final and the third-place match are played with real robots.</p>
       </div>
@@ -510,7 +466,7 @@ a.btn{display:inline-block;text-decoration:none}
 </section>
 
 <section class="panel" id="organisers">
-  <div class="panel-bar"><span class="id">05</span><h2>Organisers</h2><span class="fill"></span><span class="rt">6 co-organisers, 4 countries</span></div>
+  <div class="panel-bar"><h2>Organisers</h2><span class="rt">6 co-organisers, 4 countries</span></div>
   <div class="panel-body">
     <div class="fields">
       <div class="f"><span class="k">Organiser</span><span class="v">School of Engineering and Technology, UNSW Canberra</span><span class="s">Australia</span></div>
@@ -534,7 +490,7 @@ a.btn{display:inline-block;text-decoration:none}
 </section>
 
 <section class="panel" id="travel">
-  <div class="panel-bar"><span class="id">06</span><h2>Getting there</h2><span class="fill"></span><span class="rt">Canberra, Australia</span></div>
+  <div class="panel-bar"><h2>Getting there</h2><span class="rt">Canberra, Australia</span></div>
   <div class="panel-body">
     <p class="lede">In person only, in the centre of Canberra. Attendees are expected from Korea, Taiwan, the Philippines and Vietnam. International visitors should arrange visas early.</p>
 
@@ -552,7 +508,7 @@ a.btn{display:inline-block;text-decoration:none}
 </section>
 
 <section class="panel" id="register">
-  <div class="panel-bar"><span class="id">07</span><h2>Register</h2><span class="fill"></span><span class="rt">Registration open</span></div>
+  <div class="panel-bar"><h2>Register</h2><span class="rt">Registration open</span></div>
   <div class="panel-body">
     <p class="lede">The morning talks are free. The afternoon tutorials are in addition to the talks, so a paid ticket covers the whole day.</p>
 
