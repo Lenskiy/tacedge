@@ -268,7 +268,9 @@ names or inventing figures.
    KICS and Taiwan Tech. Marks sit on light chips rather than reversed out,
    and both axes are capped so a wide lockup and a tall crest balance. See
    `img/README.md`.
-9. **Capture-the-flag.** A short `#competition` panel (§04) came back on
+9. **Capture-the-flag — removed 8 November 2026** (Artem): tutorials became
+   120 minutes (12:40 to 14:40, coffee, 15:00 to 17:00) and the competition
+   was dropped from the programme, timeline and page. History below. A short `#competition` panel (§04) came back on
    13 October 2026 at Artem's request: one paragraph and
    `img/arena-plato-pod.jpg`, copied from platopod.com. That picture shows a
    surveillance game, not capture the flag, so its caption describes the
